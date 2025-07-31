@@ -208,14 +208,14 @@
           "type": "text",
           "description": "",
           "label": "Promoted Articles custom title",
-          "value": ""
+          "value": "Promoted articles"
         },
         {
           "identifier": "categories",
           "type": "text",
           "description": "",
           "label": "Categories custom title",
-          "value": ""
+          "value": "Categories"
         },
         {
           "identifier": "product_1_name",
