@@ -180,7 +180,7 @@
       ]
     },
     {
-      "label": "Home page settings",
+      "label": "home_page_group_label",
       "variables": [
         {
           "identifier": "show_recent_activity",
