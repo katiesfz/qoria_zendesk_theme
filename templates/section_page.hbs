@@ -13,6 +13,11 @@
         {{/if}}
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        {{search scoped=true submit=false class="search search-full search-transparent"}}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -38,7 +43,6 @@
             </div>
           {{/each}}
         </div>
-          {{pagination "section.sections"}}
       </div>
     </section>
   {{/if}}
@@ -66,7 +70,6 @@
             </div>
           {{/each}}
         </div>
-      {{pagination "section.articles"}}
       </div>
     </section>
   {{/if}}
