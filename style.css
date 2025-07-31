@@ -2101,7 +2101,7 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   padding: 30px 0;
 }
 
-.container.site-search {
+.site-search {
   background-color: #FFFFFF;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2) !important;
   padding: 16px;
@@ -2109,11 +2109,11 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   position: relative;
 }
 @media (min-width: 1024px) {
-  .container.site-search {
+  .site-search {
     padding: 32px;
   }
 }
-.container.site-search h2 {
+.site-search h2 {
   margin-bottom: 16px;
 }
 
