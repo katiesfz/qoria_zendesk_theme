@@ -392,19 +392,19 @@
 
   }
 
-    .subscriptions-subscribe button {
+  .subscriptions-subscribe button {
+    @extend .button;
+    &::before {
+      content: "+ ";
+    }
+    &[data-selected="true"] {
       @extend .button;
       &::before {
-        content: "+ ";
-      }
-      &[data-selected="true"] {
-        @extend .button;
-        &::before {
-          content: "- ";
-        }
+        content: "- ";
       }
     }
-    
+  }
+
   td > p:first-child,
   th > p:first-child {
     margin-top: 0;

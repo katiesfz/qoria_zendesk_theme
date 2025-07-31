@@ -1,4 +1,4 @@
-<section class="section hero hero-section">
+<section class="section hero hero-category">
   <div class="container">
     <div class="row">
       <div class="">
@@ -7,20 +7,11 @@
     </div>
     <div class="row">
       <div>
-        <h1 title="{{section.name}}" class="section-title h1">{{section.name}}</h1>
+        <h1 title="{{section.name}}" class="category-title h1">{{section.name}}</h1>
+        {{#if section.description}}
+          <p class="page-header-description">{{section.description}}</p>
+        {{/if}}
       </div>
-    </div>
-    <div class="row">
-      {{#if section.description}}
-        <div class="col">
-            <p class="page-header-description">{{section.description}}</p>
-        </div>
-      {{/if}}
-      {{#if settings.show_follow_section}}
-      <div class="col metadata-right">
-          <div class="section-subscribe">{{subscribe}}</div>
-      </div>
-      {{/if}}
     </div>
     <div class="row">
       <div class="col">
@@ -29,6 +20,68 @@
     </div>
   </div>
 </section>
+
+
+<div id="main-content">
+  <!-- subcategories -->
+  {{#if section.sections}}
+    <section class="section section-merged">
+      <div class="container knowledge-base subcategories">
+        <h2><a href="{{url}}">{{name}}</a></h2>
+        <div class="categories-list row row-cols-md-3">
+          {{#each section.sections}}
+            <div class="single-category {{#if promoted}} article-promoted{{/if}}">
+              <div class="category-thumbnail bg-subtle">
+                <div class="category-icon">
+                  <img src="{{../../settings.category_icon}}">
+                </div>
+                <div class="category-copy">
+                  <a href="{{url}}" class="category-link">
+                    <span class="category-title{{#if internal}} category-title-internal{{/if}}">{{title}}</span>
+                    {{#if internal}}
+                      <i class="fa far fa-lock-alt internal-article-icon" title="{{t 'internal'}}"></i>
+                    {{/if}}
+                    <span class="category-description">{{excerpt snippet}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+          {{pagination "section.sections"}}
+        </div>
+      </div>
+    </section>
+  {{/if}}
+
+  {{#if section.articles}}
+    <section class="section section-merged">
+      <div class="container knowledge-base subcategories">
+        <div class="categories-list row row-cols-md-3">
+          {{#each section.articles}}
+            <div class="single-category {{#if promoted}} article-promoted{{/if}}">
+              <div class="category-thumbnail bg-subtle">
+                <div class="category-icon">
+                  <img src="{{../../settings.category_icon}}">
+                </div>
+                <div class="category-copy">
+                  <a href="{{url}}" class="category-link">
+                    <span class="category-title{{#if internal}} category-title-internal{{/if}}">{{title}}</span>
+                    {{#if internal}}
+                      <i class="fa far fa-lock-alt internal-article-icon" title="{{t 'internal'}}"></i>
+                    {{/if}}
+                    <span class="category-description">{{excerpt snippet}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+  {{/if}}
+
+</div>
+
 
 
 
