@@ -4,7 +4,7 @@
 
   .dropdown-toggle::after {
     @include tablet { display: inline-block;}
-    display: none;
+    & {display: none;}
   }
 
   > button {
@@ -40,8 +40,8 @@
 // Selector is this strong to override the styles set with ids
 #user #user-name {
   @include tablet { display: inline-block; }
-  display: none;
-  font-size: 14px;
+  &{display: none;
+  font-size: 14px;}
 
   &:hover { text-decoration: underline; }
 }

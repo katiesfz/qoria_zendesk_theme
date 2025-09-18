@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /***** Header *****/
 $header-height: 71px;
 
@@ -14,7 +16,7 @@ $header-height: 71px;
 
   --gutter-x: #{$gutter};
   --gutter-y: 0;
-  
+
   max-width: $max-width-container;
   margin: 0 auto;
   padding-right: calc(var(--gutter-x) * .5);
@@ -28,6 +30,10 @@ $header-height: 71px;
   width: 100%;
   padding-top: $gutter;
   padding-bottom: $gutter;
+  &.shrink {
+    padding-top: math.div($gutter, 2);
+    padding-bottom: math.div($gutter, 2);
+  }
 }
 
 .logo img {
@@ -88,11 +94,11 @@ $header-height: 71px;
 }
 
 .user-nav {
-  @include tablet { position: relative; }
   display: inline-block;
   position: absolute;
   white-space: nowrap;
 
+  @include tablet { position: relative; }
   .user-avatar {
     margin-right: 8px;
   }

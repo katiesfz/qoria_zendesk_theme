@@ -705,6 +705,11 @@ ul {
 }
 
 /***** Buttons *****/
+@media (min-width: 768px) {
+  .button, .pagination-next-link, .pagination-prev-link, .pagination-first-link, .pagination-last-link, .activities .subscriptions-subscribe button[data-selected=true], .activities .subscriptions-subscribe button, .subscriptions-subscribe button, .requests-table-toolbar .organization-subscribe button, .community-follow button[data-selected=true], .community-follow button, .comment-form-controls input[type=submit], .article-subscribe button[data-selected=true], .article-subscribe button, .section-subscribe button, .search input[type=submit], .split-button button {
+    width: auto;
+  }
+}
 .button, .pagination-next-link, .pagination-prev-link, .pagination-first-link, .pagination-last-link, .activities .subscriptions-subscribe button[data-selected=true], .activities .subscriptions-subscribe button, .subscriptions-subscribe button, .requests-table-toolbar .organization-subscribe button, .community-follow button[data-selected=true], .community-follow button, .comment-form-controls input[type=submit], .article-subscribe button[data-selected=true], .article-subscribe button, .section-subscribe button, .search input[type=submit], .split-button button {
   background-color: #f1f5f9;
   color: #0f172a;
@@ -725,11 +730,6 @@ ul {
   white-space: nowrap;
   width: 100%;
   -webkit-touch-callout: none;
-}
-@media (min-width: 768px) {
-  .button, .pagination-next-link, .pagination-prev-link, .pagination-first-link, .pagination-last-link, .activities .subscriptions-subscribe button[data-selected=true], .activities .subscriptions-subscribe button, .subscriptions-subscribe button, .requests-table-toolbar .organization-subscribe button, .community-follow button[data-selected=true], .community-follow button, .comment-form-controls input[type=submit], .article-subscribe button[data-selected=true], .article-subscribe button, .section-subscribe button, .search input[type=submit], .split-button button {
-    width: auto;
-  }
 }
 .button:hover, .pagination-next-link:hover, .pagination-prev-link:hover, .pagination-first-link:hover, .pagination-last-link:hover, .activities .subscriptions-subscribe button[data-selected=true]:hover, .subscriptions-subscribe button:hover, .requests-table-toolbar .organization-subscribe button:hover, .community-follow button:hover, .comment-form-controls input[type=submit]:hover, .article-subscribe button:hover, .section-subscribe button:hover, .search input[type=submit]:hover, .split-button button:hover, .button:active, .pagination-next-link:active, .pagination-prev-link:active, .pagination-first-link:active, .pagination-last-link:active, .activities .subscriptions-subscribe button[data-selected=true]:active, .subscriptions-subscribe button:active, .requests-table-toolbar .organization-subscribe button:active, .community-follow button:active, .comment-form-controls input[type=submit]:active, .article-subscribe button:active, .section-subscribe button:active, .search input[type=submit]:active, .split-button button:active, .button:focus, .pagination-next-link:focus, .pagination-prev-link:focus, .pagination-first-link:focus, .pagination-last-link:focus, .activities .subscriptions-subscribe button[data-selected=true]:focus, .subscriptions-subscribe button:focus, .requests-table-toolbar .organization-subscribe button:focus, .community-follow button:focus, .comment-form-controls input[type=submit]:focus, .article-subscribe button:focus, .section-subscribe button:focus, .search input[type=submit]:focus, .split-button button:focus {
   background-color: #ebebeb;
@@ -755,6 +755,11 @@ ul {
   padding: 0;
   cursor: pointer;
 }
+@media (min-width: 768px) {
+  .button-outline {
+    width: auto;
+  }
+}
 .button-outline {
   background-color: transparent;
   color: #0f172a;
@@ -779,11 +784,6 @@ ul {
   width: 100%;
   -webkit-touch-callout: none;
 }
-@media (min-width: 768px) {
-  .button-outline {
-    width: auto;
-  }
-}
 .button-outline:hover, .button-outline:active, .button-outline:focus {
   background-color: #ebebeb;
   color: #0f172a;
@@ -803,6 +803,11 @@ ul {
   color: #fff;
 }
 
+@media (min-width: 768px) {
+  .button-large, .hbs-form input[type=submit] {
+    width: auto;
+  }
+}
 .button-large, .hbs-form input[type=submit] {
   cursor: pointer;
   background-color: #515ba5;
@@ -814,11 +819,6 @@ ul {
   min-width: 190px;
   padding: 0 1.9286em;
   width: 100%;
-}
-@media (min-width: 768px) {
-  .button-large, .hbs-form input[type=submit] {
-    width: auto;
-  }
 }
 .button-large:visited, .hbs-form input[type=submit]:visited {
   color: #fff;
@@ -1099,6 +1099,10 @@ ul {
   padding-top: 16px;
   padding-bottom: 16px;
 }
+.header-inner.shrink {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
 
 .logo img {
   max-height: 37px;
@@ -1376,13 +1380,13 @@ ul {
 .user-info {
   display: inline-block;
 }
-.user-info .dropdown-toggle::after {
-  display: none;
-}
 @media (min-width: 768px) {
   .user-info .dropdown-toggle::after {
     display: inline-block;
   }
+}
+.user-info .dropdown-toggle::after {
+  display: none;
 }
 .user-info > button {
   border: 0;
@@ -1407,14 +1411,14 @@ ul {
   font-weight: 600;
 }
 
-#user #user-name {
-  display: none;
-  font-size: 14px;
-}
 @media (min-width: 768px) {
   #user #user-name {
     display: inline-block;
   }
+}
+#user #user-name {
+  display: none;
+  font-size: 14px;
 }
 #user #user-name:hover {
   text-decoration: underline;
@@ -1498,8 +1502,6 @@ ul {
   margin: 0 auto;
   padding-right: calc(var(--gutter-x) * 0.5);
   padding-left: calc(var(--gutter-x) * 0.5);
-  display: flex;
-  justify-content: space-between;
 }
 @media (min-width: 1280px) {
   .footer-inner {
@@ -1507,6 +1509,10 @@ ul {
     padding-left: 0;
     width: 90%;
   }
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
 }
 .footer-language-selector button {
   color: #364255;
@@ -1882,13 +1888,6 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   margin-top: 0;
 }
 
-.page-header {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 10px 0;
-}
 @media (min-width: 768px) {
   .page-header {
     align-items: baseline;
@@ -1898,27 +1897,34 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
     margin: 0;
   }
 }
-.page-header .section-subscribe {
-  flex-shrink: 0;
-  margin-bottom: 10px;
+.page-header {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px 0;
 }
 @media (min-width: 768px) {
   .page-header .section-subscribe {
     margin-bottom: 0;
   }
 }
+.page-header .section-subscribe {
+  flex-shrink: 0;
+  margin-bottom: 10px;
+}
 .page-header h1, .page-header section.hero-home .h1, section.hero-home .page-header .h1 {
   flex-grow: 1;
   margin-bottom: 10px;
-}
-.page-header-description {
-  margin: 0 0 30px 0;
-  word-break: break-word;
 }
 @media (min-width: 1024px) {
   .page-header-description {
     flex-basis: 100%;
   }
+}
+.page-header-description {
+  margin: 0 0 30px 0;
+  word-break: break-word;
 }
 .page-header .icon-lock {
   height: 20px;
@@ -2022,9 +2028,9 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   text-decoration: none;
 }
 .blocks-item-link:focus {
+  text-decoration: none;
   outline: 0;
   box-shadow: 0 0 0 3px #515ba5;
-  text-decoration: none;
 }
 .blocks-item-title {
   margin-bottom: 0;

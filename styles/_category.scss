@@ -6,12 +6,12 @@
   }
 
   &-content {
+    flex: 1;
+    max-width: 100%;
     @include desktop {
       flex: 0 0 80%;
     }
 
-    flex: 1;
-    max-width: 100%;
   }
 }
 
@@ -23,16 +23,16 @@
 
 
 .section-tree {
-  @include tablet { flex-direction: row; }
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
+  @include tablet { flex-direction: row; }
 
   .section {
-    @include tablet { flex: 0 0 45%; /* Two columns for tablet and desktop. Leaving 5% separation between columns */ }
     flex: initial;
     max-width: 100%;
+    @include tablet { flex: 0 0 45%; /* Two columns for tablet and desktop. Leaving 5% separation between columns */ }
   }
 
   &-title {

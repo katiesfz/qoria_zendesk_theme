@@ -2,24 +2,23 @@
 
 /* Sidebar navigation that collapses on mobile */
 .collapsible-sidebar {
-  @include desktop {
-    max-height: none;
-  }
   flex: 1;
   overflow: hidden;
   position: relative;
+  @include desktop {
+    max-height: none;
+  }
 
   &-title {
     font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 16px;
   @include desktop {
     font-size: $font-size-h4;
   }
-    margin-top: 0;
-    margin-bottom: 16px;
   }
 
   &-toggle {
-    @include desktop { display: none; }
     position: absolute;
     top: $gutter;
     right: math.div($gutter,2);
@@ -29,6 +28,7 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
+    @include desktop { display: none; }
 
     [dir="rtl"] & {
       left: 0;
@@ -58,8 +58,8 @@
   }
 
   &-body {
-    @include desktop { display: block; }
     display: none;
+    @include desktop { display: block; }
   }
 
   &[aria-expanded="true"] {

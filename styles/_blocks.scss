@@ -2,22 +2,18 @@
 /* Used in Homepage#categories and Community#topics */
 .blocks {
   &-list {
-    @include tablet {
-      margin: 0 -15px;
-    }
-
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     list-style: none;
     padding: 0;
+    @include tablet {
+      margin: 0 -15px;
+    }
+
   }
 
   &-item {
-    @include tablet {
-      margin: 0 15px 30px;
-    }
-
     border: 1px solid $brand-color;
     border-radius: 4px;
     box-sizing: border-box;
@@ -27,6 +23,10 @@
     margin: 0 0 30px;
     max-width: 100%;
     text-align: center;
+    @include tablet {
+      margin: 0 15px 30px;
+    }
+
 
     &:hover,
     &:focus,
@@ -71,8 +71,8 @@
     }
     
     &:focus {
-      @include focus-ring;
       text-decoration: none;
+      @include focus-ring;
     }
   }
 
