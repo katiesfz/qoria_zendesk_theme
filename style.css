@@ -377,7 +377,7 @@ a {
   text-decoration: none;
 }
 a:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 a:hover, a:active, a:focus {
   text-decoration: none;
@@ -420,7 +420,7 @@ a[target=_blank]::after {
   border-radius: 4px;
   padding: 8px 30px 8px 10px;
   outline: none;
-  color: rgb(48.0561151079, 58.7352517986, 75.6438848921);
+  color: #303b4c;
   width: 100%;
 }
 .hbs-form select:focus, .search select:focus {
@@ -838,7 +838,7 @@ ul {
 .button-secondary:hover, .button-secondary:focus, .button-secondary:active {
   color: #0f172a;
   border: 1px solid #87929D;
-  background-color: rgb(247.35, 247.35, 247.35);
+  background-color: #f7f7f7;
 }
 
 /***** Split button *****/
@@ -1069,7 +1069,7 @@ ul {
   padding: 10px 0;
 }
 .form .suggestion-list li a:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 
 /***** Header *****/
@@ -1937,7 +1937,7 @@ ul {
   color: #0f172a;
 }
 .search input[type=search]:focus {
-  color: rgb(48.0561151079, 58.7352517986, 75.6438848921);
+  color: #303b4c;
   border-color: #515ba5;
 }
 .search input[type=search]::-webkit-search-decoration, .search input[type=search]::-webkit-search-cancel-button, .search input[type=search]::-webkit-search-results-button, .search input[type=search]::-webkit-search-results-decoration {
@@ -2376,10 +2376,10 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   text-decoration: underline;
 }
 .community a:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .community a:hover, .community a:active, .community a:focus {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 
 .community,
@@ -2475,10 +2475,10 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   text-decoration: underline;
 }
 .recent-activity-controls a:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .recent-activity-controls a:hover, .recent-activity-controls a:active, .recent-activity-controls a:focus {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .recent-activity-accessibility-label {
   border: 0;
@@ -2735,10 +2735,10 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   text-decoration: underline;
 }
 .article-body a:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .article-body a:hover, .article-body a:active, .article-body a:focus {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .article-body img {
   height: auto;
@@ -2788,7 +2788,7 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   padding: 10px 0;
   font-size: 12px;
   text-align: center;
-  background-color: rgb(242.25, 242.25, 242.25);
+  background-color: #f2f2f2;
 }
 .article-body ul,
 .article-body ol {
@@ -3020,10 +3020,10 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   text-decoration: underline;
 }
 .article-more-questions a:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .article-more-questions a:hover, .article-more-questions a:active, .article-more-questions a:focus {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .article-cta {
   padding: 16px;
@@ -3546,10 +3546,10 @@ code.hljs {
   text-decoration: underline;
 }
 .comment-callout a:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .comment-callout a:hover, .comment-callout a:active, .comment-callout a:focus {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .comment-sorter {
   display: inline-block;
@@ -3696,10 +3696,10 @@ code.hljs {
   text-decoration: underline;
 }
 .comment-body a:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .comment-body a:hover, .comment-body a:active, .comment-body a:focus {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .comment-body img {
   height: auto;
@@ -3749,7 +3749,7 @@ code.hljs {
   padding: 10px 0;
   font-size: 12px;
   text-align: center;
-  background-color: rgb(242.25, 242.25, 242.25);
+  background-color: #f2f2f2;
 }
 .comment-body ul,
 .comment-body ol {
@@ -4101,7 +4101,7 @@ code.hljs {
   text-decoration: underline;
 }
 .striped-list-title:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .striped-list .meta-group {
   margin: 5px 0;
@@ -4320,10 +4320,10 @@ code.hljs {
   text-decoration: underline;
 }
 .post-body a:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .post-body a:hover, .post-body a:active, .post-body a:focus {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .post-body img {
   height: auto;
@@ -4373,7 +4373,7 @@ code.hljs {
   padding: 10px 0;
   font-size: 12px;
   text-align: center;
-  background-color: rgb(242.25, 242.25, 242.25);
+  background-color: #f2f2f2;
 }
 .post-body ul,
 .post-body ol {
@@ -4781,7 +4781,7 @@ code.hljs {
 
 /***** My activities *****/
 .my-activities-nav {
-  background-color: rgb(242.25, 242.25, 242.25);
+  background-color: #f2f2f2;
   margin-bottom: 20px;
 }
 .my-activities-sub-nav {
@@ -5117,10 +5117,10 @@ code.hljs {
   text-decoration: underline;
 }
 .activities-body a:visited {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .activities-body a:hover, .activities-body a:active, .activities-body a:focus {
-  color: rgb(47.4146341463, 53.2682926829, 96.5853658537);
+  color: #2f3561;
 }
 .activities-body img {
   height: auto;
@@ -5170,7 +5170,7 @@ code.hljs {
   padding: 10px 0;
   font-size: 12px;
   text-align: center;
-  background-color: rgb(242.25, 242.25, 242.25);
+  background-color: #f2f2f2;
 }
 .activities-body ul,
 .activities-body ol {
@@ -5377,7 +5377,7 @@ code.hljs {
 }
 @media (min-width: 1024px) {
   .request-sidebar {
-    background-color: rgb(247.35, 247.35, 247.35);
+    background-color: #f7f7f7;
     border: 0;
     font-size: 0.9375rem;
     flex: 0 0 auto;

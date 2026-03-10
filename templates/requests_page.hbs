@@ -15,7 +15,7 @@
 
 <section class="section bg-subtle" style="padding-top: 0;">
   <div class="container">
-    <div class="requests-container" id="requests-container">
+    <div class="requests-container visibility-hidden" id="requests-container">
       <aside class="requests-sidebar" aria-labelledby="section-requests-title">
         <div class="search-container">
               
@@ -153,5 +153,21 @@
         </footer>
       </article>
     </div>
+    <div id="renderRequestList"></div>
   </div>
 </section>
+
+
+<script type="module">
+  import { renderRequestList } from "request-list"; 
+  
+  const container = document.getElementById("renderRequestList"); 
+  const settings = {{json settings}}; 
+
+  const props = {   
+    locale: {{json help_center.base_locale}},
+    customStatusesEnabled: {{json help_center.custom_statuses_enabled}}
+  }; 
+  
+  renderRequestList(settings, props, container);
+</script>
