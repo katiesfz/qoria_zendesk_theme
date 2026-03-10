@@ -1,0 +1,159 @@
+<a class="skip-navigation" tabindex="1" href="#main-content">{{t 'skip_navigation' }}</a>
+<div class="announcements-container"></div>
+<header class="header">
+  <div class="header-inner" id="headerInner">
+    <div class="logo">
+      {{#link 'help_center'}}
+        <img src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}" style=""/>
+        {{#if settings.show_brand_name}}
+        <div class="vr"></div>
+          <span aria-hidden="true">{{help_center.name}}</span>
+        {{/if}}
+      {{/link}}
+    </div>
+
+
+    <div class="nav-wrapper-desktop">
+      <nav class="user-nav" id="user-nav" aria-label="{{t 'user_navigation'}}">
+        <ul class="user-nav-list">
+          {{#if settings.header_link_1_url}}
+            {{#if settings.header_link_1_label}}
+              <li><a href="{{settings.header_link_1_url}}">{{settings.header_link_1_label}}</a></li>
+            {{/if}}
+          {{/if}}
+          {{#if settings.status_page_url}}
+          <li><a href="{{settings.status_page_url}}">Status page</a></li>
+          {{/if}}
+          {{#unless user.agent}}
+          <li>{{link 'new_request' class='submit-a-request'}}</li>
+          {{/unless}}
+          {{#unless signed_in}}
+            <li><a href="{{page_path 'sign_in'}}">Sign in</a></li>
+          {{/unless}}
+          {{#if signed_in}}
+            <li class="dropdown">
+              <button class="dropdown-toggle" aria-haspopup="true">
+                {{user_avatar class="user-avatar"}}
+                <span class="dropdown-label">
+                  {{user_name}}
+                  <i class="far fa-chevron-down fa-2xs dropdown-chevron-icon"></i>
+                </span>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end" role="menu">
+                {{#my_profile role="menuitem"}}{{t 'profile'}}{{/my_profile}}
+                {{link "requests" role="menuitem"}}
+                {{#link "contributions" role="menuitem"}}{{t "activities"}}{{/link}}
+                {{contact_details role="menuitem"}}
+                {{change_password role="menuitem"}}
+                <div class="separator" role="separator"></div>
+                {{link "sign_out" role="menuitem"}}
+              </div>
+            </li>
+          {{/if}}
+          {{#if alternative_locales}}
+            <li class="dropdown">
+              <button class="dropdown-toggle" aria-haspopup="true">
+                <i class="far fa-globe"></i>
+                <i class="far fa-chevron-down fa-2xs dropdown-chevron-icon"></i>
+              </button>
+              <span class="dropdown-menu dropdown-menu-end" role="menu">
+                  <a href="#" dir="ltr" rel="nofollow" class="active" role="menuitem">
+                    {{current_locale.name}}
+                  </a>
+                {{#each alternative_locales}}
+                  <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">
+                    {{name}}
+                  </a>
+                {{/each}}
+              </span>
+            </li>
+          {{/if}}
+        </ul>
+      </nav>
+   <!--   {{#if signed_in}}
+        <div class="user-info dropdown">
+          <button class="dropdown-toggle" aria-haspopup="true">
+            {{user_avatar class="user-avatar"}}
+            <span>
+              {{user_name}}
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon" aria-hidden="true">
+                <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
+              </svg>
+            </span>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            {{#my_profile role="menuitem"}}{{t 'profile'}}{{/my_profile}}
+            {{link "requests" role="menuitem"}}
+            {{#link "contributions" role="menuitem"}}{{t "activities"}}{{/link}}
+            {{contact_details role="menuitem"}}
+            {{change_password role="menuitem"}}
+            <div class="separator" role="separator"></div>
+            {{link "sign_out" role="menuitem"}}
+          </div>
+        </div>
+      {{/if}} 
+      {{#if alternative_locales}}
+        <div class="dropdown language-selector">
+          <button class="dropdown-toggle" aria-haspopup="true">
+            {{current_locale.name}}
+          </button>
+          <span class="dropdown-menu dropdown-menu-end" role="menu">
+            {{#each alternative_locales}}
+              <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">
+                {{name}}
+              </a>
+            {{/each}}
+          </span>
+        </div>
+      {{/if}}-->
+    </div>
+
+    <div class="nav-wrapper-mobile">
+      <button class="menu-button-mobile" aria-controls="user-nav-mobile" aria-expanded="false" aria-label="{{t 'toggle_navigation'}}">
+        <i class="fa far fa-bars"></i>
+      </button>
+      <nav class="menu-list-mobile" id="user-nav-mobile" aria-expanded="false">
+        <ul class="menu-list-mobile-items">
+          {{#if settings.header_link_1_url}}
+            {{#if settings.header_link_1_label}}
+              <li><a href="{{settings.header_link_1_url}}">{{settings.header_link_1_label}}</a></li>
+            {{/if}}
+          {{/if}}
+          {{#if signed_in}}
+            <li class="user-avatar-item item">
+              {{#my_profile role="menuitem" class="my-profile"}}
+                {{user_avatar class="menu-profile-avatar"}}
+                <div class="menu-profile-name">
+                  <div>{{user_name}}</div>
+                  <div class="my-profile-tooltip">{{t 'profile'}}</div>
+                </div>
+              {{/my_profile}}
+            </li>
+            <li class="item">{{link "requests" role="menuitem"}}</li>
+            <li class="item">{{#link "contributions" role="menuitem"}}{{t "activities"}}{{/link}}</li>
+            <li class="item">{{contact_details role="menuitem"}}</li>
+            <li class="item">{{change_password role="menuitem" class='change-password'}}</li>
+            <li class="nav-divider"></li>
+          {{else}}
+            <li class="item">
+              {{#link "sign_in" role="menuitem"}}
+                {{t 'sign_in'}}
+              {{/link}}
+            </li>
+            <li class="nav-divider"></li>
+          {{/if}}
+          {{#if settings.status_page_url}}
+          <li><a href="{{settings.status_page_url}}">Status page</a></li>
+          {{/if}}
+          <li class="item">{{link 'new_request' role="menuitem" class='submit-a-request'}}</li>
+          <li class="nav-divider"></li>
+          {{#if signed_in}}
+            <li class="item">
+              {{link "sign_out" role="menuitem"}}
+            </li>
+          {{/if}}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

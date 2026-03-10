@@ -1,0 +1,260 @@
+<section class="section hero hero-search">
+  <div class="container">
+    <div class="row">
+      <div class="">
+        {{breadcrumbs}}
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <p class="h1 strong">How can we help you today?</p>
+        <p class="page-header-description">Search our knowledge base for answers to common questions</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        {{search scoped=true submit=false class="search search-full search-transparent"}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="search-results-container" id="search-results-container">
+    {{#if results}}
+      <aside class="search-results-sidebar" aria-labelledby="search-results">
+        {{#if source_filters}}
+          <section class="filters-in-section collapsible-sidebar">
+            <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_source_menu'}}">
+              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
+              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
+            </button>
+            <h5 class="collapsible-sidebar-title sidenav-title">{{t 'filter_source'}}</h5>
+            <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
+              {{#each source_filters}}
+                <li>
+                {{#if selected}}
+                  <a href="{{url}}" class="sidenav-item active" aria-current="page">
+                {{else}}
+                  <a href="{{url}}" class="sidenav-item">
+                {{/if}}
+                    <span class="sidenav-subitem filter-name">{{name}}</span>
+                    <span class="sidenav-subitem doc-count">{{count}}</span>
+                  </a>
+                </li>
+              {{/each}}
+              <button class="see-all-filters" aria-hidden="true" aria-label="{{t 'show_more_sources'}}">{{t 'show_more_sources'}}</button>
+            </ul>
+          </section>
+        {{/if}}
+        {{#if type_filters}}
+          <section class="filters-in-section collapsible-sidebar">
+            <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_type_menu'}}">
+              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
+              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
+            </button>
+            <h5 class="collapsible-sidebar-title sidenav-title">{{t 'filter_type'}}</h5>
+            <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
+              {{#each type_filters}}
+                <li>
+                {{#if selected}}
+                  <a href="{{url}}" class="sidenav-item active" aria-current="page">
+                {{else}}
+                  <a href="{{url}}" class="sidenav-item">
+                {{/if}}
+                    <span class="sidenav-subitem filter-name">{{name}}</span>
+                    <span class="sidenav-subitem doc-count">{{count}}</span>
+                  </a>
+                </li>
+              {{/each}}
+            </ul>
+          </section>
+        {{/if}}
+        {{#if subfilters}}
+          <section class="filters-in-section collapsible-sidebar">
+            <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_subfilter_menu'}}">
+              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
+              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
+            </button>
+            {{#is current_filter.identifier 'knowledge_base'}}
+              <h5 class="collapsible-sidebar-title sidenav-title">{{t 'filter_by_category'}}</h5>
+            {{/is}}
+            {{#is current_filter.identifier 'community'}}
+              <h5 class="collapsible-sidebar-title sidenav-title">{{t 'filter_by_topic'}}</h5>
+            {{/is}}
+            <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
+              {{#each subfilters}}
+                <li>
+                  {{#if selected}}
+                    <a href="{{url}}" class="sidenav-item active" aria-current="page">
+                  {{else}}
+                    <a href="{{url}}" class="sidenav-item">
+                  {{/if}}
+                    <span class="sidenav-subitem filter-name">{{name}}</span>
+                    <span class="sidenav-subitem doc-count">{{count}}</span>
+                  </a>
+                </li>
+              {{/each}}
+              {{#is current_filter.identifier 'knowledge_base'}}
+                <button class="see-all-filters" aria-hidden="true" aria-label="{{t 'show_more_categories'}}">{{t 'show_more_categories'}}</button>
+              {{/is}}
+              {{#is current_filter.identifier 'community'}}
+                <button class="see-all-filters" aria-hidden="true" aria-label="{{t 'show_more_topics'}}">{{t 'show_more_topics'}}</button>
+              {{/is}}
+            </ul>
+          </section>
+        {{/if}}
+        {{#if content_tag_filters}}
+          <section class="filters-in-section collapsible-sidebar">
+            <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false">
+              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
+              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
+            </button>
+            <h5 class="collapsible-sidebar-title sidenav-title">{{t 'filter_content_tag'}}</h5>
+            <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
+              {{#each content_tag_filters}}
+                {{#if selected}}
+                  <li class="sidenav-tag">
+                    <div class="content-tag">
+                      <span class="label">{{name}}</span>
+                      <a href="{{url}}" aria-current="page">
+                        <span>
+                          <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false"  aria-hidden="true" >
+                              <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ul>
+          </section>
+        {{/if}}
+      </aside>
+      <article id="main-content" class="search-results">
+        <h1 class="search-results-subheading">
+          {{#is current_filter.identifier 'unified'}}
+            {{#if content_tag_filters }}
+              {{#each (filter content_tag_filters on="selected" equals=true)}}
+                {{t 'results_content_tag' content_tag=name count=../results_count}}
+              {{/each}}
+            {{else}}
+              {{t 'results' query=query count=results_count}}
+            {{/if}}
+          {{else}}
+            {{#if content_tag_filters }}
+              {{#each (filter content_tag_filters on="selected" equals=true)}}
+                {{t 'results_content_tag' content_tag=name count=../results_count}}
+              {{/each}}
+            {{else}}
+              {{#unless current_subfilter.identifier}}
+                {{t 'results' query=query count=results_count}}
+              {{else}}
+                {{t 'results_with_scope' query=query count=results_count scope_name=current_subfilter.name}}
+              {{/unless}}
+            {{/if}}
+          {{/is}}
+        </h1>
+
+        <ul class="search-results-list">
+          {{#each results}}
+            <li>
+              <article>
+                <header>
+                  <div class="search-result-title-container">
+                    <h2 class="search-result-title">
+                      <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}}>
+                        {{title}}
+                        {{#if is_external}}
+                          <i class="far fa-external-link"></i>
+                        <!--  <svg viewBox="0 0 12 12" height="12" id="zd-svg-icon-12-new-window-fill">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" d="M10.5 8.5V10c0 .28-.22.5-.5.5H2c-.28 0-.5-.22-.5-.5V2c0-.28.22-.5.5-.5h1.5M6 6l4-4"></path>
+                            <path fill="currentColor" d="M10.5 6.5a.47.47 0 0 1-.35-.15l-4.5-4.5a.474.474 0 0 1-.11-.54C5.62 1.12 5.8 1 6 1h4c.55 0 1 .45 1 1v4c0 .2-.12.38-.31.46-.06.03-.13.04-.19.04z"></path>
+                          </svg>-->
+                        {{/if}}
+                      </a>
+                    </h2>
+                    <div class="search-result-icons">
+                      {{#if vote_sum}}
+                        <span class="search-result-votes">
+                          <span class="visibility-hidden">
+                            {{t 'votes_sum' count=vote_sum}}
+                          </span>
+                          <span aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-result-votes-icon">
+                              <g fill="none" stroke="currentColor">
+                                <path stroke-linejoin="round" d="M10.77 4.5a.73.73 0 01.73.73C11.43 7 11.21 11.5 10 11.5H5a.5.5 0 01-.5-.5V4.5s1-.5 1-3a1 1 0 012 0v3z"/>
+                                <rect width="2" height="7" x=".5" y="4.5" rx=".5" ry=".5"/>
+                              </g>
+                            </svg>
+                            {{vote_sum}}
+                          </span>
+                        </span>
+                      {{/if}}
+                      {{#if comment_count}}
+                        <span class="search-result-meta-count">
+                          <span class="visibility-hidden">
+                            {{t 'comments_count' count=comment_count}}
+                          </span>
+                          <span aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-result-meta-count-icon">
+                              <path fill="none" stroke="currentColor" d="M1 .5h10c.3 0 .5.2.5.5v7c0 .3-.2.5-.5.5H6l-2.6 2.6c-.3.3-.9.1-.9-.4V8.5H1C.7 8.5.5 8.3.5 8V1C.5.7.7.5 1 .5z"/>
+                            </svg>
+                            {{comment_count}}
+                          </span>
+                        </span>
+                      {{/if}}
+                    </div>
+                  </div>
+                  <div class="search-result-meta-container">
+                    <nav 
+                      {{#is type 'article'}}aria-label='{{t 'article_location_with_title' title=title}}'{{/is}}
+                      {{#is type 'community_post'}}aria-label='{{t 'post_location_with_title' title=title}}'{{/is}}
+                      {{#is type 'external_content_record'}}aria-label='{{t 'external_content_location_with_title' title=title}}'{{/is}}
+                    >
+                      <ol class="breadcrumbs search-result-breadcrumbs">
+                        {{#each path_steps}}
+                          <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
+                        {{/each}}
+                      </ol>
+                    </nav>
+                  </div>
+                </header>
+                  <div class="search-result-description-container">
+                    <p class="search-result-description">{{text}}</p>
+                  </div>
+                  <div class="search-result-meta-container">
+                    {{#unless is_external}}
+                    <!--  <span class="meta-data">{{author.name}}</span> -->
+                    {{/unless}}
+                    {{#is edited_at created_at}}
+                    <span class="meta-data">Last updated {{date created_at}}</span>
+                    {{else}}
+                    <span class="meta-data">Last updated {{date edited_at}}</span>
+                    {{/is}}
+                  </div>
+              </article>
+            </li>
+          {{/each}}
+        </ul>
+        {{pagination}}
+      </article>
+    {{else}}
+      <article id="main-content" class="no-results">
+        <h1 class="search-results-subheading">
+          No results? Start a new search or <a href="{{page_path 'new_request'}}" target="_blank">let us know what you were looking for</a>.
+        </h1>
+        <div class="action-prompt">
+          Enter your keywords in the search field.
+        <!--  {{t 'no_results_unified_enter_keywords'}} -->
+        </div>
+        <div class="action-prompt">
+          {{#link 'help_center'}}
+            {{t 'go_to_help_center'}}
+          {{/link}}
+        </div> 
+      </article>
+    {{/if}}
+  </div>
+</div>

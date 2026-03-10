@@ -1,0 +1,176 @@
+<h1 class="visibility-hidden">{{ help_center.name }}</h1>
+
+<section class="section hero hero-home" style="margin-bottom: 0;">
+  <div class="container">
+    <div class="row">
+      <div>
+        <p class="h1">{{ settings.welcome_message }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- search bar -->
+<section class="section-null" style="padding-top: 0; padding-bottom: 0;">
+  <div class="container">
+    <div class="site-search">
+      <p class="h2 strong">How can we help you today?</p>
+      <h2 class="visibility-hidden">{{ t 'search' }}</h2>
+      {{search instant=settings.instant_search class='search search-home' submit=true}}
+    </div>
+  </div> 
+</section>
+
+
+
+<div id="main-content">
+
+    {{#if promoted_articles}}
+
+    <section class="section">
+      <div class="container knowledge-base promoted-articles">
+        <!-- promoted articles -->
+        {{#if settings.promoted_articles_title}}
+        <h2>{{settings.promoted_articles_title}}</h2>
+        {{else}}
+        <h2>{{t 'promoted_articles'}}</h2>
+        {{/if}}
+        <div class="articles-list row row-cols-md-3 g-2">
+          {{#each promoted_articles}}
+          
+          <div class="single-article">
+            <div class="article-border">
+              <div class="article-thumbnail">
+                <div class="article-icon">
+                  <img src="{{../settings.promoted_icon}}">
+                </div>
+                <div class="article-copy">
+                  <a class="article-link" href="{{url}}">
+                    <span class="article-title{{#if internal}} article-title-internal{{/if}}">{{title}}</span>
+                    {{#if internal}}
+                      <i class="fa far fa-lock-alt internal-article-icon" title="{{t 'internal'}}"></i>
+                    {{/if}}
+                    <span class="article-description">{{snippet}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+
+    {{/if}}
+
+
+    <section class="section">
+      <div class="container knowledge-base categories">
+        <!-- categories -->
+        {{#if settings.categories_title}}
+        <h2>{{settings.categories_title}}</h2>
+        {{else}}
+        <h2>{{ t 'categories' }}</h2>
+        {{/if}}
+        <div class="categories-list row row-cols-md-3">
+          {{#each categories}}
+          {{#if ../has_multiple_categories}}
+          <div class="single-category">
+            <div class="category-thumbnail">
+              <div class="category-icon">
+                <img src="{{../settings.category_icon}}">
+              </div>
+              <div class="category-copy">
+                <a class="category-link" href="{{url}}">
+                  <span class="category-title">{{name}}</span>
+                  <span class="category-description">{{excerpt description}}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          {{else}}
+          {{#each sections}}
+          <div class="category-container">
+            <div class="category-thumbnail">
+              <div class="category-icon">
+                <img src="{{../../settings.category_icon}}">
+              </div>
+              <div class="category-copy">
+                <a class="category-link" href="{{url}}">
+                  <span class="category-title">{{name}}</span>
+                  <span class="category-description">{{excerpt description}}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+          {{/if}}
+          {{/each}}
+          {{pagination}}
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section">
+      <div class="container knowledge-base promoted-products">
+        <!-- other knowledge bases -->
+        <h2>Help with other Qoria products</h2>
+        <div class="products-list row row-cols-md-3">
+          <!-- Knowledge Base Card 1 -->
+          <div class="single-product">
+            <div class="single-product-inner">
+              <div class="product-thumbnail">
+                <div class="product-icon">
+                  <img src="{{settings.product_1_icon}}">
+                </div>
+                <div class="product-copy">
+                  <a class="product-link" href="{{settings.product_1_link}}">
+                    <span class="product-title">{{settings.product_1_name}}</span>
+                    <span class="product-description">{{settings.product_1_description}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Knowledge Base Card 1 -->
+          <!-- Knowledge Base Card 2 -->
+          <div class="single-product">
+            <div class="single-product-inner">
+              <div class="product-thumbnail">
+                <div class="product-icon">
+                  <img src="{{settings.product_2_icon}}">
+                </div>
+                <div class="product-copy">
+                  <a class="product-link" href="{{settings.product_2_link}}">
+                    <span class="product-title">{{settings.product_2_name}}</span>
+                    <span class="product-description">{{settings.product_2_description}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Knowledge Base Card 2 -->
+          <!-- Knowledge Base Card 3 -->
+          <div class="single-product">
+            <div class="single-product-inner">
+              <div class="product-thumbnail">
+                <div class="product-icon">
+                  <img src="{{settings.product_3_icon}}">
+                </div>
+                <div class="product-copy">
+                  <a class="product-link" href="{{settings.product_3_link}}">
+                    <span class="product-title">{{settings.product_3_name}}</span>
+                    <span class="product-description">{{settings.product_3_description}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Knowledge Base Card 3 -->
+        </div>
+      </div>
+    </section>
+
+</div>

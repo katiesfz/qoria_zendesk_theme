@@ -1,0 +1,160 @@
+<footer class="footer">
+  <div class="container" style="padding-bottom: 64px;">
+    <div class="row">
+      <div class="col">
+        <hr style="margin: 32px 0;">
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col">
+        {{#link 'help_center'}}
+          <img src="{{settings.logo_inverse}}" style="width: 180px;">
+        {{/link}}
+      </div>
+
+      <div class="col">
+        <ul>
+          {{#link 'new_request'}}
+            <li>
+              <h6>
+                Submit a request
+              </h6>
+            </li>
+          {{/link}}
+          {{#if settings.status_page_url}}
+          <li>
+            <h6>
+              <a href="{{settings.status_page_url}}">
+              Status page
+              </a>
+            </h6>
+          </li>
+          {{/if}}
+          <li>
+            <h6>
+              <a href="{{settings.website}}">
+                Back to {{settings.website_string}}
+              </a>
+            </h6>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <ul>
+          <li>
+            <h6>
+              <a href="{{settings.contact_link}}">
+                Contact us
+              </a>
+            </h6>
+          </li>
+          <li>
+            <h6>
+              {{#if settings.show_facebook_link}}
+                <a href="{{settings.facebook_link}}">
+                  <i class="fa fa-brands fab fa-lg fa-facebook-square me-3" style="margin-right: 0.5em;"></i>
+                </a>
+              {{/if}}
+              {{#if settings.show_linkedin_link}}
+                <a href="{{settings.linkedin_link}}">
+                  <i class="fa fa-brands fab fa-lg fa-linkedin me-3" style="margin-right: 0.5em;"></i>
+                </a>
+              {{/if}}
+              {{#if settings.show_youtube_link}}
+                <a href="{{settings.youtube_link}}">
+                  <i class="fa fa-brands fab fa-lg fa-youtube-square me-3" style="margin-right: 0.5em;"></i>
+                </a>
+              {{/if}}
+              {{#if settings.show_xitter_link}}
+                <a href="{{settings.xitter_link}}">
+                  <i class="fa fa-brands fab fa-lg fa-x-twitter"></i>
+                </a>
+              {{/if}}
+            </h6>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {{#if settings.copyright_message}}
+    <div class="row">
+      <div class="col">
+        <p class="copyright">
+        &copy; <span id="currentYear"></span> {{settings.copyright_message}}
+        </p>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // add current year to copyright message
+      const span = document.getElementById('currentYear');
+      const year = new Date().getFullYear();
+      span.textContent = year;
+
+  });
+</script>
+
+
+{{#if settings.show_chat}}
+
+  {{#if settings.chat_snippet}}
+    <script>
+      var showChat = false;
+    </script>
+    {{#if settings.chat_gated}}
+      {{#if signed_in}}
+        <script>
+          showChat = true;
+        </script>
+      {{/if}}
+    {{else}}
+      <script>
+        showChat = true;
+      </script>
+    {{/if}}
+
+
+    <script>
+
+      const chatSnippetEsc = "{{~settings.chat_snippet~}}";
+      const chatSnippet = unescapeHTML(chatSnippetEsc);
+      var chatSrc = "";
+
+      // check if snippet is zendesk chat widget
+      if (chatSnippet.includes("ze-snippet")) {
+        // zendesk snippet
+        const zendeskChatRegex = /(?<=src=").*(?=")/g;
+        chatSrc = chatSnippet.match(zendeskChatRegex);
+      }
+
+      if (showChat == true) {
+            // Step 3: Load the script and run the function
+            loadScript(chatSrc, "ze-snippet")
+              .then(() => {
+                if (typeof zE === 'function') {
+                  zE('messenger', 'show'); // Step 4: Call the function from the loaded script
+                  console.log("show chat");
+                } else {
+                  console.error('zE is not defined or not a function.');
+                }
+              })
+              .catch(err => console.error(err));
+      } else {
+        zE('messenger', 'hide');
+      }
+
+    </script>
+    
+  {{/if}}
+
+{{else}}
+  <script>
+    // hide chat widget if it's shown by default
+    zE('messenger', 'hide');
+  </script>
+{{/if}}

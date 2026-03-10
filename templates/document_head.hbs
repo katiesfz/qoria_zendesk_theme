@@ -1,0 +1,47 @@
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<!-- Make the translated search clear button label available for use in JS -->
+<!-- See buildClearSearchButton() in script.js -->
+<script type="text/javascript">window.searchClearButtonLabelLocalized = "{{t 'search_clear'}}";</script>
+<script type="text/javascript">
+  // Load ES module polyfill only for browsers that don't support ES modules
+  if (!(HTMLScriptElement.supports && HTMLScriptElement.supports('importmap'))) {
+    document.write('<script async src="{{asset 'es-module-shims.js'}}"><\/script>');
+  }
+</script>
+<script type="importmap">
+{
+  "imports": {
+    "new-request-form": "{{asset 'new-request-form-bundle.js'}}",
+    "flash-notifications": "{{asset 'flash-notifications-bundle.js'}}",
+    "new-request-form-translations": "{{asset 'new-request-form-translations-bundle.js'}}",
+    "shared": "{{asset 'shared-bundle.js'}}",
+    "wysiwyg": "{{asset 'wysiwyg-bundle.js'}}"
+  }
+}
+</script>
+<script type="module">
+  import { renderFlashNotifications } from "flash-notifications";
+
+  const settings = {{json settings}};
+  const closeLabel = {{json (t 'close')}}
+
+  renderFlashNotifications(settings, closeLabel);
+</script>
+<!-- include fontawesome -->
+<link href="{{asset 'fontawesome.min.css'}}" rel="stylesheet" /> 
+<link href="{{asset 'fontawesome-brands.min.css'}}" rel="stylesheet" />
+<!-- include toc -->
+<!--<script src="{{asset 'table-of-contents.js'}}"></script>-->
+<!-- include requests status filter -->
+<!--<script src="{{asset 'request-status-filter.js'}}"></script> -->
+<!-- include accordion functionality -->
+<!--<script src="{{asset 'accordions.js'}}?q=1"></script> -->
+<!-- include tabs functionality -->
+<!--<script src="{{asset 'tabs.js'}}"></script>-->
+<!-- include basic Lightbox -->
+<script src="{{asset 'basicLightbox.min.js'}}"></script>
+<link href="{{asset 'basicLightbox.min.css'}}" rel="stylesheet" />
+<!-- include chat support functionality -->
+<script src="{{asset 'chat_widget_support.js'}}"></script>
+<!-- implement basic Lightbox -->
+<!--<script src="{{asset 'lightbox.js'}}"></script>-->
