@@ -1,6 +1,6 @@
 import type { IButtonProps } from "@zendeskgarden/react-buttons";
 import type { IGardenTheme } from "@zendeskgarden/react-theming";
-import { DEFAULT_THEME } from "@zendeskgarden/react-theming";
+import { DEFAULT_THEME, getColor } from "@zendeskgarden/react-theming";
 import { css } from "styled-components";
 
 export interface Settings {
@@ -13,156 +13,89 @@ export interface Settings {
   visited_link_color: string;
 }
 
+const createAccessibleFormControlStyle = (isWrapper: boolean) => {
+  const invalidSelector = isWrapper
+    ? ':has(input[aria-invalid="true"])'
+    : '[aria-invalid="true"]';
+
+  return css`
+    /* Boost default border contrast - use :not() to preserve validation colors */
+    &:not(${invalidSelector}) {
+      border-color: ${(p) =>
+        getColor({
+          theme: p.theme,
+          variable: "border.default",
+          dark: { offset: -100 },
+          light: { offset: 300 },
+        })};
+    }
+
+    /* Enhanced hover state */
+    &:hover:not(${invalidSelector}) {
+      border-color: ${(p) =>
+        getColor({
+          theme: p.theme,
+          variable: "border.primaryEmphasis",
+          dark: { offset: -100 },
+          light: { offset: 100 },
+        })};
+    }
+  `;
+};
+
+const accessibleFormInputStyle = createAccessibleFormControlStyle(false);
+const accessibleFormWrapperStyle = createAccessibleFormControlStyle(true);
+
 export function createTheme(settings: Settings): IGardenTheme {
   return {
-
     ...DEFAULT_THEME,
-
-  borders: {
-    sm: "0px solid",
-    md: "0px solid"
-  },
-  borderRadii: {
-    sm: "0px",
-    md: "0px"
-  },
-  borderWidths: {
-    sm: "1px",
-    md: "3px"
-  },
-  breakpoints: {
-    xs: "0px",
-    sm: "576px",
-    md: "768px",
-    lg: "992px",
-    xl: "1200px"
-  },
-  colors: {
-        background: "#FFFFFF",
-        foreground: "#0f172a",
-        primaryHue: "#515ba5",
-    base: "light",
-    dangerHue: "#b84c56",
-    warningHue: "#f2c464",
-    successHue: "#268460",
-    neutralHue: "#68768b",
-    chromeHue: "#515ba5",
-  },
-  components: {
+    rtl: document.dir === "rtl",
+    colors: {
+      ...DEFAULT_THEME.colors,
+      primaryHue: settings.brand_color,
+      variables: {
+        ...DEFAULT_THEME.colors.variables,
+        light: {
+          ...DEFAULT_THEME.colors.variables.light,
+          background: {
+            ...DEFAULT_THEME.colors.variables.light.background,
+            default: settings.background_color,
+            raised: settings.background_color,
+            recessed: settings.background_color,
+            subtle: settings.background_color,
+          },
+          foreground: {
+            ...DEFAULT_THEME.colors.variables.light.foreground,
+            default: settings.text_color,
+          },
+        },
+      },
+    },
+    components: {
       "buttons.anchor": css`
-        color: #515ba5;
+        color: ${settings.link_color};
 
         :hover,
         :active,
         :focus {
-          color: #2f3561;
+          color: ${settings.hover_link_color};
         }
 
         &:visited {
-          color: #2f3561;
+          color: ${settings.visited_link_color};
         }
       `,
       "buttons.button": css`
-        padding: 16px 38px;
-        font-size: 0.875em;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.12s ease-in-out, border-color 0.12s ease-in-out, color 0.15s ease-in-out;
-        display: inline-block;
-        line-height: 1;
-        text-align: center;
-        height: auto;
-        margin: 0;
-        border: 0;
-        font-weight: 700;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-        white-space: nowrap;
-        width: auto;
-        -webkit-touch-callout: none;
-
         ${(props: IButtonProps) =>
           props.isPrimary &&
           css`
-            color: #ffffff;
-            background-color: #515ba5;
-            border-radius: 4px;
-            :hover,
-            :active,
-            :focus {
-            background-color: #3a3879;}
+            color: ${settings.brand_text_color};
           `}
       `,
-      "forms.faux_input": css`
-        background-color: #f1f5f9;
-        border: 0;
-        border-radius: 0;
-      `,
-      'forms.input': css`
-        background-color: #f1f5f9;
-        border: 0;
-        border-radius: 0;
-      `,
-      'typography.paragraph': css`
-        margin-top: 0;
-      `,
-      'forms.file_upload': css`
-        background-color: #f1f5f9;
-          :hover,
-          :active,
-          :focus {
-            background-color: #d2dae5;
-            }
-      `,
-      'dropdowns.combobox.trigger': css`
-        background-color: #f1f5f9;
-        border: 0;
-        border-radius: 0;
-      `,
+      "forms.input": accessibleFormInputStyle,
+      "forms.textarea": accessibleFormInputStyle,
+      "forms.faux_input": accessibleFormInputStyle,
+      "dropdowns.combobox.trigger": accessibleFormWrapperStyle,
     },
-  fonts: {
-    mono: "SFMono-Regular,Consolas,\"Liberation Mono\",Menlo,Courier,monospace",
-    system: "Quicksand, Arial, Helvetica, sans-serif"
-  },
-  fontSizes: {
-    xs: "12px",
-    sm: "14px",
-    md: "16px",
-    lg: "18px",
-    xl: "22px",
-    xxl: "26px",
-    xxxl: "36px"
-  },
-  iconSizes: {
-    sm: "12px",
-    md: "16px",
-    lg: "26px"
-  },
-  lineHeights: {
-    sm: "16px",
-    md: "25px",
-    lg: "28px",
-    xl: "32px",
-    xxl: "44px",
-    xxxl: "50px"
-  },
-  palette: { /* see API for details */ },
-  rtl: document.dir === "rtl",
-  shadowWidths: {
-    xs: "1px",
-    sm: "2px",
-    md: "3px"
-  },
-  space: {
-    base: 4,
-    xxs: "4px",
-    xs: "8px",
-    sm: "12px",
-    md: "16px",
-    lg: "32px",
-    xl: "40px",
-    xxl: "48px"
-  }
   };
 }
