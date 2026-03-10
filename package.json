@@ -14,7 +14,8 @@
     "i18n:extract": "node bin/extract-strings.mjs new-request-form 'src/modules/new-request-form/**/*.{ts,tsx}' src/modules/new-request-form/translations",
     "i18n:update-translations": "node bin/update-modules-translations.mjs",
     "zcli": "zcli",
-    "push-staging": "git subtree push --prefix theme origin staging",
+    "postversion": "node version-sync.js && git add theme/manifest.json && git commit --amend --no-edit",
+    "push-staging": "npm version patch && git subtree push --prefix theme origin staging",
     "push-theme": "git subtree push --prefix theme origin theme"
   },
   "dependencies": {
