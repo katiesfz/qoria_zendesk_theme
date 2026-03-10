@@ -1,7 +1,7 @@
 {
   "name": "Qoria",
   "author": "Katie Sutcliffe",
-  "version": "1.2",
+  "version": "1.2.2",
   "api_version": 4,
   "default_locale": "en-us",
   "settings": [
@@ -390,7 +390,6 @@
           "description": "Chat snippet",
           "label": "Chat snippet",
           "value": ""
-
         }
       ]
     },
