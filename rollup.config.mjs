@@ -19,7 +19,7 @@ export default defineConfig([
   {
     input: "src/index.js",
     output: {
-      file: "script.js",
+      file: "theme/script.js",
       format: "iife",
     },
     plugins: [zass()],
@@ -35,7 +35,7 @@ export default defineConfig([
       "flash-notifications": "src/modules/flash-notifications/index.ts",
     },
     output: {
-      dir: "assets",
+      dir: "theme/assets",
       format: "es",
       manualChunks: (id) => {
 

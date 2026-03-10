@@ -5,7 +5,7 @@
   "scripts": {
     "start": "concurrently -k -r \"rollup -c -w\"",
     "build": "NODE_ENV=production rollup -c",
-    "prebuild": "rm -f assets/*-bundle.js",
+    "prebuild": "rm -f theme/assets/*-bundle.js",
     "eslint": "eslint src",
     "prepare": "husky install",
     "download-locales": "node ./bin/update-translations",
@@ -13,7 +13,9 @@
     "test-a11y": "node bin/lighthouse/index.js",
     "i18n:extract": "node bin/extract-strings.mjs new-request-form 'src/modules/new-request-form/**/*.{ts,tsx}' src/modules/new-request-form/translations",
     "i18n:update-translations": "node bin/update-modules-translations.mjs",
-    "zcli": "zcli"
+    "zcli": "zcli",
+    "push-staging": "git subtree push --prefix theme origin staging",
+    "push-theme": "git subtree push --prefix theme origin theme"
   },
   "dependencies": {
     "@types/dompurify": "3.0.2",

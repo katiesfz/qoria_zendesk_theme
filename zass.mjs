@@ -2,8 +2,8 @@ import path from "path";
 import fs from "fs";
 import sass from "rollup-plugin-sass";
 
-const manifestPath = path.resolve("manifest.json");
-const assetsPath = path.resolve("assets");
+const manifestPath = path.resolve("theme/manifest.json");
+const assetsPath = path.resolve("theme/assets");
 
 const data = fs.readFileSync(manifestPath, "utf-8");
 const manifest = JSON.parse(data);
@@ -60,7 +60,7 @@ function convertZassFunctions(css) {
 
 export default () =>
   sass({
-    output: "style.css",
+    output: "theme/style.css",
     options: { data: preamble },
     processor: (css) => {
       const unescaped = unescapeVariables(css);
