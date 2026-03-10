@@ -1,4 +1,4 @@
-import { Datepicker as GardenDatepicker } from "@zendeskgarden/react-datepickers";
+import { DatePicker as GardenDatepicker } from "@zendeskgarden/react-datepickers";
 import {
   Field as GardenField,
   Hint,

@@ -32,8 +32,8 @@ export default defineConfig([
     context: "this",
     input: {
       "new-request-form": "src/modules/new-request-form/index.tsx",
-      "flash-notifications": "src/modules/flash-notifications/index.ts",
       "request-list": "src/modules/request-list/index.tsx",
+      "flash-notifications": "src/modules/flash-notifications/index.ts",
     },
     output: {
       dir: "theme/assets",
@@ -65,9 +65,7 @@ export default defineConfig([
       chunkFileNames: fileNames,
     },
     plugins: [
-      nodeResolve({
-        extensions: [".js"],
-      }),
+      nodeResolve(),
       commonjs(),
       typescript(),
       replace({
