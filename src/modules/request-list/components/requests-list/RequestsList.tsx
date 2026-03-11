@@ -147,54 +147,62 @@ export function RequestsList({
         <RequestLoadingState />
       ) : (
         <>
-          <RequestsTabs
-            organizations={organizations}
-            selectedTab={selectedTab}
-            onTabSelected={handleTabSelected}
-          />
-          <RequestsToolbar
-            hasPagination={hasNextPage || hasPreviousPage}
-            page={page}
-            requestsCount={requestsCount}
-            requestsPerPage={requestsPerPage}
-            query={query}
-            onSearchSubmit={(value) => push({ page: 1, query: value })}
-            filters={filters}
-            ticketFields={ticketFields}
-            onFiltersChanged={handleFiltersChanged}
-            organizations={organizations}
-            selectedTab={selectedTab}
-            onOrganizationSelected={handleOrganizationSelected}
-            user={user}
-            customStatusesEnabled={customStatusesEnabled}
-            customStatuses={customStatuses}
-          />
-          <RequestsTable
-            onSort={onSort}
-            requests={requests}
-            users={usersWithAliases || users}
-            sort={sort}
-            ticketFields={ticketFields}
-            customStatuses={customStatuses}
-            customStatusesEnabled={customStatusesEnabled}
-          />
+
+
+          <aside className="requests-sidebar" aria-labelledby="section-requests-title">
+            <RequestsToolbar
+              hasPagination={hasNextPage || hasPreviousPage}
+              page={page}
+              requestsCount={requestsCount}
+              requestsPerPage={requestsPerPage}
+              query={query}
+              onSearchSubmit={(value) => push({ page: 1, query: value })}
+              filters={filters}
+              ticketFields={ticketFields}
+              onFiltersChanged={handleFiltersChanged}
+              organizations={organizations}
+              selectedTab={selectedTab}
+              onOrganizationSelected={handleOrganizationSelected}
+              user={user}
+              customStatusesEnabled={customStatusesEnabled}
+              customStatuses={customStatuses}
+            />
+          </aside>
+
+          <article className="requests">
+            <RequestsTabs
+              organizations={organizations}
+              selectedTab={selectedTab}
+              onTabSelected={handleTabSelected}
+            />
+            <RequestsTable
+              onSort={onSort}
+              requests={requests}
+              users={usersWithAliases || users}
+              sort={sort}
+              ticketFields={ticketFields}
+              customStatuses={customStatuses}
+              customStatusesEnabled={customStatusesEnabled}
+            />
+            
+            {(hasPreviousPage || hasNextPage) && (
+              <CursorPagination>
+                <CursorPagination.Previous
+                  onClick={() => push({ page: page - 1 })}
+                  disabled={!hasPreviousPage}
+                >
+                  {t("guide-requests-app.previous", "Previous")}
+                </CursorPagination.Previous>
+                <CursorPagination.Next
+                  onClick={() => push({ page: page + 1 })}
+                  disabled={!hasNextPage}
+                >
+                  {t("guide-requests-app.next", "Next")}
+                </CursorPagination.Next>
+              </CursorPagination>
+            )}
+          </article>
         </>
-      )}
-      {!isLoading && (hasPreviousPage || hasNextPage) && (
-        <CursorPagination>
-          <CursorPagination.Previous
-            onClick={() => push({ page: page - 1 })}
-            disabled={!hasPreviousPage}
-          >
-            {t("guide-requests-app.previous", "Previous")}
-          </CursorPagination.Previous>
-          <CursorPagination.Next
-            onClick={() => push({ page: page + 1 })}
-            disabled={!hasNextPage}
-          >
-            {t("guide-requests-app.next", "Next")}
-          </CursorPagination.Next>
-        </CursorPagination>
       )}
     </>
   );
