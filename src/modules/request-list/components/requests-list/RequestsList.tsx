@@ -1,9 +1,11 @@
 import { CursorPagination } from "@zendeskgarden/react-pagination";
 import { useTranslation } from "react-i18next";
+import { Span } from "@zendeskgarden/react-typography";
 import { useParams } from "../../hooks/useParams";
 import RequestsToolbar from "../requests-toolbar/RequestsToolbar";
 import { RequestsTable } from "../requests-table/RequestsTable";
 import RequestsTabs from "../requests-tabs/RequestsTabs";
+import { StyledSpan } from "../../../shared/styles"; 
 import type { FilterValuesMap } from "../../data-types/FilterValue";
 import type {
   RequestListParams,
@@ -141,6 +143,9 @@ export function RequestsList({
     }
   };
 
+  const from = (page - 1) * requestsPerPage + 1;
+  let to = from + requestsPerPage - 1;
+
   return (
     <>
       {isLoading ? (
@@ -175,6 +180,7 @@ export function RequestsList({
               selectedTab={selectedTab}
               onTabSelected={handleTabSelected}
             />
+
             <RequestsTable
               onSort={onSort}
               requests={requests}
@@ -185,21 +191,58 @@ export function RequestsList({
               customStatusesEnabled={customStatusesEnabled}
             />
             
-            {(hasPreviousPage || hasNextPage) && (
-              <CursorPagination>
-                <CursorPagination.Previous
-                  onClick={() => push({ page: page - 1 })}
-                  disabled={!hasPreviousPage}
-                >
-                  {t("guide-requests-app.previous", "Previous")}
-                </CursorPagination.Previous>
-                <CursorPagination.Next
-                  onClick={() => push({ page: page + 1 })}
-                  disabled={!hasNextPage}
-                >
-                  {t("guide-requests-app.next", "Next")}
-                </CursorPagination.Next>
-              </CursorPagination>
+            {(hasPreviousPage || hasNextPage) ? (
+              <>
+                <CursorPagination>
+                  <CursorPagination.Previous
+                    onClick={() => push({ page: page - 1 })}
+                    disabled={!hasPreviousPage}
+                  >
+                    {t("guide-requests-app.previous", "Previous")}
+                  </CursorPagination.Previous>
+                  <CursorPagination.Next
+                    onClick={() => push({ page: page + 1 })}
+                    disabled={!hasNextPage}
+                  >
+                    {t("guide-requests-app.next", "Next")}
+                  </CursorPagination.Next>
+                </CursorPagination>
+                <Span role="status" hidden>
+                    {t(
+                      "guide-requests-app.requestCount.screenreader.range",
+                      "{{from}} to {{to}} of {{total}} requests",
+                      {
+                        from,
+                        to,
+                        total: requestsCount,
+                      }
+                    )}
+                </Span>
+                <StyledSpan>
+                  {t(
+                    "guide-requests-app.requestCount.range",
+                    "{{from}} - {{to}} of {{total}} requests",
+                    {
+                      from,
+                      to,
+                      total: requestsCount,
+                    }
+                  )}
+                </StyledSpan>
+              </>
+            ) : (
+              <>
+                <Span role="status" hidden>
+                  {t("guide-requests-app.requestCount", "{{count}} requests", {
+                        count: requestsCount,
+                    })}
+                </Span>
+                <StyledSpan>
+                  {t("guide-requests-app.requestCount", "{{count}} requests", {
+                        count: requestsCount,
+                    })}
+                </StyledSpan>
+              </>
             )}
           </article>
         </>

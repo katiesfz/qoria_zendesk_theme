@@ -1,8 +1,13 @@
 import { useRef } from "react";
 import type { FormEvent } from "react";
 import { Field, MediaInput } from "@zendeskgarden/react-forms";
-import SearchIcon from "@zendeskgarden/svg-icons/src/16/search-stroke.svg";
+//import SearchIcon from "@zendeskgarden/svg-icons/src/16/search-stroke.svg";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@awesome.me/kit-b56161fd23/icons/classic/regular';
+
+
+const SearchIcon = <FontAwesomeIcon icon={faSearch} />;
 
 interface RequestsSearchProps {
   query: string;
@@ -31,7 +36,7 @@ export default function RequestsSearch({
           {t("guide-requests-app.searchField.Label", "Search")}
         </Field.Label>
         <MediaInput
-          start={<SearchIcon aria-hidden="true" />}
+          end={SearchIcon}
           ref={searchInputRef}
           type="search"
           defaultValue={query}

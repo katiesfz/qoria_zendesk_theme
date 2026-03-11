@@ -19,6 +19,7 @@ import { FilterModal } from "./filter-modal/FilterModal";
 import { Button } from "@zendeskgarden/react-buttons";
 import { FilterTags } from "./filter-tags/FilterTags";
 import type { MultiSelectOption } from "./filter-modal/Multiselect";
+import { StyledSpan } from "../../../shared/styles"; 
 
 interface RequestsToolbarProps {
   query: string;
@@ -77,10 +78,6 @@ const OrganizationsManagementBlock = styled(Block)`
   align-items: flex-end;
   justify-content: flex-end;
   flex-grow: 1;
-`;
-
-const StyledSpan = styled(Span)`
-  margin-bottom: ${(p) => p.theme.space.xs};
 `;
 
 /**
@@ -162,38 +159,8 @@ export default function RequestsToolbar({
 
   return (
     <>
-      <Span role="status" hidden>
-        {hasPagination
-          ? t(
-              "guide-requests-app.requestCount.screenreader.range",
-              "{{from}} to {{to}} of {{total}} requests",
-              {
-                from,
-                to,
-                total: requestsCount,
-              }
-            )
-          : t("guide-requests-app.requestCount", "{{count}} requests", {
-              count: requestsCount,
-            })}
-      </Span>
       <Container>
         <SearchBlock>
-          <StyledSpan>
-            {hasPagination
-              ? t(
-                  "guide-requests-app.requestCount.range",
-                  "{{from}} - {{to}} of {{total}} requests",
-                  {
-                    from,
-                    to,
-                    total: requestsCount,
-                  }
-                )
-              : t("guide-requests-app.requestCount", "{{count}} requests", {
-                  count: requestsCount,
-                })}
-          </StyledSpan>
           <RequestsSearch query={query} onSearchSubmit={onSearchSubmit} />
         </SearchBlock>
         {isOrganizationTab && (
