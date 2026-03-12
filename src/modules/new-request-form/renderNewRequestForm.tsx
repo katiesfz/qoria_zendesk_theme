@@ -2,6 +2,7 @@ import { render } from "react-dom";
 import type { Settings } from "../shared";
 import {
   createTheme,
+  qoriaTheme,
   ThemeProviders,
   loadTranslations,
   initI18next,
@@ -23,7 +24,7 @@ export async function renderNewRequestForm(
   );
 
   render(
-    <ThemeProviders theme={createTheme(settings)}>
+    <ThemeProviders theme={qoriaTheme(settings)}>
       <NewRequestForm {...props} />
     </ThemeProviders>,
     container

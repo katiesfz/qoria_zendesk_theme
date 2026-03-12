@@ -16,6 +16,8 @@ import type { FilterValuesMap } from "../../data-types/FilterValue";
 import type { SelectedTab } from "../../data-types/request-list-params";
 import { ORG_REQUESTS_TAB_NAME } from "../../data-types/request-list-params";
 import { FilterModal } from "./filter-modal/FilterModal";
+import { FiltersContainer } from "./filters-container/FiltersContainer";
+import { FilterPropertyDropdown } from "./filters-container/FilterPropertyDropdown";
 import { Button } from "@zendeskgarden/react-buttons";
 import { FilterTags } from "./filter-tags/FilterTags";
 import type { MultiSelectOption } from "./filter-modal/Multiselect";
@@ -40,14 +42,11 @@ interface RequestsToolbarProps {
 }
 
 const Container = styled.div`
-  align-items: flex-end;
+
+  align-items: flex-start;
   display: flex;
+  flex-direction: column;
   gap: 12px;
-  margin: ${(p) => p.theme.space.sm} 0 ${(p) => p.theme.space.xs};
-  ${media.mobile`
-    align-items: flex-start;
-    flex-direction: column;
-  `}
 `;
 
 const Block = styled.div`
@@ -56,11 +55,7 @@ const Block = styled.div`
 `;
 
 const SearchBlock = styled(Block)`
-  width: 400px;
-  ${media.mobile`
-    flex-direction: column;
-    width: 100%;
-  `};
+  width: 100%;
 `;
 
 const RequestsFilterMenuBlock = Block;
@@ -145,6 +140,12 @@ export default function RequestsToolbar({
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
+  const [isFiltersShown, setIsFiltersShown] = useState(false);
+
+  const handleFilters = () => {
+    setIsFiltersShown(!isFiltersShown);
+  };
+
   const customStatusOptions = useMemo(
     () => createCustomStatusOptions(customStatuses),
     [customStatuses]
@@ -182,11 +183,18 @@ export default function RequestsToolbar({
         )}
         <RequestsFilterMenuBlock>
           <Button
+            // onClick={() => {
+            //   setIsFilterModalOpen(true);
+            // }}
             onClick={() => {
-              setIsFilterModalOpen(true);
+              handleFilters;
             }}
           >
-            {t("guide-requests-app.filter", "Filter")}
+            {isFiltersShown ? (
+              "Hide filters"
+            ) : (
+              "Show filters"
+            )}
           </Button>
         </RequestsFilterMenuBlock>
         <OrganizationsManagementBlock>
@@ -207,9 +215,7 @@ export default function RequestsToolbar({
         customStatusOptions={customStatusOptions}
         onFiltersChanged={onFiltersChanged}
       />
-      {isFilterModalOpen && (
-        <FilterModal
-          onClose={() => setIsFilterModalOpen(false)}
+        <FiltersContainer
           ticketFields={ticketFields}
           filterValuesMap={filters}
           onFiltersChanged={onFiltersChanged}
@@ -217,7 +223,6 @@ export default function RequestsToolbar({
           customStatusesEnabled={customStatusesEnabled}
           customStatusOptions={customStatusOptions}
         />
-      )}
     </>
   );
 }

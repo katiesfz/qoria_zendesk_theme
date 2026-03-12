@@ -1,5 +1,6 @@
 import type { Settings } from "../shared";
 import { createTheme } from "../shared/garden-theme/createTheme";
+import { qoriaTheme } from "../shared/garden-theme/QoriaTheme";
 import { ThemeProviders } from "../shared/garden-theme/ThemeProviders";
 import { render } from "react-dom";
 import { RequestsList } from "./components/requests-list/RequestsList";
@@ -25,7 +26,7 @@ export async function renderRequestList(
   const helpCenterPath = `/hc/${locale}`;
 
   render(
-    <ThemeProviders theme={createTheme(themeSettings)}>
+    <ThemeProviders theme={qoriaTheme(themeSettings)}>
       <ErrorBoundary helpCenterPath={helpCenterPath}>
         <RequestsList
           locale={locale}
