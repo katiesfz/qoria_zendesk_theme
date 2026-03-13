@@ -99,6 +99,7 @@ export function FilterPropertyDropdown({
             customStatusOptions={customStatusOptions}
             onSelect={(state) => onFiltersChanged(property, state)}
             errors={errors}
+            required={false}
           />
         </PropertySection>
       ))}
