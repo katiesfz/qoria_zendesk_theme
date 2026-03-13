@@ -1,6 +1,5 @@
 import {
   Dropdown,
-  Field,
   Item,
   Label,
   Select,
@@ -8,6 +7,7 @@ import {
 import { useEffect, useState } from "react";
 import type { FilterValue } from "../../../data-types/FilterValue";
 import { useFilterTranslations } from "../i18n";
+import { Radio, Fieldset, Field } from "@zendeskgarden/react-forms";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { format } from "date-fns";
@@ -165,25 +165,40 @@ export function DateFilter({
     onSelect(validateForm(selectedItem, allowFutureDates, values));
   }
 
+  const [radioValue, setRadioValue] = useState('');
+
   return (
     <>
-      <Dropdown selectedItem={selectedItem} onSelect={handleItemSelected}>
+
+    
+      <Fieldset>
+        <Fieldset.Legend>{label}</Fieldset.Legend>
+        {Object.entries(dateRangeI18n).map(([value, label]) => (
+          <Field>
+            <Radio
+              name={label}
+              value={value}
+              checked={selectedItem === value}
+              onChange={() => handleItemSelected(value as FilterValue)}
+              >
+                <Field.Label>{label}</Field.Label>
+            </Radio>
+          </Field>
+        ))}
         <Field>
-          <Label>{label}</Label>
-          <Select validation={errors.dateFilterItem ? "error" : undefined}>
-            {renderItemValue(selectedItem, dateRangeI18n)}
-          </Select>
+          <Radio
+            name="custom"
+            value="custom"
+            checked={selectedItem === "custom"}
+            onChange={() => handleItemSelected("custom")}
+            >
+              <Field.Label>{t("guide-requests-app.custom", "Custom")}</Field.Label>
+          </Radio>
+        </Field>
+        <Field>
           <FieldError errors={errors} field="dateFilterItem" />
         </Field>
-        <ModalMenu>
-          {Object.entries(dateRangeI18n).map(([value, label]) => (
-            <Item key={value} value={value}>
-              {label}
-            </Item>
-          ))}
-          <Item value="custom">{t("guide-requests-app.custom", "Custom")}</Item>
-        </ModalMenu>
-      </Dropdown>
+      </Fieldset>
       {selectedItem === "custom" && (
         <StyledCustomDateFilter
           initialValues={customDatesInitialValues}

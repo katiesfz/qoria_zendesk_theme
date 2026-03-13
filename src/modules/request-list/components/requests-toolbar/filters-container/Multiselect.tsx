@@ -86,21 +86,21 @@ export function Multiselect({
   };
 
   return (
-        <Fieldset>
-          <Fieldset.Legend>{label}</Fieldset.Legend>
-          {options.map((option) => (
-              <Field key={option.value}>
-                <Checkbox
-                  checked={isOptionSelected(option)}
-                  onChange={(e) => handleCheckboxChange(option, e.target.checked)}
-                >
-                  <Field.Label>{option.label}</Field.Label>
-                </Checkbox>
-              </Field>
-          ))}
-          <Field>
-            <FieldError errors={errors} field="selectedOptions"/>
+    <Fieldset>
+      <Fieldset.Legend>{label}</Fieldset.Legend>
+      {options.map((option) => (
+          <Field key={option.value}>
+            <Checkbox
+              checked={isOptionSelected(option)}
+              onChange={(e) => handleCheckboxChange(option, e.target.checked)}
+            >
+              <Field.Label>{option.label}</Field.Label>
+            </Checkbox>
           </Field>
-        </Fieldset>
+      ))}
+      <Field>
+        <FieldError errors={errors} field="selectedOptions"/>
+      </Field>
+    </Fieldset>
   );
 }
