@@ -5,6 +5,8 @@ import type { FilterValue } from "../../../data-types/FilterValue";
 import { FieldError } from "./FieldError";
 import type { FormErrors, FormState } from "./FormState";
 import { useTranslation } from "react-i18next";
+import { Grid } from '@zendeskgarden/react-grid';
+
 
 export interface MultiSelectOption {
   value: FilterValue;
@@ -84,23 +86,21 @@ export function Multiselect({
   };
 
   return (
-    <div>
-      <Fieldset>
-        <Fieldset.Legend>{label}</Fieldset.Legend>
-        {options.map((option) => (
-            <Field key={option.value}>
-              <Checkbox
-                checked={isOptionSelected(option)}
-                onChange={(e) => handleCheckboxChange(option, e.target.checked)}
-              >
-                {option.label}
-              </Checkbox>
-            </Field>
-        ))}
-        <Field>
-          <FieldError errors={errors} field="selectedOptions"/>
-        </Field>
-      </Fieldset>
-    </div>
+        <Fieldset>
+          <Fieldset.Legend>{label}</Fieldset.Legend>
+          {options.map((option) => (
+              <Field key={option.value}>
+                <Checkbox
+                  checked={isOptionSelected(option)}
+                  onChange={(e) => handleCheckboxChange(option, e.target.checked)}
+                >
+                  <Field.Label>{option.label}</Field.Label>
+                </Checkbox>
+              </Field>
+          ))}
+          <Field>
+            <FieldError errors={errors} field="selectedOptions"/>
+          </Field>
+        </Fieldset>
   );
 }
