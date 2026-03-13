@@ -19,6 +19,7 @@ interface FilterValuesListProps {
   customStatusOptions: MultiSelectOption[];
   onSelect: (state: FormState<string>) => void;
   errors: FormErrors;
+  required?: boolean;
 }
 
 export function FilterValuesList({
@@ -28,6 +29,7 @@ export function FilterValuesList({
   customStatusOptions,
   onSelect,
   errors,
+  required = true,
 }: FilterValuesListProps): JSX.Element {
   const { t } = useTranslation();
 
@@ -60,6 +62,7 @@ export function FilterValuesList({
         onSelect={onSelect}
         options={options}
         errors={errors}
+        required={required}
       />
     );
   }
@@ -71,6 +74,7 @@ export function FilterValuesList({
         onSelect={onSelect}
         options={customStatusOptions}
         errors={errors}
+        required={required}
       />
     );
   }
@@ -87,6 +91,7 @@ export function FilterValuesList({
         onSelect={onSelect}
         options={options}
         errors={errors}
+        required={required}
       />
     );
   }
@@ -127,6 +132,7 @@ export function FilterValuesList({
           onSelect={onSelect}
           options={options}
           errors={errors}
+          required={required}
         />
       );
     }

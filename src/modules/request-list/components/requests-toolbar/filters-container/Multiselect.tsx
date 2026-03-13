@@ -6,18 +6,6 @@ import { FieldError } from "./FieldError";
 import type { FormErrors, FormState } from "./FormState";
 import { useTranslation } from "react-i18next";
 
-const CheckboxList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 8px 0;
-`;
-
-const CheckboxWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 export interface MultiSelectOption {
   value: FilterValue;
   label: string;
@@ -30,6 +18,7 @@ interface MultiselectProps {
   options: MultiSelectOption[];
   onSelect: (state: FormState<FormFieldKey>) => void;
   errors: FormErrors<FormFieldKey>;
+  required: boolean;
 }
 
 export function Multiselect({
@@ -37,27 +26,35 @@ export function Multiselect({
   options,
   onSelect,
   errors,
+  required,
 }: MultiselectProps): JSX.Element {
   const { t } = useTranslation();
 
   const validateForm = (
     selectedOptions: MultiSelectOption[]
   ): FormState<FormFieldKey> => {
-    if (selectedOptions.length > 0) {
+    if (!required) {
       return {
         state: "valid",
         values: selectedOptions.map((option): FilterValue => option.value),
       };
     } else {
-      return {
-        state: "invalid",
-        errors: {
-          selectedOptions: t(
-            "guide-requests-app.filters-modal.multiselect-no-value-error",
-            "Select at least one value"
-          ),
-        },
-      };
+      if (selectedOptions.length > 0) {
+        return {
+          state: "valid",
+          values: selectedOptions.map((option): FilterValue => option.value),
+        };
+      } else {
+        return {
+          state: "invalid",
+          errors: {
+            selectedOptions: t(
+              "guide-requests-app.filters-modal.multiselect-no-value-error",
+              "Select at least one value"
+            ),
+          },
+        };
+      }
     }
   };
 
@@ -100,7 +97,9 @@ export function Multiselect({
               </Checkbox>
             </Field>
         ))}
-        <FieldError errors={errors} field="selectedOptions" />
+        <Field>
+          <FieldError errors={errors} field="selectedOptions"/>
+        </Field>
       </Fieldset>
     </div>
   );
