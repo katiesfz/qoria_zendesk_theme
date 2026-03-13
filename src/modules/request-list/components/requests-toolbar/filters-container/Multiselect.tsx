@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Checkbox } from "@zendeskgarden/react-forms";
+import { Checkbox, Fieldset, Field } from "@zendeskgarden/react-forms";
 import styled from "styled-components";
 import type { FilterValue } from "../../../data-types/FilterValue";
 import { FieldError } from "./FieldError";
@@ -88,20 +88,20 @@ export function Multiselect({
 
   return (
     <div>
-      <div style={{ marginBottom: "8px", fontWeight: 500 }}>{label}</div>
-      <CheckboxList role="group" aria-label={label}>
+      <Fieldset>
+        <Fieldset.Legend>{label}</Fieldset.Legend>
         {options.map((option) => (
-          <CheckboxWrapper key={option.value}>
-            <Checkbox
-              checked={isOptionSelected(option)}
-              onChange={(e) => handleCheckboxChange(option, e.target.checked)}
-            >
-              {option.label}
-            </Checkbox>
-          </CheckboxWrapper>
+            <Field key={option.value}>
+              <Checkbox
+                checked={isOptionSelected(option)}
+                onChange={(e) => handleCheckboxChange(option, e.target.checked)}
+              >
+                {option.label}
+              </Checkbox>
+            </Field>
         ))}
-      </CheckboxList>
-      <FieldError errors={errors} field="selectedOptions" />
+        <FieldError errors={errors} field="selectedOptions" />
+      </Fieldset>
     </div>
   );
 }

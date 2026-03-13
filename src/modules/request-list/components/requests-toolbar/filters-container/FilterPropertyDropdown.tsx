@@ -15,13 +15,6 @@ const PropertySection = styled.div`
   }
 `;
 
-const PropertyName = styled.h3`
-  margin: 0 0 12px 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-`;
-
 type FormFieldKey = "ticketField";
 
 export interface FilterProperty {
@@ -99,7 +92,6 @@ export function FilterPropertyDropdown({
     <div>
       {filterProperties.map((property) => (
         <PropertySection key={property.identifier}>
-          <PropertyName>{property.label}</PropertyName>
           <FilterValuesList
             filterProperty={property}
             ticketFields={ticketFields}

@@ -120,7 +120,6 @@ function createCustomStatusOptions(
 }
 
 export default function RequestsToolbar({
-  hasPagination,
   page,
   requestsCount,
   requestsPerPage,
@@ -137,8 +136,6 @@ export default function RequestsToolbar({
   customStatusesEnabled,
 }: RequestsToolbarProps): JSX.Element {
   const { t } = useTranslation();
-
-  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
   const [isFiltersShown, setIsFiltersShown] = useState(false);
 
@@ -215,14 +212,14 @@ export default function RequestsToolbar({
         customStatusOptions={customStatusOptions}
         onFiltersChanged={onFiltersChanged}
       />
-        <FiltersContainer
-          ticketFields={ticketFields}
-          filterValuesMap={filters}
-          onFiltersChanged={onFiltersChanged}
-          organizations={isOrganizationTab ? [] : organizations}
-          customStatusesEnabled={customStatusesEnabled}
-          customStatusOptions={customStatusOptions}
-        />
+      <FiltersContainer
+        ticketFields={ticketFields}
+        filterValuesMap={filters}
+        onFiltersChanged={onFiltersChanged}
+        organizations={isOrganizationTab ? [] : organizations}
+        customStatusesEnabled={customStatusesEnabled}
+        customStatusOptions={customStatusOptions}
+      />
     </>
   );
 }

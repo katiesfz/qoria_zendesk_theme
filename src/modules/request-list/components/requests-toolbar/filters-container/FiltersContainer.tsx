@@ -1,6 +1,5 @@
 import type { FormEventHandler } from "react";
 import { useState } from "react";
-import { Button } from "@zendeskgarden/react-buttons";
 import { useTranslation } from "react-i18next";
 import type { FilterValuesMap } from "../../../data-types/FilterValue";
 import styled from "styled-components";
@@ -14,7 +13,7 @@ export const Gap = styled.div`
   height: ${(p) => p.theme.space.md};
 `;
 
-const FormContainer = styled.form`
+const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -24,15 +23,6 @@ const FormTitle = styled.h2`
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid #e8e8e8;
 `;
 
 interface FiltersContainerProps {
@@ -72,49 +62,31 @@ export function FiltersContainer({
 }: FiltersContainerProps): JSX.Element {
   const { t } = useTranslation();
 
-  const [accumulatedFilters, setAccumulatedFilters] = useState<
-    Map<string, FormState>
-  >(new Map());
   const [errors, setErrors] = useState<FormErrors>({});
 
   const handlePropertyFilterChanged = (property: FilterProperty, state: FormState<string>) => {
-    const newFilters = new Map(accumulatedFilters);
-    newFilters.set(property.identifier, state);
-    setAccumulatedFilters(newFilters);
     setErrors({});
-  };
+    
+    if (state.state === "valid") {
+      const filterKey =
+        isSystemFieldType(property.identifier) ||
+        property.identifier === "created_at" ||
+        property.identifier === "updated_at" ||
+        property.identifier === "organization" ||
+        property.identifier === "custom_status_id"
+          ? property.identifier
+          : `custom_field_${property.identifier}`;
 
-  const handleSubmit: FormEventHandler = (e) => {
-    e.preventDefault();
-
-    const newFiltersMap = { ...filterValuesMap };
-    let hasInvalidFilter = false;
-
-    accumulatedFilters.forEach((state, propertyIdentifier) => {
-      if (state.state === "invalid") {
-        hasInvalidFilter = true;
-        setErrors((prev) => ({ ...prev, ...state.errors }));
-      } else if (state.state === "valid") {
-        const filterKey =
-          isSystemFieldType(propertyIdentifier) ||
-          propertyIdentifier === "created_at" ||
-          propertyIdentifier === "updated_at" ||
-          propertyIdentifier === "organization" ||
-          propertyIdentifier === "custom_status_id"
-            ? propertyIdentifier
-            : `custom_field_${propertyIdentifier}`;
-
-        newFiltersMap[filterKey] = state.values;
-      }
-    });
-
-    if (!hasInvalidFilter && accumulatedFilters.size > 0) {
+      const newFiltersMap = { ...filterValuesMap };
+      newFiltersMap[filterKey] = state.values;
       onFiltersChanged(newFiltersMap);
+    } else if (state.state === "invalid") {
+      setErrors((prev) => ({ ...prev, ...state.errors }));
     }
   };
 
   return (
-    <FormContainer onSubmit={handleSubmit} noValidate>
+    <FormContainer>
       <FormTitle>
         {t("guide-requests-app.filters-modal.title", "Filters")}
       </FormTitle>
