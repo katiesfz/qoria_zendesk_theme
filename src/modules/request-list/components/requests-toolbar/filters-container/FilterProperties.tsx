@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import type { FormErrors, FormState } from "./FormState";
 import type { FilterValuesMap } from "../../../data-types/FilterValue";
 import { useState } from "react";
-import { Accordion } from '@zendeskgarden/react-accordions';
 import type { Organization, TicketField } from "../../../data-types";
 import type { MultiSelectOption } from "./Multiselect";
 import { FilterPropertyField } from "./FilterPropertyField";
@@ -25,7 +24,7 @@ const PropertyLabel = styled.h3`
 
 type FormFieldKey = "ticketField";
 
-interface FilterPropertiesProps {
+interface FilterPropertiesGroupProps {
   ticketFields: TicketField[];
   organizations: Organization[];
   hasCustomStatuses: boolean;
@@ -53,14 +52,14 @@ function isSystemFieldType(type: string): boolean {
   return systemType.includes(type);
 }
   
-export function FilterProperties({
+export function FilterPropertiesGroup({
   ticketFields,
   organizations,
   hasCustomStatuses,
   customStatusOptions,
   filterValuesMap,
   onFiltersChanged,
-}: FilterPropertiesProps): JSX.Element {
+}: FilterPropertiesGroupProps): JSX.Element {
   const { t } = useTranslation();
 
   const HIDDEN_FIELDS = [

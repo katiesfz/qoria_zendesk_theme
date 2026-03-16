@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Checkbox, Fieldset, Field } from "@zendeskgarden/react-forms";
 import styled from "styled-components";
-import type { FilterProperty } from "./FilterProperties";
 import type { FilterValue } from "../../../data-types/FilterValue";
 import { FieldError } from "./FieldError";
 import type { FormErrors, FormState } from "./FormState";

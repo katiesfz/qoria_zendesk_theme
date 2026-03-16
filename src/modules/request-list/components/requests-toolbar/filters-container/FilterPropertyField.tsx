@@ -48,18 +48,14 @@ export function FilterPropertyField({
 
   const { t } = useTranslation();
 
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-  const toggleFilterOpen = () => {setIsFilterOpen(!isFilterOpen)}
-
   if (ticketField == null) {
     return <></>;
   }
 
   return (
     <PropertySection key={filterProperty.identifier}>
-      <h3 onClick={toggleFilterOpen}>{filterProperty.label}</h3>
-      {isFilterOpen && 
+      <a className="h4 filter-heading" href={`#collapse${filterProperty.identifier}`} role="button" aria-expanded="false" aria-controls={`collapse${filterProperty.identifier}`} data-bs-toggle="collapse">{filterProperty.label}</a>
+      <div className="collapse" id={`collapse${filterProperty.identifier}`}>
         <FilterValuesList
           filterProperty={filterProperty}
           ticketField={ticketField}
@@ -70,7 +66,7 @@ export function FilterPropertyField({
           errors={errors}
           required={false}
         />
-      }
+      </div>
     </PropertySection>
   );
 }

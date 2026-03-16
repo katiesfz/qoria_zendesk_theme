@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { FilterValuesMap } from "../../../data-types/FilterValue";
 import { Accordion } from '@zendeskgarden/react-accordions';
 import styled from "styled-components";
-import { FilterProperties } from "./FilterProperties";
+import { FilterPropertiesGroup } from "./FilterProperties";
 import type { FormErrors, FormState } from "./FormState";
 import type { Organization, TicketField } from "../../../data-types";
 import type { MultiSelectOption } from "./Multiselect";
@@ -65,7 +65,7 @@ export function FiltersContainer({
       <FormTitle>
         {t("guide-requests-app.filters-modal.title", "Filters")}
       </FormTitle>
-        <FilterProperties
+        <FilterPropertiesGroup
           ticketFields={ticketFields}
           organizations={organizations}
           hasCustomStatuses={customStatusesEnabled}
