@@ -14,23 +14,23 @@ import type { FilterValue } from "../../../data-types/FilterValue";
 
 interface FilterValuesListProps {
   filterProperty: FilterProperty;
-  ticketField: TicketField;
   organizations: Organization[];
   customStatusOptions: MultiSelectOption[];
   onSelect: (state: FormState<string>) => void;
   errors: FormErrors;
   required?: boolean;
+  ticketField?: TicketField;
 }
 
 export function FilterValuesList({
   filterProperty,
-  ticketField,
-  // ticketFields,
   organizations,
   customStatusOptions,
   onSelect,
   errors,
+  // ticketFields,
   required = true,
+  ticketField,
 }: FilterValuesListProps): JSX.Element {
   const { t } = useTranslation();
 
@@ -97,13 +97,9 @@ export function FilterValuesList({
     );
   }
 
-  // const ticketField = ticketFields.find(
-  //   (field) => String(field.id) === filterProperty.identifier
-  // );
-// 
-  // if (ticketField == null) {
-  //   return <></>;
-  // }
+   if (ticketField == null) {
+     return <></>;
+   }
 
   const { type, title_in_portal } = ticketField;
 

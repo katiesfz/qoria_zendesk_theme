@@ -49,10 +49,6 @@ export function FilterPropertyField({
 
   const { t } = useTranslation();
 
-  if (ticketField == null) {
-    return <></>;
-  }
-
   return (
       <Accordion.Section key={filterProperty.identifier}>
         <Accordion.Header>
@@ -63,12 +59,12 @@ export function FilterPropertyField({
         <Accordion.Panel>
           <FilterValuesList
           filterProperty={filterProperty}
-          ticketField={ticketField}
           organizations={organizations}
           customStatusOptions={customStatusOptions}
           onSelect={(state) => onValueChanged(filterProperty, state)}
           errors={errors}
           required={false}
+          ticketField={ticketField}
         />
         </Accordion.Panel>
       </Accordion.Section>

@@ -109,6 +109,7 @@ export function FilterPropertiesGroup({
     ) as TicketField;
   }
 
+    const emptyTicketField: TicketField = {} as TicketField;
     const [errors, setErrors] = useState<FormErrors>({});
 
     const handlePropertyFilterChanged = (property: FilterProperty, state: FormState<string>) => {
@@ -139,14 +140,13 @@ export function FilterPropertiesGroup({
   return (
     <>
       {filterProperties.map((property) => (
-        checkTicketField(property) != null && 
           <FilterPropertyField
-            ticketField={checkTicketField(property)}
             filterProperty={property}
             organizations={organizations}
             customStatusOptions={customStatusOptions}
             onValueChanged={handlePropertyFilterChanged}
-            errors={errors} />
+            errors={errors}
+            ticketField={checkTicketField(property) ?? emptyTicketField} />
       ))}
     </>
   );
