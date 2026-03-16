@@ -17,7 +17,6 @@ import type { SelectedTab } from "../../data-types/request-list-params";
 import { ORG_REQUESTS_TAB_NAME } from "../../data-types/request-list-params";
 import { FilterModal } from "./filter-modal/FilterModal";
 import { FiltersContainer } from "./filters-container/FiltersContainer";
-import { FilterPropertyDropdown } from "./filters-container/FilterPropertyDropdown";
 import { Button } from "@zendeskgarden/react-buttons";
 import { FilterTags } from "./filter-tags/FilterTags";
 import type { MultiSelectOption } from "./filter-modal/Multiselect";

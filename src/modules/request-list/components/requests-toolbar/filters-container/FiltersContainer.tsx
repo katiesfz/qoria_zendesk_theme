@@ -2,9 +2,9 @@ import type { FormEventHandler } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { FilterValuesMap } from "../../../data-types/FilterValue";
+import { Accordion } from '@zendeskgarden/react-accordions';
 import styled from "styled-components";
-import type { FilterProperty } from "./FilterPropertyDropdown";
-import { FilterPropertyDropdown } from "./FilterPropertyDropdown";
+import { FilterProperties } from "./FilterProperties";
 import type { FormErrors, FormState } from "./FormState";
 import type { Organization, TicketField } from "../../../data-types";
 import type { MultiSelectOption } from "./Multiselect";
@@ -48,10 +48,6 @@ const systemType = [
   "requester",
 ];
 
-function isSystemFieldType(type: string): boolean {
-  return systemType.includes(type);
-}
-
 export function FiltersContainer({
   ticketFields,
   organizations,
@@ -64,40 +60,20 @@ export function FiltersContainer({
 
   const [errors, setErrors] = useState<FormErrors>({});
 
-  const handlePropertyFilterChanged = (property: FilterProperty, state: FormState<string>) => {
-    setErrors({});
-    
-    if (state.state === "valid") {
-      const filterKey =
-        isSystemFieldType(property.identifier) ||
-        property.identifier === "created_at" ||
-        property.identifier === "updated_at" ||
-        property.identifier === "organization" ||
-        property.identifier === "custom_status_id"
-          ? property.identifier
-          : `custom_field_${property.identifier}`;
-
-      const newFiltersMap = { ...filterValuesMap };
-      newFiltersMap[filterKey] = state.values;
-      onFiltersChanged(newFiltersMap);
-    } else if (state.state === "invalid") {
-      setErrors((prev) => ({ ...prev, ...state.errors }));
-    }
-  };
-
   return (
     <FormContainer>
       <FormTitle>
         {t("guide-requests-app.filters-modal.title", "Filters")}
       </FormTitle>
-      <FilterPropertyDropdown
-        ticketFields={ticketFields}
-        organizations={organizations}
-        hasCustomStatuses={customStatusesEnabled}
-        customStatusOptions={customStatusOptions}
-        onFiltersChanged={handlePropertyFilterChanged}
-        errors={errors}
-      />
+        <FilterProperties
+          ticketFields={ticketFields}
+          organizations={organizations}
+          hasCustomStatuses={customStatusesEnabled}
+          customStatusOptions={customStatusOptions}
+          filterValuesMap={filterValuesMap}
+          onFiltersChanged={onFiltersChanged}
+          errors={errors}
+        />
     </FormContainer>
   );
 }

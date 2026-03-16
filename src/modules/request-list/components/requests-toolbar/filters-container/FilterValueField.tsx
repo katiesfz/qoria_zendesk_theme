@@ -1,7 +1,7 @@
 import { CheckboxFilter } from "./CheckboxFilter";
 import { CreditCardFilter } from "./CreditCardFilter";
 import { DateFilter } from "./DateFilter";
-import type { FilterProperty } from "./FilterPropertyDropdown";
+import { FilterProperty } from "./FilterPropertyField";
 import type { FormErrors, FormState } from "./FormState";
 import type { MultiSelectOption } from "./Multiselect";
 import { Multiselect } from "./Multiselect";

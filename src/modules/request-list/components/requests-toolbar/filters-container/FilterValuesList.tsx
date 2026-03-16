@@ -1,7 +1,7 @@
 import { CheckboxFilter } from "./CheckboxFilter";
 import { CreditCardFilter } from "./CreditCardFilter";
 import { DateFilter } from "./DateFilter";
-import type { FilterProperty } from "./FilterPropertyDropdown";
+import type { FilterProperty } from "./FilterProperties";
 import type { FormErrors, FormState } from "./FormState";
 import type { MultiSelectOption } from "./Multiselect";
 import { Multiselect } from "./Multiselect";
@@ -14,7 +14,7 @@ import type { FilterValue } from "../../../data-types/FilterValue";
 
 interface FilterValuesListProps {
   filterProperty: FilterProperty;
-  ticketFields: TicketField[];
+  ticketField: TicketField;
   organizations: Organization[];
   customStatusOptions: MultiSelectOption[];
   onSelect: (state: FormState<string>) => void;
@@ -24,7 +24,8 @@ interface FilterValuesListProps {
 
 export function FilterValuesList({
   filterProperty,
-  ticketFields,
+  ticketField,
+  // ticketFields,
   organizations,
   customStatusOptions,
   onSelect,
@@ -96,13 +97,13 @@ export function FilterValuesList({
     );
   }
 
-  const ticketField = ticketFields.find(
-    (field) => String(field.id) === filterProperty.identifier
-  );
-
-  if (ticketField == null) {
-    return <></>;
-  }
+  // const ticketField = ticketFields.find(
+  //   (field) => String(field.id) === filterProperty.identifier
+  // );
+// 
+  // if (ticketField == null) {
+  //   return <></>;
+  // }
 
   const { type, title_in_portal } = ticketField;
 
