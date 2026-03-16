@@ -87,7 +87,7 @@ export function Multiselect({
 
   return (
     <Fieldset>
-      <Fieldset.Legend>{label}</Fieldset.Legend>
+      <Fieldset.Legend hidden>{label}</Fieldset.Legend>
       {options.map((option) => (
           <Field key={option.value}>
             <Checkbox

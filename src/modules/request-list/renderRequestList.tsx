@@ -9,7 +9,6 @@ import { initI18next, loadTranslations } from "../shared/i18n";
 import { ErrorBoundary } from "../shared/error-boundary/ErrorBoundary";
 
 export async function renderRequestList(
-  themeSettings: Settings,
   props: RequestsListProps,
   container: Element
 ): Promise<void> {
@@ -26,7 +25,7 @@ export async function renderRequestList(
   const helpCenterPath = `/hc/${locale}`;
 
   render(
-    <ThemeProviders theme={qoriaTheme(themeSettings)}>
+    <ThemeProviders theme={qoriaTheme}>
       <ErrorBoundary helpCenterPath={helpCenterPath}>
         <RequestsList
           locale={locale}

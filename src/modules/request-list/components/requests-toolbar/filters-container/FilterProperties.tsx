@@ -7,6 +7,7 @@ import type { Organization, TicketField } from "../../../data-types";
 import type { MultiSelectOption } from "./Multiselect";
 import { FilterPropertyField } from "./FilterPropertyField";
 import type { FilterProperty } from "./FilterPropertyField";
+import { Accordion } from '@zendeskgarden/react-accordions';
 
 interface FilterPropertiesGroupProps {
   ticketFields: TicketField[];
@@ -138,16 +139,18 @@ export function FilterPropertiesGroup({
   
 
   return (
-    <>
+    <Accordion level={4} isExpandable>
       {filterProperties.map((property) => (
-          <FilterPropertyField
-            filterProperty={property}
-            organizations={organizations}
-            customStatusOptions={customStatusOptions}
-            onValueChanged={handlePropertyFilterChanged}
-            errors={errors}
-            ticketField={checkTicketField(property) ?? emptyTicketField} />
+        <Accordion.Section key={property.identifier}>
+        <FilterPropertyField
+          filterProperty={property}
+          organizations={organizations}
+          customStatusOptions={customStatusOptions}
+          onValueChanged={handlePropertyFilterChanged}
+          errors={errors}
+          ticketField={checkTicketField(property) ?? emptyTicketField} />
+          </Accordion.Section>
       ))}
-    </>
+    </Accordion>
   );
 }

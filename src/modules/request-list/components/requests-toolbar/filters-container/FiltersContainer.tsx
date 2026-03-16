@@ -19,12 +19,6 @@ const FormContainer = styled.div`
   gap: 16px;
 `;
 
-const FormTitle = styled.h2`
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-`;
-
 interface FiltersContainerProps {
   ticketFields: TicketField[];
   organizations: Organization[];
@@ -61,17 +55,14 @@ export function FiltersContainer({
 
   return (
     <FormContainer>
-      <FormTitle>
-        {t("guide-requests-app.filters-modal.title", "Filters")}
-      </FormTitle>
-        <FilterPropertiesGroup
-          ticketFields={ticketFields}
-          organizations={organizations}
-          hasCustomStatuses={customStatusesEnabled}
-          customStatusOptions={customStatusOptions}
-          filterValuesMap={filterValuesMap}
-          onFiltersChanged={onFiltersChanged}
-        />
+      <FilterPropertiesGroup
+        ticketFields={ticketFields}
+        organizations={organizations}
+        hasCustomStatuses={customStatusesEnabled}
+        customStatusOptions={customStatusOptions}
+        filterValuesMap={filterValuesMap}
+        onFiltersChanged={onFiltersChanged}
+      />
     </FormContainer>
   );
 }

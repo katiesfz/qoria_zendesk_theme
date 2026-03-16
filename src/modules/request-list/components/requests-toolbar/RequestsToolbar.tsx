@@ -40,12 +40,22 @@ interface RequestsToolbarProps {
   customStatuses: CustomStatus[];
 }
 
-const Container = styled.div`
-
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+const Container = styled.aside`
+  flex: 1 0 auto;
+  margin-bottom: 16px;
+  position: sticky;
+  top: 0px;
+  ${media.desktop`
+    border: 0;
+    flex: 0 0 25%;
+    height: auto;
+    max-width: 25%;
+    margin-right: 16px;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  `};
 `;
 
 const Block = styled.div`
@@ -72,6 +82,12 @@ const OrganizationsManagementBlock = styled(Block)`
   align-items: flex-end;
   justify-content: flex-end;
   flex-grow: 1;
+`;
+
+const FormTitle = styled.h2`
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
 `;
 
 /**
@@ -136,12 +152,6 @@ export default function RequestsToolbar({
 }: RequestsToolbarProps): JSX.Element {
   const { t } = useTranslation();
 
-  const [isFiltersShown, setIsFiltersShown] = useState(false);
-
-  const handleFilters = () => {
-    setIsFiltersShown(!isFiltersShown);
-  };
-
   const customStatusOptions = useMemo(
     () => createCustomStatusOptions(customStatuses),
     [customStatuses]
@@ -155,11 +165,11 @@ export default function RequestsToolbar({
   const hasOrganizations = organizations.length > 0;
 
   return (
-    <>
-      <Container>
-        <SearchBlock>
-          <RequestsSearch query={query} onSearchSubmit={onSearchSubmit} />
-        </SearchBlock>
+    <Container aria-labelledby="section-requests-title">
+      <SearchBlock>
+        <RequestsSearch query={query} onSearchSubmit={onSearchSubmit} />
+      </SearchBlock>
+      <div className="requests-sidebar-sticky request-filter-container">
         {isOrganizationTab && (
           <OrganizationBlock>
             <OrganizationsDropdown
@@ -177,22 +187,6 @@ export default function RequestsToolbar({
             )}
           </OrganizationBlock>
         )}
-        <RequestsFilterMenuBlock>
-          <Button
-            // onClick={() => {
-            //   setIsFilterModalOpen(true);
-            // }}
-            onClick={() => {
-              handleFilters;
-            }}
-          >
-            {isFiltersShown ? (
-              "Hide filters"
-            ) : (
-              "Show filters"
-            )}
-          </Button>
-        </RequestsFilterMenuBlock>
         <OrganizationsManagementBlock>
           <Desktop>
             {isOrganizationTab && hasOrganizations && user && (
@@ -203,22 +197,26 @@ export default function RequestsToolbar({
             )}
           </Desktop>
         </OrganizationsManagementBlock>
-      </Container>
-      <FilterTags
-        filters={filters}
-        ticketFields={ticketFields}
-        organizations={organizations}
-        customStatusOptions={customStatusOptions}
-        onFiltersChanged={onFiltersChanged}
-      />
-      <FiltersContainer
-        ticketFields={ticketFields}
-        filterValuesMap={filters}
-        onFiltersChanged={onFiltersChanged}
-        organizations={isOrganizationTab ? [] : organizations}
-        customStatusesEnabled={customStatusesEnabled}
-        customStatusOptions={customStatusOptions}
-      />
-    </>
+        
+        <FormTitle>
+          {t("guide-requests-app.filters-modal.title", "Filters")}
+        </FormTitle>
+        <FilterTags
+          filters={filters}
+          ticketFields={ticketFields}
+          organizations={organizations}
+          customStatusOptions={customStatusOptions}
+          onFiltersChanged={onFiltersChanged}
+        />
+        <FiltersContainer
+          ticketFields={ticketFields}
+          filterValuesMap={filters}
+          onFiltersChanged={onFiltersChanged}
+          organizations={isOrganizationTab ? [] : organizations}
+          customStatusesEnabled={customStatusesEnabled}
+          customStatusOptions={customStatusOptions}
+        />
+      </div>
+    </Container>
   );
 }

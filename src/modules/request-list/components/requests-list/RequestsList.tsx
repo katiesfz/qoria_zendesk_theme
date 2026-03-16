@@ -152,27 +152,23 @@ export function RequestsList({
         <RequestLoadingState />
       ) : (
         <>
-
-
-          <aside className="requests-sidebar" aria-labelledby="section-requests-title">
-            <RequestsToolbar
-              hasPagination={hasNextPage || hasPreviousPage}
-              page={page}
-              requestsCount={requestsCount}
-              requestsPerPage={requestsPerPage}
-              query={query}
-              onSearchSubmit={(value) => push({ page: 1, query: value })}
-              filters={filters}
-              ticketFields={ticketFields}
-              onFiltersChanged={handleFiltersChanged}
-              organizations={organizations}
-              selectedTab={selectedTab}
-              onOrganizationSelected={handleOrganizationSelected}
-              user={user}
-              customStatusesEnabled={customStatusesEnabled}
-              customStatuses={customStatuses}
-            />
-          </aside>
+          <RequestsToolbar
+            hasPagination={hasNextPage || hasPreviousPage}
+            page={page}
+            requestsCount={requestsCount}
+            requestsPerPage={requestsPerPage}
+            query={query}
+            onSearchSubmit={(value) => push({ page: 1, query: value })}
+            filters={filters}
+            ticketFields={ticketFields}
+            onFiltersChanged={handleFiltersChanged}
+            organizations={organizations}
+            selectedTab={selectedTab}
+            onOrganizationSelected={handleOrganizationSelected}
+            user={user}
+            customStatusesEnabled={customStatusesEnabled}
+            customStatuses={customStatuses}
+          />
 
           <article className="requests">
             <RequestsTabs
@@ -180,7 +176,6 @@ export function RequestsList({
               selectedTab={selectedTab}
               onTabSelected={handleTabSelected}
             />
-
             <RequestsTable
               onSort={onSort}
               requests={requests}

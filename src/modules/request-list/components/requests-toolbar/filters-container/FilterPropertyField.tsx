@@ -50,25 +50,23 @@ export function FilterPropertyField({
   const { t } = useTranslation();
 
   return (
-    <Accordion level={4} isExpandable>
-      <Accordion.Section key={filterProperty.identifier}>
-        <Accordion.Header>
-          <Accordion.Label>
-            {filterProperty.label}
-          </Accordion.Label>
-        </Accordion.Header>
-        <Accordion.Panel>
-          <FilterValuesList
-          filterProperty={filterProperty}
-          organizations={organizations}
-          customStatusOptions={customStatusOptions}
-          onSelect={(state) => onValueChanged(filterProperty, state)}
-          errors={errors}
-          required={false}
-          ticketField={ticketField}
-        />
-        </Accordion.Panel>
-      </Accordion.Section>
-    </Accordion>
+    <>
+      <Accordion.Header>
+        <Accordion.Label>
+          {filterProperty.label}
+        </Accordion.Label>
+      </Accordion.Header>
+      <Accordion.Panel>
+        <FilterValuesList
+        filterProperty={filterProperty}
+        organizations={organizations}
+        customStatusOptions={customStatusOptions}
+        onSelect={(state) => onValueChanged(filterProperty, state)}
+        errors={errors}
+        required={false}
+        ticketField={ticketField}
+      />
+      </Accordion.Panel>
+    </>
   );
 }

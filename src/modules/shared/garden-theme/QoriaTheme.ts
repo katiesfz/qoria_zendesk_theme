@@ -1,6 +1,6 @@
 import type { IButtonProps } from "@zendeskgarden/react-buttons";
 import type { IGardenTheme } from "@zendeskgarden/react-theming";
-import { DEFAULT_THEME, getColor } from "@zendeskgarden/react-theming";
+import { DEFAULT_THEME, getColor, PALETTE } from "@zendeskgarden/react-theming";
 import { css } from "styled-components";
 
 export interface Settings {
@@ -46,8 +46,119 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
 const accessibleFormInputStyle = createAccessibleFormControlStyle(false);
 const accessibleFormWrapperStyle = createAccessibleFormControlStyle(true);
 
-export function qoriaTheme(settings: Settings): IGardenTheme {
-  return {
+
+const themeSettings = {
+    background_color: "#FFFFFF",
+    text_color: "#1d1e1c",
+    brand_color: "#515ba5",
+    brand_text_color: "#1d1e1c",
+    link_color: "#515ba5",
+    hover_link_color: "#515ba5",
+    visited_link_color: "#515ba5"
+}
+
+const qoriaPalette = {
+    ...PALETTE,
+    "black": "#000",
+    "white": "#fff",
+    "product": {
+        "support": "#00a656",
+        "explore": "#30aabc",
+        "gather": "#f6c8be",
+        "guide": "#eb4962",
+        "chat": "#f79a3e",
+        "talk": "#efc93d",
+        "sell": "#c38f00"
+    },
+    "grey": {
+        "100": "#f8f8f8",
+        "200": "#f4f4f4",
+        "300": "#ebebeb",
+        "400": "#cbcbcb",
+        "500": "#B0B0B0",
+        "600": "#706f6e",
+        "700": "#4d4d4d",
+        "800": "#323332",
+        "900": "#1d1e1c",
+        "1000": "#1d1e1c",
+        "1100": "#1d1e1c",
+        "1200": "#1d1e1c"
+    },
+    "blue": {
+        "100": "#F0F8FB",
+        "200": "#D4EAF5",
+        "300": "#A9D6EC",
+        "400": "#8DC9E6",
+        "500": "#7BAFC9",
+        "600": "#6996AC",
+        "700": "#587D8F",
+        "800": "#466473",
+        "900": "#344B56",
+        "1000": "#233239",
+        "1100": "#11191C",
+        "1200": "#11191C"
+    },
+    "red": {
+        "100": "#FFEEEE",
+        "200": "#FFDADB",
+        "300": "#FFC5C6",
+        "400": "#FFAFB1",
+        "500": "#FF8D93",
+        "600": "#EB6571",
+        "700": "#C24553",
+        "800": "#A23442",
+        "900": "#79242F",
+        "1000": "#56161E",
+        "1100": "#44000E",
+        "1200": "#44000E"
+    },
+    "yellow": {
+        "100":  "#FFF2D9",
+        "200":  "#FFE9B2",
+        "300":  "#FFD86F",
+        "400":  "#F5BA00",
+        "500":  "#D69F00",
+        "600":  "#C18700",
+        "700":  "#9C6C00",
+        "800":  "#7E5500",
+        "900":  "#593C00",
+        "1000": "#3E2A00",
+        "1100": "#261700",
+        "1200": "#261700"
+    },
+    "green": {
+        "100":  "#E8F8EF",
+        "200":  "#CEEDDD",
+        "300":  "#A4DBC0",
+        "400":  "#7ECAA7",
+        "500":  "#58B78E",
+        "600":  "#3E9F78",
+        "700":  "#268460",
+        "800":  "#1B6F50",
+        "900":  "#00563A",
+        "1000": "#084630",
+        "1100": "#003925",
+        "1200": "#003925"
+    },
+    "purple": {
+        "100":  "#F4F6FF",
+        "200":  "#E1E7FF",
+        "300":  "#D1D9FD",
+        "400":  "#B6C1F5",
+        "500":  "#9EABEB",
+        "600":  "#7E8AD4",
+        "700":  "#6371BB",
+        "800":  "#515BA5",
+        "900":  "#383F85",
+        "1000": "#262A6E",
+        "1100": "#110A4E",
+        "1200": "#110A4E"
+    }
+};
+
+
+
+export const qoriaTheme = {
     ...DEFAULT_THEME,
     borders: {
         sm: "1px solid",
@@ -74,12 +185,12 @@ export function qoriaTheme(settings: Settings): IGardenTheme {
     },
     colors: {
         base: "light",
-        primaryHue: "blue",
+        primaryHue: "purple",
         dangerHue: "red",
         warningHue: "yellow",
         successHue: "green",
         neutralHue: "grey",
-        chromeHue: "kale",
+        chromeHue: "purple",
         variables: {
             dark: {
                 background: {
@@ -181,21 +292,21 @@ export function qoriaTheme(settings: Settings): IGardenTheme {
     },
     components: {
        "buttons.anchor": css`
-         color: ${settings.link_color};
+         color: ${themeSettings.link_color};
          :hover,
          :active,
          :focus {
-           color: ${settings.hover_link_color};
+           color: ${themeSettings.hover_link_color};
          }
          &:visited {
-           color: ${settings.visited_link_color};
+           color: ${themeSettings.visited_link_color};
          }
        `,
        "buttons.button": css`
          ${(props: IButtonProps) =>
            props.isPrimary &&
            css`
-             color: ${settings.brand_text_color};
+             color: ${themeSettings.brand_text_color};
            `}
        `,
        "forms.input": accessibleFormInputStyle,
@@ -208,9 +319,9 @@ export function qoriaTheme(settings: Settings): IGardenTheme {
         system: "system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",Arial,sans-serif"
     },
     fontSizes: {
-        xs: "10px",
-        sm: "12px",
-        md: "14px",
+        xs: "12px",
+        sm: "14px",
+        md: "16px",
         lg: "18px",
         xl: "22px",
         xxl: "26px",
@@ -254,7 +365,7 @@ export function qoriaTheme(settings: Settings): IGardenTheme {
         1100: 0.88,
         1200: 0.96
     },
-    palette: { /* see API for details */ },
+    palette: qoriaPalette,
     rtl: document.dir === "rtl",
     shadowWidths: {
         xs: "1px",
@@ -277,5 +388,4 @@ export function qoriaTheme(settings: Settings): IGardenTheme {
         xl: "40px",
         xxl: "48px"
     }
-  };
-}
+  } as IGardenTheme;
