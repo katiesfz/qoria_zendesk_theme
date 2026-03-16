@@ -2,7 +2,7 @@ import type { ChangeEventHandler } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { DatepickerRange } from "@zendeskgarden/react-datepickers";
+import { DatePickerRange } from "@zendeskgarden/react-datepickers";
 import { formatISO } from "date-fns";
 import { Field, Input } from "@zendeskgarden/react-forms";
 import { Grid } from "@zendeskgarden/react-grid";

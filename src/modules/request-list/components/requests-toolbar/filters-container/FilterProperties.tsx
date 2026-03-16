@@ -8,22 +8,6 @@ import type { MultiSelectOption } from "./Multiselect";
 import { FilterPropertyField } from "./FilterPropertyField";
 import type { FilterProperty } from "./FilterPropertyField";
 
-const PropertySection = styled.div`
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #e8e8e8;
-
-  &:last-child {
-    border-bottom: none;
-  }
-`;
-
-const PropertyLabel = styled.h3`
-  margin-bottom: 8px;
-`;
-
-type FormFieldKey = "ticketField";
-
 interface FilterPropertiesGroupProps {
   ticketFields: TicketField[];
   organizations: Organization[];
@@ -31,7 +15,6 @@ interface FilterPropertiesGroupProps {
   customStatusOptions: MultiSelectOption[];
   filterValuesMap: FilterValuesMap;
   onFiltersChanged: (filters: FilterValuesMap) => void;
-  errors: FormErrors<FormFieldKey>;
 }
 
 const systemType = [
@@ -84,15 +67,13 @@ export function FilterPropertiesGroup({
       identifier: "updated_at",
       label: t("guide-requests-app.updatedDate", "Updated date"),
     },
-    hasCustomStatuses
-      ? {
-          identifier: "custom_status_id",
-          label: t("guide-requests-app.status", "Status"),
-        }
-      : {
-          identifier: "status",
-          label: t("guide-requests-app.status", "Status"),
-        },
+    hasCustomStatuses ? {
+        identifier: "custom_status_id",
+        label: t("guide-requests-app.status", "Status"),
+      } : {
+        identifier: "status",
+        label: t("guide-requests-app.status", "Status"),
+      },
     ...(organizations.length > 1
       ? [
           {
@@ -110,6 +91,14 @@ export function FilterPropertiesGroup({
   ];
 
   const checkTicketField = (filterProperty: FilterProperty) => {
+
+    console.log('Filter property:', filterProperty);
+
+    const foundFilter = ticketFields.find(
+      (field) => String(field.id) === filterProperty.identifier
+      );
+    console.log('Filter property found:', foundFilter);
+    
     return (
       ticketFields.find(
       (field) => String(field.id) === filterProperty.identifier
@@ -153,8 +142,7 @@ export function FilterPropertiesGroup({
             organizations={organizations}
             customStatusOptions={customStatusOptions}
             onValueChanged={handlePropertyFilterChanged}
-            errors={errors}>
-          </FilterPropertyField>
+            errors={errors} />
       ))}
     </>
   );

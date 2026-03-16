@@ -5,6 +5,7 @@ import { FilterValuesList } from "./FilterValuesList";
 import type { Organization, TicketField } from "../../../data-types";
 import type { FilterValuesMap } from "../../../data-types/FilterValue";
 import type { MultiSelectOption } from "./Multiselect";
+import { Accordion } from '@zendeskgarden/react-accordions';
 import { useState } from "react";
 
 const PropertySection = styled.div`
@@ -53,20 +54,23 @@ export function FilterPropertyField({
   }
 
   return (
-    <PropertySection key={filterProperty.identifier}>
-      <a className="h4 filter-heading" href={`#collapse${filterProperty.identifier}`} role="button" aria-expanded="false" aria-controls={`collapse${filterProperty.identifier}`} data-bs-toggle="collapse">{filterProperty.label}</a>
-      <div className="collapse" id={`collapse${filterProperty.identifier}`}>
-        <FilterValuesList
+      <Accordion.Section key={filterProperty.identifier}>
+        <Accordion.Header>
+          <Accordion.Label>
+            {filterProperty.label}
+          </Accordion.Label>
+        </Accordion.Header>
+        <Accordion.Panel>
+          <FilterValuesList
           filterProperty={filterProperty}
           ticketField={ticketField}
-          // ticketFields={ticketFields}
           organizations={organizations}
           customStatusOptions={customStatusOptions}
           onSelect={(state) => onValueChanged(filterProperty, state)}
           errors={errors}
           required={false}
         />
-      </div>
-    </PropertySection>
+        </Accordion.Panel>
+      </Accordion.Section>
   );
 }
