@@ -58,12 +58,12 @@ export function FiltersContainer({
 }: FiltersContainerProps): JSX.Element {
   const { t } = useTranslation();
 
+
   return (
     <FormContainer>
       <FormTitle>
         {t("guide-requests-app.filters-modal.title", "Filters")}
       </FormTitle>
-      <Accordion level={4} isExpandable>
         <FilterPropertiesGroup
           ticketFields={ticketFields}
           organizations={organizations}
@@ -72,7 +72,6 @@ export function FiltersContainer({
           filterValuesMap={filterValuesMap}
           onFiltersChanged={onFiltersChanged}
         />
-      </Accordion>
     </FormContainer>
   );
 }

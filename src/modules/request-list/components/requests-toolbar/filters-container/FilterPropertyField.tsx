@@ -50,6 +50,7 @@ export function FilterPropertyField({
   const { t } = useTranslation();
 
   return (
+    <Accordion level={4} isExpandable>
       <Accordion.Section key={filterProperty.identifier}>
         <Accordion.Header>
           <Accordion.Label>
@@ -68,5 +69,6 @@ export function FilterPropertyField({
         />
         </Accordion.Panel>
       </Accordion.Section>
+    </Accordion>
   );
 }
