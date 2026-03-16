@@ -5002,7 +5002,7 @@ code.hljs {
   position: sticky;
   top: 71px;
 }
-.requests-sidebar section {
+.requests-sidebar > section {
   margin-bottom: 32px;
 }
 .requests-sidebar .search-container {
