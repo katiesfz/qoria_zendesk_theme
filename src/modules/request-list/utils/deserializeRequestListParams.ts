@@ -79,18 +79,27 @@ function getFiltersFromSearchParams(
   console.log("searchParams: ", searchParams);
 
   for (const [key] of searchParams) {
+    console.log("key: ", key);
     if (!key.startsWith(FILTER_PREFIX)) {
+      console.log("key does not start with ", FILTER_PREFIX);
       continue;
     }
+
+    console.log("key starts with ", FILTER_PREFIX);
 
     const field = key.replace(FILTER_PREFIX, "");
 
     if (res[field] != null) {
+      console.log(res[field], "is not null");
       continue;
     }
 
+    console.log(res[field], "is null");
+
     const values = searchParams.getAll(key).filter(isFilterValue);
+
     if (values.length > 0) {
+      console.log("Values: ", values);
       res[field] = values;
     }
   }
