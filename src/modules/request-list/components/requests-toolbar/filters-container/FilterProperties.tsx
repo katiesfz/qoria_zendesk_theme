@@ -91,17 +91,17 @@ export function FilterPropertiesGroup({
       })),
   ];
 
-  console.log("Ticket fields: ", ticketFields)
-  console.log("Filter Properties: ", filterProperties);
+  //console.log("Ticket fields: ", ticketFields)
+  //console.log("Filter Properties: ", filterProperties);
 
   const checkTicketField = (filterProperty: FilterProperty) => {
 
-    console.log('Filter property:', filterProperty);
+    //console.log('Filter property:', filterProperty);
 
     const foundFilter = ticketFields.find(
       (field) => String(field.id) === filterProperty.identifier
       );
-    console.log('Filter property found:', foundFilter);
+    //console.log('Filter property found:', foundFilter);
 
     return (
       ticketFields.find(
@@ -128,7 +128,7 @@ export function FilterPropertiesGroup({
   
         const newFiltersMap = { ...filterValuesMap };
         newFiltersMap[filterKey] = state.values;
-        console.log("New filters map: ", newFiltersMap);
+        // console.log("New filters map: ", newFiltersMap);
         onFiltersChanged(newFiltersMap);
       } else if (state.state === "invalid") {
         setErrors((prev) => ({ ...prev, ...state.errors }));

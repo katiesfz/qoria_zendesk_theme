@@ -24,7 +24,7 @@ export async function renderNewRequestForm(
   );
 
   render(
-    <ThemeProviders theme={qoriaTheme(settings)}>
+    <ThemeProviders theme={qoriaTheme}>
       <NewRequestForm {...props} />
     </ThemeProviders>,
     container

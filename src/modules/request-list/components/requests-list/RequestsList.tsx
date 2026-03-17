@@ -146,6 +146,8 @@ export function RequestsList({
   const from = (page - 1) * requestsPerPage + 1;
   let to = from + requestsPerPage - 1;
 
+  console.log("Initial filters: ", filters);
+
   return (
     <>
       {isLoading ? (
