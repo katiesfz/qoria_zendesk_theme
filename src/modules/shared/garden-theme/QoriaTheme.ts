@@ -291,6 +291,21 @@ export const qoriaTheme = {
         }
     },
     components: {
+        'forms.input_label': css`
+            font-size: ${p => p.theme.fontSizes.sm};
+        `,
+        'forms.checkbox_label': css`
+            font-size: ${p => p.theme.fontSizes.sm};
+        `,
+        'forms.radio_label': css`
+            font-size: ${p => p.theme.fontSizes.sm};
+        `,
+        'forms.toggle_label': css`
+            font-size: ${p => p.theme.fontSizes.sm};
+        `,
+        'forms.fieldset_legend': css`
+            font-size: ${p => p.theme.fontSizes.sm};
+        `,
         "accordions.button": css`
             padding: 1.25rem 0;
             line-height: 1;
@@ -302,17 +317,21 @@ export const qoriaTheme = {
             gap: 8px;
         `,
         "accordions.step_inner_panel": css`
-            overflow: auto;
-            padding-bottom: 2px;
-            max-height: 8rem;
+            padding: 2px 0;
         `,
         "accordions.panel": css`
-            padding: 0 0 1.5rem 0;
+            padding: 0;
         `,
         "forms.fieldset": css`
             display: flex;
             flex-direction: column;
             gap: 8px;
+            margin-bottom: 1.5rem;
+            max-height: 8rem;
+            overflow: auto;
+        `,
+        "forms.field": css`
+            margin-top: 0px;
         `,
         "buttons.anchor": css`
             color: ${themeSettings.link_color};
@@ -345,7 +364,7 @@ export const qoriaTheme = {
         xs: "12px",
         sm: "14px",
         md: "16px",
-        lg: "18px",
+        lg: "14px",
         xl: "22px",
         xxl: "26px",
         xxxl: "36px"
