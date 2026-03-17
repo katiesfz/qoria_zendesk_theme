@@ -2527,6 +2527,9 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   padding-bottom: 60px;
   padding-top: 0px;
 }
+.subcategories .see-all-articles {
+  width: 100%;
+}
 
 .section-tree {
   display: flex;
