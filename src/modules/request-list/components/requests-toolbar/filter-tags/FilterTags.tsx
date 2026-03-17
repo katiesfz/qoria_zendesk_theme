@@ -14,8 +14,8 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  min-height: 32px;
-  margin-bottom: 28px;
+  min-height: 0;
+  margin-bottom: 0;
 `;
 
 interface FilterTagsProps {
@@ -55,7 +55,7 @@ export function FilterTags({
         );
       })}
       {Object.keys(filters).length > 0 && (
-        <Button isBasic size="small" onClick={() => onFiltersChanged({})}>
+        <Button size="small" isLink onClick={() => onFiltersChanged({})}>
           {t("guide-requests-app.clearFilters", "Clear filters")}
         </Button>
       )}

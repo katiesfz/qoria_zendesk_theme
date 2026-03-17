@@ -291,17 +291,40 @@ export const qoriaTheme = {
         }
     },
     components: {
-       "buttons.anchor": css`
-         color: ${themeSettings.link_color};
-         :hover,
-         :active,
-         :focus {
-           color: ${themeSettings.hover_link_color};
-         }
-         &:visited {
-           color: ${themeSettings.visited_link_color};
-         }
-       `,
+        "accordions.button": css`
+            padding: 1.25rem 0;
+            line-height: 1;
+        `,
+        "accordions.rotate_icon": css`
+            padding: 1.25rem 0;
+        `,
+        "accordions.header": css`
+            gap: 8px;
+        `,
+        "accordions.step_inner_panel": css`
+            overflow: auto;
+            padding-bottom: 2px;
+            max-height: 8rem;
+        `,
+        "accordions.panel": css`
+            padding: 0 0 1.5rem 0;
+        `,
+        "forms.fieldset": css`
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        `,
+        "buttons.anchor": css`
+            color: ${themeSettings.link_color};
+            :hover,
+            :active,
+            :focus {
+            color: ${themeSettings.hover_link_color};
+            }
+            &:visited {
+            color: ${themeSettings.visited_link_color};
+            }
+        `,
        "buttons.button": css`
          ${(props: IButtonProps) =>
            props.isPrimary &&

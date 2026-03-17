@@ -88,7 +88,9 @@ function getFiltersFromSearchParams(
     }
 
     const values = searchParams.getAll(key).filter(isFilterValue);
-    res[field] = values;
+    if (values.length > 0) {
+      res[field] = values;
+    }
   }
 
   return res;

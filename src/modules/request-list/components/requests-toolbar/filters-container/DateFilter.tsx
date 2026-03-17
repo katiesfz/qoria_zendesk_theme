@@ -172,7 +172,7 @@ export function DateFilter({
 
     
       <Fieldset>
-        <Fieldset.Legend>{label}</Fieldset.Legend>
+        <Fieldset.Legend hidden>{label}</Fieldset.Legend>
         {Object.entries(dateRangeI18n).map(([value, label]) => (
           <Field>
             <Radio

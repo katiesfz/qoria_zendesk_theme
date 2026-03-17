@@ -51,7 +51,7 @@ const Container = styled.aside`
     height: auto;
     max-width: 25%;
     margin-right: 16px;
-    align-items: flex-start;
+    align-items: stretch;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -86,6 +86,7 @@ const OrganizationsManagementBlock = styled(Block)`
 
 const FormTitle = styled.h2`
   margin: 0;
+  margin-bottom: 1em;
   font-size: 18px;
   font-weight: 600;
 `;
@@ -187,16 +188,16 @@ export default function RequestsToolbar({
             )}
           </OrganizationBlock>
         )}
-        <OrganizationsManagementBlock>
-          <Desktop>
-            {isOrganizationTab && hasOrganizations && user && (
+        {isOrganizationTab && hasOrganizations && user && (
+          <OrganizationsManagementBlock>
+            <Desktop>
               <OrganizationsManagement
                 organizations={organizations}
                 user={user}
               />
-            )}
-          </Desktop>
-        </OrganizationsManagementBlock>
+            </Desktop>
+          </OrganizationsManagementBlock>
+        )}
         
         <FormTitle>
           {t("guide-requests-app.filters-modal.title", "Filters")}
