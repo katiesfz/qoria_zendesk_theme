@@ -63,7 +63,7 @@ export function FilterValuesList({
         onSelect={onSelect}
         options={options}
         errors={errors}
-        required={required}
+        required={false}
       />
     );
   }
@@ -75,7 +75,7 @@ export function FilterValuesList({
         onSelect={onSelect}
         options={customStatusOptions}
         errors={errors}
-        required={required}
+        required={false}
       />
     );
   }
@@ -92,7 +92,7 @@ export function FilterValuesList({
         onSelect={onSelect}
         options={options}
         errors={errors}
-        required={required}
+        required={false}
       />
     );
   }
@@ -132,7 +132,7 @@ export function FilterValuesList({
           onSelect={onSelect}
           options={options}
           errors={errors}
-          required={required}
+          required={false}
         />
       );
     }
