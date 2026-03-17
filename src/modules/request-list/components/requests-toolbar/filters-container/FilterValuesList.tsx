@@ -126,6 +126,8 @@ export function FilterValuesList({
           label: option.name,
         })) ?? [];
 
+      console.log(JSON.stringify(ticketField, null, 2));
+
       return (
         <Multiselect
           label={title_in_portal}
