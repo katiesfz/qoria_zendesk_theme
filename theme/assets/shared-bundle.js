@@ -60,7 +60,7 @@ function e(e,t){return t.forEach(function(t){t&&"string"!=typeof t&&!Array.isArr
         `,"accordions.header":hn`
             gap: 8px;
         `,"accordions.step_inner_panel":hn`
-            padding: 2px 0;
+            padding: 0;
         `,"accordions.panel":hn`
             padding: 0;
         `,"forms.fieldset":hn`
@@ -70,7 +70,11 @@ function e(e,t){return t.forEach(function(t){t&&"string"!=typeof t&&!Array.isArr
             margin-bottom: 1.5rem;
             max-height: 8rem;
             overflow: auto;
-        `,"forms.field":hn`
+
+            & > [data-garden-id="forms.field"] {
+                margin-top: 0;
+            }
+        `,"formset.field":hn`
             margin-top: 0px;
         `,"buttons.anchor":hn`
             color: ${yi};

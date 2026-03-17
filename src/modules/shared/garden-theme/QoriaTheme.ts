@@ -317,7 +317,7 @@ export const qoriaTheme = {
             gap: 8px;
         `,
         "accordions.step_inner_panel": css`
-            padding: 2px 0;
+            padding: 0;
         `,
         "accordions.panel": css`
             padding: 0;
@@ -329,8 +329,12 @@ export const qoriaTheme = {
             margin-bottom: 1.5rem;
             max-height: 8rem;
             overflow: auto;
+
+            & > [data-garden-id="forms.field"] {
+                margin-top: 0;
+            }
         `,
-        "forms.field": css`
+        "formset.field": css`
             margin-top: 0px;
         `,
         "buttons.anchor": css`
