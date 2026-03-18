@@ -76,7 +76,7 @@ function getFiltersFromSearchParams(
 ): FilterValuesMap {
   const res: FilterValuesMap = {};
 
-  //console.log("searchParams: ", searchParams);
+  console.log("searchParams: ", JSON.stringify(searchParams, null, 2));
 
   for (const [key] of searchParams) {
     //console.log("key: ", key);
