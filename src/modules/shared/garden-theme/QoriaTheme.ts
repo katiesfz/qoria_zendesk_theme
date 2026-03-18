@@ -293,18 +293,23 @@ export const qoriaTheme = {
     components: {
         'forms.input_label': css`
             font-size: ${p => p.theme.fontSizes.sm};
+            line-height: 1.5;
         `,
         'forms.checkbox_label': css`
             font-size: ${p => p.theme.fontSizes.sm};
+            line-height: 1.5;
         `,
         'forms.radio_label': css`
             font-size: ${p => p.theme.fontSizes.sm};
+            line-height: 1.5;
         `,
         'forms.toggle_label': css`
             font-size: ${p => p.theme.fontSizes.sm};
+            line-height: 1.5;
         `,
         'forms.fieldset_legend': css`
             font-size: ${p => p.theme.fontSizes.sm};
+            line-height: 1.5;
         `,
         "accordions.button": css`
             padding: 1.25rem 0;

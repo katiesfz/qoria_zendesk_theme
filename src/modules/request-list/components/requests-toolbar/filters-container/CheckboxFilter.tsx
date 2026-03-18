@@ -52,9 +52,9 @@ export function CheckboxFilter({
   const { checkboxFilterValuesI18N } = useFilterTranslations();
   const [value, setValue] = useState<CheckboxFilterValue | null>(null);
 
-  useEffect(() => {
-    onSelect(validateForm(null));
-  }, []);
+  //useEffect(() => {
+  //  onSelect(validateForm(null));
+  //}, []);
 
   const handleSelect = (item: CheckboxFilterValue) => {
     setValue(item);

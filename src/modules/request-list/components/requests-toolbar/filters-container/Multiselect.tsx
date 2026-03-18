@@ -64,9 +64,9 @@ export function Multiselect({
     []
   );
 
-  useEffect(() => {
-    onSelect(validateForm([]));
-  }, []);
+  //useEffect(() => {
+  //  onSelect(validateForm([]));
+  //}, []);
 
   function handleCheckboxChange(option: MultiSelectOption, isChecked: boolean) {
     let updatedOptions: MultiSelectOption[];
