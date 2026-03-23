@@ -28,6 +28,7 @@ interface DateFilterProps {
   onSelect: (state: FormState<FormFieldKey>) => void;
   errors: FormErrors<FormFieldKey>;
   allowFutureDates: boolean;
+  required?: boolean;
 }
 
 const StyledCustomDateFilter = styled(CustomDateFilter)`
@@ -43,6 +44,7 @@ export function DateFilter({
   onSelect,
   errors,
   allowFutureDates,
+  required = false,
 }: DateFilterProps): JSX.Element | null {
   const { t } = useTranslation();
 
@@ -61,7 +63,8 @@ export function DateFilter({
     if (currentFilterValues.length !== 0) {
       const currentSelection = currentFilterValues[0] as ItemValue;
       console.log("current selection: ", currentSelection);
-      handleItemSelected(currentSelection);
+      setSelectedItem(currentSelection);
+      onSelect(validateForm(currentSelection, allowFutureDates, customDatesInitialValues));
     }
 
   }, [filters, filterProperty]);
@@ -150,7 +153,7 @@ export function DateFilter({
     allowFutureDates: boolean,
     customDateValues: CustomDateValues = [undefined, undefined]
   ): FormState<FormFieldKey> => {
-    if (itemValue === null) {
+    if (itemValue === null && required) {
       return {
         state: "invalid",
         errors: {
@@ -160,13 +163,15 @@ export function DateFilter({
           ),
         },
       };
-    } else if (itemValue !== "custom") {
-      return { state: "valid", values: [itemValue] };
-    } else {
+    } else if (itemValue === null) {
+      return { state: "valid", values: [] };
+    } else if (itemValue === "custom") {
       return validateCustomDates({
         values: customDateValues,
         allowFutureDates,
       });
+    } else {
+      return { state: "valid", values: [itemValue] };
     }
   };
 
