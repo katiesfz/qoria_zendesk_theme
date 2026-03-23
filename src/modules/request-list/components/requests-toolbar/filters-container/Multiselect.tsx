@@ -36,72 +36,49 @@ export function Multiselect({
   errors,
   required,
 }: MultiselectProps): JSX.Element {
-  const { t } = useTranslation();
 
-  const validateForm = (
-    selectedOptions: MultiSelectOption[]
-  ): FormState<FormFieldKey> => {
-    if (!required) {
-      return {
-        state: "valid",
-        values: selectedOptions.map((option): FilterValue => option.value),
-      };
-    } else {
-      if (selectedOptions.length > 0) {
-        return {
-          state: "valid",
-          values: selectedOptions.map((option): FilterValue => option.value),
-        };
-      } else {
-        return {
-          state: "invalid",
-          errors: {
-            selectedOptions: t(
-              "guide-requests-app.filters-modal.multiselect-no-value-error",
-              "Select at least one value"
-            ),
-          },
-        };
-      }
-    }
-  };
+  const { t } = useTranslation();
 
   const [selectedOptions, setSelectedOptions] = useState<MultiSelectOption[]>(
     []
   );
 
-  //useEffect(() => {
-  //  onSelect(validateForm([]));
-  //}, []);
+  useEffect(() => {
+    const currentFilterValues = filters[filterProperty.identifier] || [];
+    const synced = options.filter((option) => currentFilterValues.includes(option.value));
+    setSelectedOptions(synced);
+  }, [filters, filterProperty, options]);
 
-  function handleCheckboxChange(option: MultiSelectOption, isChecked: boolean) {
-    let updatedOptions: MultiSelectOption[];
-    
-    if (isChecked) {
-      updatedOptions = [...selectedOptions, option];
-    } else {
-      updatedOptions = selectedOptions.filter((item) => item.value !== option.value);
+  const validateForm = (
+    selectedOptions: MultiSelectOption[]
+  ): FormState<FormFieldKey> => {
+    const values = selectedOptions.map((option):FilterValue => option.value);
+    if (required && values.length === 0) {
+      return {
+        state: "invalid",
+        errors: { 
+          selectedOptions: t(
+            "guide-requests-app.filters-modal.multiselect-no-value-error", 
+            "Select at least one value"
+          ) 
+        },
+      };
     }
-    
+    return { state: "valid", values };
+  };
+  
+  function handleCheckboxChange(option: MultiSelectOption, isChecked: boolean) {
+    const updatedOptions = isChecked
+      ? [...selectedOptions, option]
+      : selectedOptions.filter((item) => item.value !== option.value);
+
     setSelectedOptions(updatedOptions);
     onSelect(validateForm(updatedOptions));
   }
 
   const isOptionSelected = (option: MultiSelectOption): boolean => {
-    const fieldId = filterProperty.identifier;
-    console.log("multiselect id: ", fieldId);
-    if (selectedOptions.some((item) => item.value === option.value)) {
-      console.log("selected options: option exists");
       return selectedOptions.some((item) => item.value === option.value);
-    } else {
-      if (filters) {
-        if (filters[fieldId]) {
-          return filters[fieldId].some((value) => value === option.value);
-        }
-      }
-    }
-    return false;
-  };
+    };
 
   return (
     <Fieldset>
