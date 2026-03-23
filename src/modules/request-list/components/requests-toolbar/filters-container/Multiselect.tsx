@@ -44,9 +44,10 @@ export function Multiselect({
   );
 
   useEffect(() => {
-    const currentFilterValues = filters[filterProperty.identifier] || [];
+    const currentFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
     const synced = options.filter((option) => currentFilterValues.includes(option.value));
     setSelectedOptions(synced);
+    console.log("selected Options: ", selectedOptions);
   }, [filters, filterProperty, options]);
 
   const validateForm = (
