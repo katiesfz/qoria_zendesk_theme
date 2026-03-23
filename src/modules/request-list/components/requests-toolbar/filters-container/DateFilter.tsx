@@ -137,7 +137,6 @@ export function DateFilter({
     allowFutureDates: boolean,
     customDateValues: CustomDateValues = [undefined, undefined]
   ): FormState<FormFieldKey> => {
-    // FIX: If null, return valid state with an empty array to remove the filter
     if (itemValue === null && required) {
       return {
         state: "invalid",
@@ -175,12 +174,8 @@ export function DateFilter({
     onSelect(validateForm(selectedItem, allowFutureDates, values));
   }
 
-  const [radioValue, setRadioValue] = useState('');
-
   return (
-    <>
-
-    
+    <>    
       <Fieldset>
         <Fieldset.Legend hidden>{label}</Fieldset.Legend>
         {Object.entries(dateRangeI18n).map(([value, label]) => (

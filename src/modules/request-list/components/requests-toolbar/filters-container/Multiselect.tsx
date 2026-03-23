@@ -72,13 +72,16 @@ export function Multiselect({
       ? [...selectedOptions, option]
       : selectedOptions.filter((item) => item.value !== option.value);
 
+    console.log("selected Options: ", selectedOptions);
+    console.log("updated Options: ", updatedOptions);
+    
     setSelectedOptions(updatedOptions);
     onSelect(validateForm(updatedOptions));
   }
 
   const isOptionSelected = (option: MultiSelectOption): boolean => {
-      return selectedOptions.some((item) => item.value === option.value);
-    };
+    return selectedOptions.some((item) => item.value === option.value);
+  };
 
   return (
     <Fieldset>
