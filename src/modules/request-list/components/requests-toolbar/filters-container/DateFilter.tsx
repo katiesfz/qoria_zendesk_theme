@@ -158,12 +158,14 @@ export function DateFilter({
 
   useEffect(() => {
     const currentFilterValues: ItemValue[] = filters[filterProperty.identifier] || [];
+    console.log("running datefilter");
+    console.log("current filter values: ", currentFilterValues);
 
     if (currentFilterValues.length !== 0) {
       const currentSelection = currentFilterValues[0] || null;
+      console.log("current selection: ", currentSelection);
       setSelectedItem(currentSelection);
     }
-
   }, [filters, filterProperty]);
 
 

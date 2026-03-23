@@ -115,8 +115,8 @@ export function FilterValuesList({
 
   const { type, title_in_portal } = ticketField;
 
-  console.log("Field type: ", type);
-  console.log("Field name: ", title_in_portal);
+  // console.log("Field type: ", type);
+  // console.log("Field name: ", title_in_portal);
 
   switch (type) {
     case "textarea":
@@ -138,7 +138,7 @@ export function FilterValuesList({
           label: option.name,
         })) ?? [];
 
-      console.log(JSON.stringify(ticketField, null, 2));
+      // console.log(JSON.stringify(ticketField, null, 2));
 
       return (
         <Multiselect
