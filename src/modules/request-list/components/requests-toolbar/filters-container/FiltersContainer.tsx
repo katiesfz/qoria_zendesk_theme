@@ -20,6 +20,7 @@ const FormContainer = styled.div`
 `;
 
 interface FiltersContainerProps {
+  filters: FilterValuesMap;
   ticketFields: TicketField[];
   organizations: Organization[];
   customStatusesEnabled: boolean;
@@ -28,21 +29,8 @@ interface FiltersContainerProps {
   onFiltersChanged: (filters: FilterValuesMap) => void;
 }
 
-const systemType = [
-  "subject",
-  "description",
-  "status",
-  "custom_status",
-  "type",
-  "priority",
-  "basic_priority",
-  "assignee",
-  "group",
-  "tickettype",
-  "requester",
-];
-
 export function FiltersContainer({
+  filters,
   ticketFields,
   organizations,
   filterValuesMap,
@@ -56,6 +44,7 @@ export function FiltersContainer({
   return (
     <FormContainer>
       <FilterPropertiesGroup
+        filters={filters}
         ticketFields={ticketFields}
         organizations={organizations}
         hasCustomStatuses={customStatusesEnabled}

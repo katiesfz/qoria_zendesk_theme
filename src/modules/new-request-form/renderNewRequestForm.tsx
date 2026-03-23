@@ -1,4 +1,5 @@
 import { render } from "react-dom";
+
 import type { Settings } from "../shared";
 import {
   createTheme,

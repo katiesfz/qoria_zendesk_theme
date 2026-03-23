@@ -68,9 +68,9 @@ export const TextField = ({
     }
   };
 
-  useEffect(() => {
-    onSelect(validateForm(undefined, ""));
-  }, []);
+  //useEffect(() => {
+  //  onSelect(validateForm(undefined, ""));
+  //}, []);
 
   const handleFilterTypeSelect = (filterType: FilterTypeValue) => {
     setSelectedFilter(filterType);

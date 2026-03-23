@@ -40,8 +40,16 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
           light: { offset: 100 },
         })};
     }
+
+    border-radius: 0;
+    background-color: rgba(241, 245, 249, 0.8)
   `;
 };
+
+const inputLabelStyle = css`
+            font-size: ${p => p.theme.fontSizes.sm};
+            line-height: 1.5;
+        `;
 
 const accessibleFormInputStyle = createAccessibleFormControlStyle(false);
 const accessibleFormWrapperStyle = createAccessibleFormControlStyle(true);
@@ -155,8 +163,6 @@ const qoriaPalette = {
         "1200": "#110A4E"
     }
 };
-
-
 
 export const qoriaTheme = {
     ...DEFAULT_THEME,
@@ -291,26 +297,11 @@ export const qoriaTheme = {
         }
     },
     components: {
-        'forms.input_label': css`
-            font-size: ${p => p.theme.fontSizes.sm};
-            line-height: 1.5;
-        `,
-        'forms.checkbox_label': css`
-            font-size: ${p => p.theme.fontSizes.sm};
-            line-height: 1.5;
-        `,
-        'forms.radio_label': css`
-            font-size: ${p => p.theme.fontSizes.sm};
-            line-height: 1.5;
-        `,
-        'forms.toggle_label': css`
-            font-size: ${p => p.theme.fontSizes.sm};
-            line-height: 1.5;
-        `,
-        'forms.fieldset_legend': css`
-            font-size: ${p => p.theme.fontSizes.sm};
-            line-height: 1.5;
-        `,
+        'forms.input_label': inputLabelStyle,
+        'forms.checkbox_label': inputLabelStyle,
+        'forms.radio_label': inputLabelStyle,
+        'forms.toggle_label': inputLabelStyle,
+        'forms.fieldset_legend': inputLabelStyle,
         "accordions.button": css`
             padding: 1.25rem 0;
             line-height: 1;
@@ -434,9 +425,9 @@ export const qoriaTheme = {
         xxs: "4px",
         xs: "8px",
         sm: "12px",
-        md: "20px",
-        lg: "32px",
-        xl: "40px",
-        xxl: "48px"
+        md: "16px",
+        lg: "24px",
+        xl: "32px",
+        xxl: "40px"
     }
   } as IGardenTheme;

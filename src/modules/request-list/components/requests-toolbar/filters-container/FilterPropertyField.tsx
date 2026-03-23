@@ -30,6 +30,7 @@ export interface FilterProperty {
 }
 
 interface FilterPropertyFieldProps {
+  filters: FilterValuesMap;
   ticketField: TicketField;
   filterProperty: FilterProperty;
   organizations: Organization[];
@@ -39,6 +40,7 @@ interface FilterPropertyFieldProps {
 }
 
 export function FilterPropertyField({
+  filters,
   ticketField,
   filterProperty,
   organizations,
@@ -58,6 +60,7 @@ export function FilterPropertyField({
       </Accordion.Header>
       <Accordion.Panel>
         <FilterValuesList
+        filters={filters}
         filterProperty={filterProperty}
         organizations={organizations}
         customStatusOptions={customStatusOptions}

@@ -4,6 +4,7 @@ import { DateFilter } from "./DateFilter";
 import type { FilterProperty } from "./FilterPropertyField";
 import type { FormErrors, FormState } from "./FormState";
 import type { MultiSelectOption } from "./Multiselect";
+import type { FilterValuesMap } from "../../../data-types/FilterValue";
 import { Multiselect } from "./Multiselect";
 import { NumberFilter } from "./NumberFilter";
 import { TextField } from "./TextField";
@@ -11,8 +12,10 @@ import { useTranslation } from "react-i18next";
 import type { Organization, TicketField } from "../../../data-types";
 import { useFilterTranslations } from "../i18n";
 import type { FilterValue } from "../../../data-types/FilterValue";
+import { faOilCan } from "@awesome.me/kit-b56161fd23/icons/classic/regular";
 
 interface FilterValuesListProps {
+  filters: FilterValuesMap;
   filterProperty: FilterProperty;
   organizations: Organization[];
   customStatusOptions: MultiSelectOption[];
@@ -23,6 +26,7 @@ interface FilterValuesListProps {
 }
 
 export function FilterValuesList({
+  filters,
   filterProperty,
   organizations,
   customStatusOptions,
@@ -59,6 +63,8 @@ export function FilterValuesList({
     }));
     return (
       <Multiselect
+        filters={filters}
+        filterProperty={filterProperty}
         label={t("guide-requests-app.status", "Status")}
         onSelect={onSelect}
         options={options}
@@ -72,6 +78,8 @@ export function FilterValuesList({
     return (
       <Multiselect
         label={t("guide-requests-app.status", "Status")}
+        filters={filters}
+        filterProperty={filterProperty}
         onSelect={onSelect}
         options={customStatusOptions}
         errors={errors}
@@ -89,6 +97,8 @@ export function FilterValuesList({
     return (
       <Multiselect
         label={t("guide-requests-app.organization", "Organization")}
+        filters={filters}
+        filterProperty={filterProperty}
         onSelect={onSelect}
         options={options}
         errors={errors}
@@ -130,6 +140,8 @@ export function FilterValuesList({
 
       return (
         <Multiselect
+          filters={filters}
+          filterProperty={filterProperty}
           label={title_in_portal}
           onSelect={onSelect}
           options={options}

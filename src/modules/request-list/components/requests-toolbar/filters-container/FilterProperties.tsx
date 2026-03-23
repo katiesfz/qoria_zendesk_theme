@@ -10,6 +10,7 @@ import type { FilterProperty } from "./FilterPropertyField";
 import { Accordion } from '@zendeskgarden/react-accordions';
 
 interface FilterPropertiesGroupProps {
+  filters: FilterValuesMap;
   ticketFields: TicketField[];
   organizations: Organization[];
   hasCustomStatuses: boolean;
@@ -37,6 +38,7 @@ function isSystemFieldType(type: string): boolean {
 }
   
 export function FilterPropertiesGroup({
+  filters,
   ticketFields,
   organizations,
   hasCustomStatuses,
@@ -143,6 +145,7 @@ export function FilterPropertiesGroup({
       {filterProperties.map((property) => (
         <Accordion.Section key={property.identifier}>
         <FilterPropertyField
+          filters={filters}
           filterProperty={property}
           organizations={organizations}
           customStatusOptions={customStatusOptions}

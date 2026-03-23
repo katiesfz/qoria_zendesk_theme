@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Checkbox, Fieldset, Field } from "@zendeskgarden/react-forms";
 import styled from "styled-components";
 import type { FilterValue } from "../../../data-types/FilterValue";
+import type { FilterValuesMap } from "../../../data-types/FilterValue";
 import { FieldError } from "./FieldError";
 import type { FormErrors, FormState } from "./FormState";
 import { useTranslation } from "react-i18next";
+import type { FilterProperty } from "./FilterPropertyField";
 import { Grid } from '@zendeskgarden/react-grid';
 
 
@@ -16,6 +18,8 @@ export interface MultiSelectOption {
 type FormFieldKey = "selectedOptions";
 
 interface MultiselectProps {
+  filters: FilterValuesMap;
+  filterProperty: FilterProperty;
   label: string;
   options: MultiSelectOption[];
   onSelect: (state: FormState<FormFieldKey>) => void;
@@ -24,6 +28,8 @@ interface MultiselectProps {
 }
 
 export function Multiselect({
+  filters,
+  filterProperty,
   label,
   options,
   onSelect,
@@ -82,7 +88,13 @@ export function Multiselect({
   }
 
   const isOptionSelected = (option: MultiSelectOption): boolean => {
-    return selectedOptions.some((item) => item.value === option.value);
+    const fieldId = filterProperty.identifier;
+    if (selectedOptions.some((item) => item.value === option.value)) {
+      return true;
+    } else if (filters[fieldId]) {
+      return filters[fieldId].some((item) => item === option.value);
+    }
+    return false;
   };
 
   return (

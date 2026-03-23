@@ -210,6 +210,7 @@ export default function RequestsToolbar({
           onFiltersChanged={onFiltersChanged}
         />
         <FiltersContainer
+          filters={filters}
           ticketFields={ticketFields}
           filterValuesMap={filters}
           onFiltersChanged={onFiltersChanged}
