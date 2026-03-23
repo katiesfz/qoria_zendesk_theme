@@ -52,6 +52,20 @@ export function DateFilter({
   const dateRangeI18n = createDefaultDateRangeI18N();
   const customDatesInitialValues: [Date, Date] = [new Date(), new Date()];
 
+  useEffect(() => {
+    const currentFilterValues: ItemValue[] = filters[filterProperty.identifier] || [];
+    console.log("running datefilter");
+    console.log("current filter values: ", currentFilterValues);
+
+
+    if (currentFilterValues.length !== 0) {
+      const currentSelection = currentFilterValues[0] as ItemValue;
+      console.log("current selection: ", currentSelection);
+      handleItemSelected(currentSelection);
+    }
+
+  }, [filters, filterProperty]);
+
   const renderItemValue = (
     value: ItemValue | null,
     dateRangeI18n: Record<FilterValue, string>
@@ -155,19 +169,6 @@ export function DateFilter({
       });
     }
   };
-
-  useEffect(() => {
-    const currentFilterValues: ItemValue[] = filters[filterProperty.identifier] || [];
-    console.log("running datefilter");
-    console.log("current filter values: ", currentFilterValues);
-
-    if (currentFilterValues.length !== 0) {
-      const currentSelection = currentFilterValues[0] || null;
-      console.log("current selection: ", currentSelection);
-      setSelectedItem(currentSelection);
-    }
-  }, [filters, filterProperty]);
-
 
   function handleItemSelected(item: ItemValue) {
     setSelectedItem(item);

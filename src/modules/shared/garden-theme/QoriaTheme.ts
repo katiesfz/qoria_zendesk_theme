@@ -47,7 +47,6 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
 
     box-shadow: unset;
     padding: ${p => p.theme.space.md};
-    padding-right: ${p => p.theme.space.xxl};
     border-width: 1px;
     border-radius: 0;
     background-color: rgba(241, 245, 249, 0.8)

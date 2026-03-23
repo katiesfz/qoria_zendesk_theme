@@ -49,7 +49,6 @@ function e(e,t){return t.forEach(function(t){t&&"string"!=typeof t&&!Array.isArr
 
     box-shadow: unset;
     padding: ${e=>e.theme.space.md};
-    padding-right: ${e=>e.theme.space.xxl};
     border-width: 1px;
     border-radius: 0;
     background-color: rgba(241, 245, 249, 0.8)
