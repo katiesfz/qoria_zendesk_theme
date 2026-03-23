@@ -44,10 +44,10 @@ export function DateFilter({
   onSelect,
   errors,
   allowFutureDates,
-  required = false,
+  required = true,
 }: DateFilterProps): JSX.Element | null {
+  
   const { t } = useTranslation();
-
   const [selectedItem, setSelectedItem] = useState<ItemValue | null>(null);
 
   const { createDefaultDateRangeI18N } = useFilterTranslations();
@@ -55,18 +55,14 @@ export function DateFilter({
   const customDatesInitialValues: [Date, Date] = [new Date(), new Date()];
 
   useEffect(() => {
-    const currentFilterValues: ItemValue[] = filters[filterProperty.identifier] || [];
-    console.log("running datefilter");
-    console.log("current filter values: ", currentFilterValues);
-
-
-    if (currentFilterValues.length !== 0) {
-      const currentSelection = currentFilterValues[0] as ItemValue;
-      console.log("current selection: ", currentSelection);
-      setSelectedItem(currentSelection);
-      onSelect(validateForm(currentSelection, allowFutureDates, customDatesInitialValues));
+    const externalValues = filters[filterProperty.identifier] as ItemValue[] || [] as ItemValue[];
+    if (externalValues.length === 0) {
+      setSelectedItem(null);
+    } else if (externalValues.length === 1) {
+      setSelectedItem(externalValues[0] as ItemValue);
+    } else if (externalValues.length === 2) {
+      setSelectedItem("custom");
     }
-
   }, [filters, filterProperty]);
 
   const renderItemValue = (
@@ -92,60 +88,48 @@ export function DateFilter({
   }): FormState<CustomDateFieldKey> => {
     if (startDate === undefined || endDate === undefined) {
       const errors: FormErrors<CustomDateFieldKey> = {};
-
       if (startDate === undefined) {
-        errors.startDate = t(
-          "guide-requests-app.no-start-date-error",
-          "Select a start date"
-        );
+        errors.startDate = t("guide-requests-app.no-start-date-error", "Select a start date");
       }
-
       if (endDate === undefined) {
-        errors.endDate = t(
-          "guide-requests-app.no-end-date-error",
-          "Select an end date"
-        );
+        errors.endDate = t("guide-requests-app.no-end-date-error", "Select an end date");
       }
-
       return { state: "invalid", errors };
-    } else if (startDate > endDate) {
+    } 
+    
+    if (startDate > endDate) {
       return {
         state: "invalid",
         errors: {
-          endDate: t(
-            "guide-requests-app.endDateAfterStartDate",
-            "End date must occur after the start date"
-          ),
+          endDate: t("guide-requests-app.endDateAfterStartDate", "End date must occur after the start date"),
         },
       };
-    } else {
-      const errors: FormErrors<CustomDateFieldKey> = {};
-      const today = new Date();
+    }
 
-      if (!allowFutureDates && startDate > today) {
-        errors.startDate = t(
-          "guide-requests-app.date-lte-today",
-          "Select a date earlier than or equal to today"
-        );
-      }
+    const errors: FormErrors<CustomDateFieldKey> = {};
+    const today = new Date();
 
-      if (!allowFutureDates && endDate > today) {
-        errors.endDate = t(
-          "guide-requests-app.date-lte-today",
-          "Select a date earlier than or equal to today"
-        );
-      }
+    if (!allowFutureDates && startDate > today) {
+      errors.startDate = t("guide-requests-app.date-lte-today", "Select a date earlier than or equal to today");
+    }
+    if (!allowFutureDates && endDate > today) {
+      errors.endDate = t("guide-requests-app.date-lte-today", "Select a date earlier than or equal to today");
+    }
 
-      if (Object.keys(errors).length > 0) {
-        return { state: "invalid", errors };
-      } else {
-        const values: [FilterValue, FilterValue] = [
+    if (Object.keys(errors).length > 0) {
+      return { state: "invalid", errors };
+    }
+
+    // Valid custom range: return as array of strings
+    const values: [FilterValue, FilterValue] = [
           `>=${format(startDate, "yyyy-MM-dd")}`,
           `<=${format(endDate, "yyyy-MM-dd")}`,
-        ];
-        return { state: "valid", values };
-      }
-    }
+      ];
+
+    return { 
+      state: "valid", 
+      values: values
+    };
   };
 
   const validateForm = (
@@ -153,6 +137,7 @@ export function DateFilter({
     allowFutureDates: boolean,
     customDateValues: CustomDateValues = [undefined, undefined]
   ): FormState<FormFieldKey> => {
+    // FIX: If null, return valid state with an empty array to remove the filter
     if (itemValue === null && required) {
       return {
         state: "invalid",
@@ -163,16 +148,20 @@ export function DateFilter({
           ),
         },
       };
-    } else if (itemValue === null) {
+    } 
+
+    if (itemValue === null) {
       return { state: "valid", values: [] };
-    } else if (itemValue === "custom") {
-      return validateCustomDates({
-        values: customDateValues,
-        allowFutureDates,
-      });
-    } else {
+    } 
+    
+    if (itemValue !== "custom") {
       return { state: "valid", values: [itemValue] };
     }
+
+    return validateCustomDates({
+      values: customDateValues,
+      allowFutureDates,
+    });
   };
 
   function handleItemSelected(item: ItemValue) {
@@ -190,6 +179,8 @@ export function DateFilter({
 
   return (
     <>
+
+    
       <Fieldset>
         <Fieldset.Legend hidden>{label}</Fieldset.Legend>
         {Object.entries(dateRangeI18n).map(([value, label]) => (

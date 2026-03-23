@@ -52,6 +52,7 @@ export function FilterValuesList({
         onSelect={onSelect}
         errors={errors}
         allowFutureDates={false}
+        required={false}
       />
     );
   }
@@ -161,6 +162,7 @@ export function FilterValuesList({
           onSelect={onSelect}
           errors={errors}
           allowFutureDates={true}
+          required={false}
         />
       );
     }
