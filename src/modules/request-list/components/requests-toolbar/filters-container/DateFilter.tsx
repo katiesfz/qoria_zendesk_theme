@@ -157,10 +157,11 @@ export function DateFilter({
   };
 
   useEffect(() => {
-    const currentFilterValues = filters[filterProperty.identifier] || [];
-    
-    if (currentFilterValues.length != 0) {
-      setSelectedItem(currentFilterValues[0] as ItemValue);
+    const currentFilterValues: ItemValue[] = filters[filterProperty.identifier] || [];
+
+    if (currentFilterValues.length !== 0) {
+      const currentSelection = currentFilterValues[0] || null;
+      setSelectedItem(currentSelection);
     }
 
   }, [filters, filterProperty]);
