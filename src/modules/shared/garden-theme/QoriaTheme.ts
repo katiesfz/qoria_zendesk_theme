@@ -21,13 +21,7 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
   return css`
     /* Boost default border contrast - use :not() to preserve validation colors */
     &:not(${invalidSelector}) {
-      border-color: ${(p) =>
-        getColor({
-          theme: p.theme,
-          variable: "border.default",
-          dark: { offset: -100 },
-          light: { offset: 300 },
-        })};
+        border-color: transparent;
     }
 
     /* Enhanced hover state */
@@ -35,12 +29,26 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
       border-color: ${(p) =>
         getColor({
           theme: p.theme,
-          variable: "border.primaryEmphasis",
+          variable: "border.primarySubtle",
           dark: { offset: -100 },
           light: { offset: 100 },
         })};
     }
 
+    &:focus:not(${invalidSelector}) {
+        border-color: ${(p) =>
+            getColor({
+            theme: p.theme,
+            variable: "border.primaryEmphasis",
+            dark: { offset: -100 },
+            light: { offset: 100 },
+            })};
+    }
+
+    box-shadow: unset;
+    padding: ${p => p.theme.space.md};
+    padding-right: ${p => p.theme.space.xxl};
+    border-width: 1px;
     border-radius: 0;
     background-color: rgba(241, 245, 249, 0.8)
   `;
@@ -208,7 +216,7 @@ export const qoriaTheme = {
                     success: "successHue.1000",
                     warning: "warningHue.1000",
                     danger: "dangerHue.1000",
-                    primaryEmphasis: "primaryHue.600",
+                    primaryEmphasis: "primaryHue.800",
                     successEmphasis: "successHue.600",
                     warningEmphasis: "warningHue.600",
                     dangerEmphasis: "dangerHue.600",
@@ -221,10 +229,14 @@ export const qoriaTheme = {
                     success: "successHue.900",
                     warning: "warningHue.900",
                     danger: "dangerHue.900",
-                    primaryEmphasis: "primaryHue.600",
+                    primaryEmphasis: "primaryHue.800",
+                    primarySubtle: "primaryHue.600",
                     successEmphasis: "successHue.600",
+                    successSubtle: "successHue.600",
                     warningEmphasis: "warningHue.600",
+                    warningSubtle: "warningHue.600",
                     dangerEmphasis: "dangerHue.600",
+                    dangerSubtle: "dangerHue.600",
                     disabled: "neutralHue.800"
                 },
                 foreground: {
@@ -270,9 +282,13 @@ export const qoriaTheme = {
                     warning: "warningHue.300",
                     danger: "dangerHue.300",
                     primaryEmphasis: "primaryHue.700",
+                    primarySubtle: "primaryHue.700",
                     successEmphasis: "successHue.700",
+                    successSubtle: "successHue.700",
                     warningEmphasis: "warningHue.700",
+                    warningSubtle: "warningHue.700",
                     dangerEmphasis: "dangerHue.700",
+                    dangerSubtle: "dangerHue.700",
                     disabled: "neutralHue.300"
                 },
                 foreground: {

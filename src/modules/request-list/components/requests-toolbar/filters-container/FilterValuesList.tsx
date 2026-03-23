@@ -46,6 +46,8 @@ export function FilterValuesList({
   ) {
     return (
       <DateFilter
+        filters={filters}
+        filterProperty={filterProperty}
         label={filterProperty.label}
         onSelect={onSelect}
         errors={errors}
@@ -153,6 +155,8 @@ export function FilterValuesList({
     case "date": {
       return (
         <DateFilter
+          filters={filters}
+          filterProperty={filterProperty}
           label={title_in_portal}
           onSelect={onSelect}
           errors={errors}

@@ -20,19 +20,9 @@ interface RequestsSearchProps {
 
 const Form = styled.form`
   flex: 1 0 auto;
-  margin-bottom: 16px;
   position: sticky;
   top: 0px;
   ${media.desktop`
-    border: 0;
-    flex: 0 0 25%;
-    height: auto;
-    max-width: 25%;
-    margin-right: 16px;
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
   `};
 `;
 
@@ -52,7 +42,7 @@ export default function RequestsSearch({
   };
 
   return (
-    <Form onSubmit={onSearchChange} className="search search-full search-transparent">
+    <Form onSubmit={onSearchChange}>
       <Field>
         <Field.Label hidden>
           {t("guide-requests-app.searchField.Label", "Search")}

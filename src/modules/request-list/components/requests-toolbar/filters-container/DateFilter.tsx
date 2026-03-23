@@ -6,6 +6,8 @@ import {
 } from "@zendeskgarden/react-dropdowns.legacy";
 import { useEffect, useState } from "react";
 import type { FilterValue } from "../../../data-types/FilterValue";
+import type { FilterValuesMap } from "../../../data-types/FilterValue";
+import type { FilterProperty } from "./FilterPropertyField";
 import { useFilterTranslations } from "../i18n";
 import { Radio, Fieldset, Field } from "@zendeskgarden/react-forms";
 import { useTranslation } from "react-i18next";
@@ -20,6 +22,8 @@ import { ModalMenu } from "../../modal-menu/ModalMenu";
 type FormFieldKey = "dateFilterItem" | CustomDateFieldKey;
 
 interface DateFilterProps {
+  filters: FilterValuesMap;
+  filterProperty: FilterProperty;
   label: string;
   onSelect: (state: FormState<FormFieldKey>) => void;
   errors: FormErrors<FormFieldKey>;
@@ -33,6 +37,8 @@ const StyledCustomDateFilter = styled(CustomDateFilter)`
 type ItemValue = FilterValue | "custom";
 
 export function DateFilter({
+  filters,
+  filterProperty,
   label,
   onSelect,
   errors,
@@ -151,8 +157,14 @@ export function DateFilter({
   };
 
   useEffect(() => {
-    onSelect(validateForm(null, allowFutureDates, customDatesInitialValues));
-  }, []);
+    const currentFilterValues = filters[filterProperty.identifier] || [];
+    
+    if (currentFilterValues.length != 0) {
+      setSelectedItem(currentFilterValues[0] as ItemValue);
+    }
+
+  }, [filters, filterProperty]);
+
 
   function handleItemSelected(item: ItemValue) {
     setSelectedItem(item);
@@ -169,8 +181,6 @@ export function DateFilter({
 
   return (
     <>
-
-    
       <Fieldset>
         <Fieldset.Legend hidden>{label}</Fieldset.Legend>
         {Object.entries(dateRangeI18n).map(([value, label]) => (
