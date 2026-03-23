@@ -89,10 +89,16 @@ export function Multiselect({
 
   const isOptionSelected = (option: MultiSelectOption): boolean => {
     const fieldId = filterProperty.identifier;
+    console.log("multiselect id: ", fieldId);
     if (selectedOptions.some((item) => item.value === option.value)) {
-      return true;
-    } else if (filters[fieldId]) {
-      return filters[fieldId].some((item) => item === option.value);
+      console.log("selected options: option exists");
+      return selectedOptions.some((item) => item.value === option.value);
+    } else {
+      if (filters) {
+        if (filters[fieldId]) {
+          return filters[fieldId].some((value) => value === option.value);
+        }
+      }
     }
     return false;
   };
