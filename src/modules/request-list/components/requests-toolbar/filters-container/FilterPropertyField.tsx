@@ -66,7 +66,6 @@ export function FilterPropertyField({
         customStatusOptions={customStatusOptions}
         onSelect={(state) => onValueChanged(filterProperty, state)}
         errors={errors}
-        required={false}
         ticketField={ticketField}
       />
       </Accordion.Panel>

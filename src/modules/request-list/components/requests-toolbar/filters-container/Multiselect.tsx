@@ -45,13 +45,13 @@ export function Multiselect({
 
   useEffect(() => {
     const currentFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
-    console.log(`current filter values of ${filterProperty.identifier}: `, currentFilterValues);
+    console.log(`current filter values of ${filterProperty.identifier}: `, JSON.stringify(currentFilterValues, null, 2));
     const synced = options.filter((option) => currentFilterValues.includes(option.value));
-    console.log(`synced Options of ${filterProperty.identifier}: `, synced);
+    console.log(`synced Options of ${filterProperty.identifier}: `, JSON.stringify(synced, null, 2));
     setSelectedOptions(synced);
-    console.log(`selected Options of ${filterProperty.identifier}:`, selectedOptions);
+    console.log(`selected Options of ${filterProperty.identifier}:`, JSON.stringify(selectedOptions, null, 2));
     const newFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
-    console.log(`new filter values of ${filterProperty.identifier}`, newFilterValues);
+    console.log(`new filter values of ${filterProperty.identifier}`, JSON.stringify(newFilterValues, null, 2));
   }, [filters]);
 
   const validateForm = (

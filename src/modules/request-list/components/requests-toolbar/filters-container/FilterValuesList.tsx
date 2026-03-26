@@ -21,7 +21,6 @@ interface FilterValuesListProps {
   customStatusOptions: MultiSelectOption[];
   onSelect: (state: FormState<string>) => void;
   errors: FormErrors;
-  required?: boolean;
   ticketField?: TicketField;
 }
 
@@ -33,7 +32,6 @@ export function FilterValuesList({
   onSelect,
   errors,
   // ticketFields,
-  required = true,
   ticketField,
 }: FilterValuesListProps): JSX.Element {
   const { t } = useTranslation();
