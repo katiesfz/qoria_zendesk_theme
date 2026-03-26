@@ -45,16 +45,18 @@ export function Multiselect({
 
   useEffect(() => {
     const currentFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
+    console.log("current filter values: ", currentFilterValues);
     const synced = options.filter((option) => currentFilterValues.includes(option.value));
+    console.log("synced Options: ", synced);
     setSelectedOptions(synced);
     console.log("selected Options: ", selectedOptions);
-  }, [filters, filterProperty, options]);
+  }, [filters]);
 
   const validateForm = (
     selectedOptions: MultiSelectOption[]
   ): FormState<FormFieldKey> => {
     const values = selectedOptions.map((option):FilterValue => option.value);
-    if (required && values.length === 0) {
+    if (required && selectedOptions.length === 0) {
       return {
         state: "invalid",
         errors: { 

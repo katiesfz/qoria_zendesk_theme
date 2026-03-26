@@ -149,6 +149,8 @@ export function DateFilter({
       };
     } 
 
+   //  const values = selectedValues.map((option):FilterValue => option.value);
+
     if (itemValue === null) {
       return { state: "valid", values: [] };
     } 
