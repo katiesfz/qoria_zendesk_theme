@@ -45,13 +45,13 @@ export function Multiselect({
 
   useEffect(() => {
     const currentFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
-    console.log("current filter values: ", currentFilterValues);
-    const synced = options.filter((option) => currentFilterValues.includes(`:${option.value}`));
-    console.log("synced Options: ", synced);
+    console.log(`current filter values of ${filterProperty.identifier}: `, currentFilterValues);
+    const synced = options.filter((option) => currentFilterValues.includes(option.value));
+    console.log(`synced Options of ${filterProperty.identifier}: `, synced);
     setSelectedOptions(synced);
-    console.log("selected Options: ", selectedOptions);
+    console.log(`selected Options of ${filterProperty.identifier}:`, selectedOptions);
     const newFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
-    console.log(newFilterValues);
+    console.log(`new filter values of ${filterProperty.identifier}`, newFilterValues);
   }, [filters]);
 
   const validateForm = (
@@ -80,8 +80,8 @@ export function Multiselect({
       ? [...selectedOptions, option]
       : selectedOptions.filter((item) => item.value !== option.value);
 
-    console.log("selected Options: ", selectedOptions);
-    console.log("updated Options: ", updatedOptions);
+    // console.log("selected Options: ", selectedOptions);
+    // console.log("updated Options: ", updatedOptions);
     
     setSelectedOptions(updatedOptions);
     onSelect(validateForm(updatedOptions));
@@ -93,10 +93,10 @@ export function Multiselect({
 
   const isOptionSelected = (option: MultiSelectOption): boolean => {
     const fieldId = filterProperty.identifier;
-    if (selectedOptions.some((item) => item.value === `:${option.value}`)) {
+    if (selectedOptions.some((item) => item.value === `${option.value}`)) {
       return true;
     } else if (filters[fieldId]) {
-      return filters[fieldId].some((item) => item === `:${option.value}`);
+      return filters[fieldId].some((item) => item === `${option.value}`);
     }
     return false;
   };
