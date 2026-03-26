@@ -66,8 +66,12 @@ export function Multiselect({
           ) 
         },
       };
+    } else {
+      return { 
+        state: "valid", 
+        values: values 
+      };
     }
-    return { state: "valid", values };
   };
   
   function handleCheckboxChange(option: MultiSelectOption, isChecked: boolean) {

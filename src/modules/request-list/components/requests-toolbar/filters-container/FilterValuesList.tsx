@@ -66,9 +66,9 @@ export function FilterValuesList({
     }));
     return (
       <Multiselect
+        label={t("guide-requests-app.status", "Status")}
         filters={filters}
         filterProperty={filterProperty}
-        label={t("guide-requests-app.status", "Status")}
         onSelect={onSelect}
         options={options}
         errors={errors}
@@ -139,13 +139,13 @@ export function FilterValuesList({
           label: option.name,
         })) ?? [];
 
-      // console.log(JSON.stringify(ticketField, null, 2));
+      console.log(JSON.stringify(ticketField, null, 2));
 
       return (
         <Multiselect
+          label={title_in_portal}
           filters={filters}
           filterProperty={filterProperty}
-          label={title_in_portal}
           onSelect={onSelect}
           options={options}
           errors={errors}
