@@ -46,11 +46,12 @@ export function Multiselect({
   useEffect(() => {
     const currentFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
     console.log("current filter values: ", currentFilterValues);
-    const synced = options.filter((option) => currentFilterValues.includes(option.value));
+    const synced = options.filter((option) => currentFilterValues.includes(`:${option.value}`));
     console.log("synced Options: ", synced);
     setSelectedOptions(synced);
     console.log("selected Options: ", selectedOptions);
     const newFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
+    console.log(newFilterValues);
   }, [filters]);
 
   const validateForm = (
@@ -92,10 +93,10 @@ export function Multiselect({
 
   const isOptionSelected = (option: MultiSelectOption): boolean => {
     const fieldId = filterProperty.identifier;
-    if (selectedOptions.some((item) => item.value as FilterValue === option.value as FilterValue)) {
+    if (selectedOptions.some((item) => item.value === `:${option.value}`)) {
       return true;
     } else if (filters[fieldId]) {
-      return filters[fieldId].some((item:FilterValue) => item as FilterValue === option.value as FilterValue);
+      return filters[fieldId].some((item) => item === `:${option.value}`);
     }
     return false;
   };
