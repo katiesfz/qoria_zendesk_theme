@@ -50,12 +50,12 @@ export function Multiselect({
     console.log("synced Options: ", synced);
     setSelectedOptions(synced);
     console.log("selected Options: ", selectedOptions);
+    const newFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
   }, [filters]);
 
   const validateForm = (
     selectedOptions: MultiSelectOption[]
   ): FormState<FormFieldKey> => {
-    const values = selectedOptions.map((option):FilterValue => option.value);
     if (required && selectedOptions.length === 0) {
       return {
         state: "invalid",
@@ -69,7 +69,7 @@ export function Multiselect({
     } else {
       return { 
         state: "valid", 
-        values: values 
+        values: selectedOptions.map((option):FilterValue => option.value) 
       };
     }
   };
@@ -86,10 +86,20 @@ export function Multiselect({
     onSelect(validateForm(updatedOptions));
   }
 
-  const isOptionSelected = (option: MultiSelectOption): boolean => {
-    return selectedOptions.some((item) => item.value === option.value);
-  };
+  // const isOptionSelected = (option: MultiSelectOption): boolean => {
+  //   return selectedOptions.some((item) => item.value === option.value);
+  // };
 
+  const isOptionSelected = (option: MultiSelectOption): boolean => {
+    const fieldId = filterProperty.identifier;
+    if (selectedOptions.some((item) => item.value === option.value)) {
+      return true;
+    } else if (filters[fieldId]) {
+      return filters[fieldId].some((item) => item === option.value);
+    }
+    return false;
+  };
+ 
   return (
     <Fieldset>
       <Fieldset.Legend hidden>{label}</Fieldset.Legend>
