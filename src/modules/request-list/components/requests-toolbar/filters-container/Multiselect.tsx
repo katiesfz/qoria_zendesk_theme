@@ -30,7 +30,7 @@ interface MultiselectProps {
 export function Multiselect({
   filters,
   filterProperty,
-  label,
+  label,  
   options,
   onSelect,
   errors,
@@ -43,15 +43,42 @@ export function Multiselect({
     []
   );
 
+  const systemType = [
+    "subject",
+    "description",
+    "status",
+    "custom_status",
+    "type",
+    "priority",
+    "basic_priority",
+    "assignee",
+    "group",
+    "tickettype",
+    "requester",
+  ];
+
+  function isSystemFieldType(type: string): boolean {
+    return systemType.includes(type);
+  }
+
+  const filterKey =
+    isSystemFieldType(filterProperty.identifier) ||
+    filterProperty.identifier === "created_at" ||
+    filterProperty.identifier === "updated_at" ||
+    filterProperty.identifier === "organization" ||
+    filterProperty.identifier === "custom_status_id"
+      ? filterProperty.identifier
+      : `custom_field_${filterProperty.identifier}`;
+
   useEffect(() => {
-    const currentFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
-    console.log(`current filter values of ${filterProperty.identifier}: `, JSON.stringify(currentFilterValues, null, 2));
+    const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
+    console.log(`current filter values of ${filterKey}: `, JSON.stringify(currentFilterValues, null, 2));
     const synced = options.filter((option) => currentFilterValues.includes(option.value));
-    console.log(`synced Options of ${filterProperty.identifier}: `, JSON.stringify(synced, null, 2));
+    console.log(`synced Options of ${filterKey}: `, JSON.stringify(synced, null, 2));
     setSelectedOptions(synced);
-    console.log(`selected Options of ${filterProperty.identifier}:`, JSON.stringify(selectedOptions, null, 2));
-    const newFilterValues = filters[filterProperty.identifier] as FilterValue[] || [] as FilterValue[];
-    console.log(`new filter values of ${filterProperty.identifier}`, JSON.stringify(newFilterValues, null, 2));
+    console.log(`selected Options of ${filterKey}:`, JSON.stringify(selectedOptions, null, 2));
+    const newFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
+    console.log(`new filter values of ${filterKey}`, JSON.stringify(newFilterValues, null, 2));
   }, [filters]);
 
   const validateForm = (
@@ -92,11 +119,10 @@ export function Multiselect({
   // };
 
   const isOptionSelected = (option: MultiSelectOption): boolean => {
-    const fieldId = filterProperty.identifier;
     if (selectedOptions.some((item) => item.value === `${option.value}`)) {
       return true;
-    } else if (filters[fieldId]) {
-      return filters[fieldId].some((item) => item === `${option.value}`);
+    } else if (filters[filterKey]) {
+      return filters[filterKey].some((item) => item === `${option.value}`);
     }
     return false;
   };
