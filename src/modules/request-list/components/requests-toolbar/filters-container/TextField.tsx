@@ -91,6 +91,25 @@ export const TextField = ({
         errors={errors}
       />
       <Gap />
+      {selectedFilter === "anyValue" && (
+        <Field>
+          <Field.Label>
+            {t(
+              "guide-requests-app.filters-modal.enter-field-value",
+              "Enter {{field_name}}",
+              {
+                field_name: label,
+              }
+            )}
+          </Field.Label>
+          <Input
+            value={value}
+            onChange={handleChange}
+            validation={errors["textValue"] ? "error" : undefined}
+          />
+          <FieldError errors={errors} field="textValue" />
+        </Field>
+      )}
       {selectedFilter === "exactMatch" && (
         <Field>
           <Field.Label>

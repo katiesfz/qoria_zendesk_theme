@@ -1,10 +1,11 @@
-import {
-  Dropdown,
-  Item,
-  Field,
-  Select,
-  Label,
-} from "@zendeskgarden/react-dropdowns.legacy";
+//import {
+//  Dropdown,
+//  Item,
+//  Field,
+//  Select,
+//  Label,
+//} from "@zendeskgarden/react-dropdowns.legacy";
+import { Field, Select } from '@zendeskgarden/react-forms';
 import styled from "styled-components";
 import { useFilterTranslations } from "../i18n";
 import { FieldError } from "./FieldError";
@@ -35,20 +36,18 @@ export const FilterTypeDropdown = (
   const { filterTypeDropdownI18N } = useFilterTranslations();
 
   return (
-    <Dropdown onSelect={onFilterTypeSelect} selectedItem={selectedFilter}>
+    <>
       <Field>
-        <Label>
-          {t("guide-requests-app.filter-modal.filterTypeLabel", "Filter type")}
-        </Label>
-        <StyledSelect validation={errors["filterType"] ? "error" : undefined}>
-          {selectedFilter ? filterTypeDropdownI18N[selectedFilter] : ""}
-        </StyledSelect>
-        <FieldError errors={errors} field="filterType" />
+        <Field.Label hidden>{t("guide-requests-app.filter-modal.filterTypeLabel", "Filter type")}</Field.Label>
+        <Select validation={errors["filterType"] ? "error" : undefined} onChange={(e) => onFilterTypeSelect(e.currentTarget.value as FilterTypeValue)} value={selectedFilter}>
+          <option value="anyValue">{filterTypeDropdownI18N.anyValue}</option>
+          <option value="exactMatch">{filterTypeDropdownI18N.exactMatch}</option>
+        </Select>
       </Field>
-      <ModalMenu>
-        <Item value="anyValue">{filterTypeDropdownI18N.anyValue}</Item>
-        <Item value="exactMatch">{filterTypeDropdownI18N.exactMatch}</Item>
-      </ModalMenu>
-    </Dropdown>
+
+      <Field>
+        <FieldError errors={errors} field="filterType"/>
+      </Field>
+    </>
   );
 };
