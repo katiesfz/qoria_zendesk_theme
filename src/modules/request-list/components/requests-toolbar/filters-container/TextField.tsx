@@ -27,26 +27,13 @@ export const TextField = ({
 }: TextFieldProps): JSX.Element => {
   const { t } = useTranslation();
   const [value, setValue] = useState<string>("");
-  const [selectedFilter, setSelectedFilter] = useState<
-    undefined | FilterTypeValue
-  >();
+  const [selectedFilter, setSelectedFilter] = useState<FilterTypeValue>("anyValue");
 
   const validateForm = (
-    filterType: FilterTypeValue | undefined,
+    filterType: FilterTypeValue,
     value: string
   ): FormState<FormFieldKey> => {
     switch (filterType) {
-      case undefined: {
-        return {
-          state: "invalid",
-          errors: {
-            filterType: t(
-              "guide-requests-app.filters-modal.no-filter-type-error",
-              "Select a filter type"
-            ),
-          },
-        };
-      }
       case "anyValue": {
         return { state: "valid", values: [":*"] };
       }
@@ -74,7 +61,6 @@ export const TextField = ({
 
   const handleFilterTypeSelect = (filterType: FilterTypeValue) => {
     setSelectedFilter(filterType);
-    onSelect(validateForm(filterType, value));
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -90,45 +76,23 @@ export const TextField = ({
         selectedFilter={selectedFilter}
         errors={errors}
       />
-      <Gap />
-      {selectedFilter === "anyValue" && (
-        <Field>
-          <Field.Label>
-            {t(
-              "guide-requests-app.filters-modal.enter-field-value",
-              "Enter {{field_name}}",
-              {
-                field_name: label,
-              }
-            )}
-          </Field.Label>
-          <Input
-            value={value}
-            onChange={handleChange}
-            validation={errors["textValue"] ? "error" : undefined}
-          />
-          <FieldError errors={errors} field="textValue" />
-        </Field>
-      )}
-      {selectedFilter === "exactMatch" && (
-        <Field>
-          <Field.Label>
-            {t(
-              "guide-requests-app.filters-modal.enter-field-value",
-              "Enter {{field_name}}",
-              {
-                field_name: label,
-              }
-            )}
-          </Field.Label>
-          <Input
-            value={value}
-            onChange={handleChange}
-            validation={errors["textValue"] ? "error" : undefined}
-          />
-          <FieldError errors={errors} field="textValue" />
-        </Field>
-      )}
+      <Field>
+        <Field.Label>
+          {t(
+            "guide-requests-app.filters-modal.enter-field-value",
+            "Enter {{field_name}}",
+            {
+              field_name: label,
+            }
+          )}
+        </Field.Label>
+        <Input
+          value={value}
+          onChange={handleChange}
+          validation={errors["textValue"] ? "error" : undefined}
+        />
+        <FieldError errors={errors} field="textValue" />
+      </Field>
     </>
   );
 };

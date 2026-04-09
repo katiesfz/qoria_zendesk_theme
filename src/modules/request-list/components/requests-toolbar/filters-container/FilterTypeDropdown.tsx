@@ -19,7 +19,7 @@ export type FilterTypeKey = "filterType";
 
 interface FilterTypeDropdownProps {
   onFilterTypeSelect: (value: FilterTypeValue) => void;
-  selectedFilter: undefined | FilterTypeValue;
+  selectedFilter: FilterTypeValue;
   errors: FormErrors<FilterTypeKey>;
 }
 
@@ -39,7 +39,7 @@ export const FilterTypeDropdown = (
     <>
       <Field>
         <Field.Label hidden>{t("guide-requests-app.filter-modal.filterTypeLabel", "Filter type")}</Field.Label>
-        <Select validation={errors["filterType"] ? "error" : undefined} onChange={(e) => onFilterTypeSelect(e.currentTarget.value as FilterTypeValue)} value={selectedFilter}>
+        <Select onChange={(e) => onFilterTypeSelect(e.currentTarget.value as FilterTypeValue)} value={selectedFilter}>
           <option value="anyValue">{filterTypeDropdownI18N.anyValue}</option>
           <option value="exactMatch">{filterTypeDropdownI18N.exactMatch}</option>
         </Select>
