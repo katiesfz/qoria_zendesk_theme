@@ -7,6 +7,7 @@ import { FilterTypeDropdown } from "./FilterTypeDropdown";
 import type { FormErrors, FormState } from "./FormState";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { input } from "@testing-library/user-event/dist/cjs/event/input.js";
 
 type FormFieldKey = FilterTypeKey | "textValue";
 
@@ -65,6 +66,7 @@ export const TextField = ({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
+    console.log(inputValue);
     setValue(inputValue);
     onSelect(validateForm(selectedFilter, inputValue));
   };
