@@ -8,6 +8,7 @@ import type { FormErrors, FormState } from "./FormState";
 import { useTranslation } from "react-i18next";
 import type { FilterProperty } from "./FilterPropertyField";
 import { Grid } from '@zendeskgarden/react-grid';
+import {isSystemFieldType} from "./SystemFieldCheck";
 
 
 export interface MultiSelectOption {
@@ -43,24 +44,6 @@ export function Multiselect({
     []
   );
 
-  const systemType = [
-    "subject",
-    "description",
-    "status",
-    "custom_status",
-    "type",
-    "priority",
-    "basic_priority",
-    "assignee",
-    "group",
-    "tickettype",
-    "requester",
-  ];
-
-  function isSystemFieldType(type: string): boolean {
-    return systemType.includes(type);
-  }
-
   const filterKey =
     isSystemFieldType(filterProperty.identifier) ||
     filterProperty.identifier === "created_at" ||
@@ -72,14 +55,15 @@ export function Multiselect({
 
   useEffect(() => {
     const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
-    console.log(`current filter values of ${filterKey}: `, JSON.stringify(currentFilterValues, null, 2));
+    //console.log(`current filter values of ${filterKey}: `, JSON.stringify(currentFilterValues, null, 2));
     const synced = options.filter((option) => currentFilterValues.includes(option.value));
-    console.log(`synced Options of ${filterKey}: `, JSON.stringify(synced, null, 2));
+    //console.log(`synced Options of ${filterKey}: `, JSON.stringify(synced, null, 2));
     setSelectedOptions(synced);
-    console.log(`selected Options of ${filterKey}:`, JSON.stringify(selectedOptions, null, 2));
-    const newFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
-    console.log(`new filter values of ${filterKey}`, JSON.stringify(newFilterValues, null, 2));
-  }, [filters]);
+    //console.log(`selected Options of ${filterKey}:`, JSON.stringify(selectedOptions, null, 2));
+    // const newFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
+    //console.log(`new filter values of ${filterKey}`, JSON.stringify(newFilterValues, null, 2));
+  }, [filters[filterKey]]);
+
 
   const validateForm = (
     selectedOptions: MultiSelectOption[]

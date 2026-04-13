@@ -166,6 +166,8 @@ export function FilterValuesList({
       return (
         <NumberFilter
           label={title_in_portal}
+          filters={filters}
+          filterProperty={filterProperty}
           onSelect={onSelect}
           errors={errors}
           type={type}

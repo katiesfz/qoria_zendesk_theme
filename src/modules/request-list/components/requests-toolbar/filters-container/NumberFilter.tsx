@@ -11,10 +11,14 @@ import styled from "styled-components";
 import { useFilterTranslations } from "../i18n";
 import { FieldError } from "./FieldError";
 import type { FormErrors, FormState } from "./FormState";
+import type { FilterValuesMap } from "../../../data-types/FilterValue";
+import type { FilterProperty } from "./FilterPropertyField";
 import { useTranslation } from "react-i18next";
 import { ModalMenu } from "../../modal-menu/ModalMenu";
 import { FilterTypeDropdown } from "./FilterTypeDropdown";
 import { Menu, Item, IMenuProps } from '@zendeskgarden/react-dropdowns';
+import { FilterValue } from "../../../data-types";
+import {isSystemFieldType} from "./SystemFieldCheck";
 
 type FormFieldKey = "filterType" | "minValue" | "maxValue" | "exactValue";
 
@@ -43,11 +47,12 @@ const filterOptions: NumberFilter[] = [{
   }, {
     type: "exactMatch"
   }];
-
-
+  
 
 interface NumberFilterProps {
   label: string;
+  filters: FilterValuesMap;
+  filterProperty: FilterProperty;
   onSelect: (state: FormState<FormFieldKey>) => void;
   errors: FormErrors<FormFieldKey>;
   type: "decimal" | "integer";
@@ -56,6 +61,8 @@ interface NumberFilterProps {
 
 export function NumberFilter({
   label,
+  filters,
+  filterProperty,
   onSelect,
   errors,
   type,
@@ -189,9 +196,29 @@ export function NumberFilter({
     }
   };
 
-  //useEffect(() => {
-  //  onSelect(validateForm({ type: "anyValue" }, type));
-  //}, []);
+  const filterKey =
+    isSystemFieldType(filterProperty.identifier) ||
+    filterProperty.identifier === "created_at" ||
+    filterProperty.identifier === "updated_at" ||
+    filterProperty.identifier === "organization" ||
+    filterProperty.identifier === "custom_status_id"
+      ? filterProperty.identifier
+      : `custom_field_${filterProperty.identifier}`;
+
+  useEffect(() => {
+    const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
+    if (currentFilterValues.includes(":*")) {
+      setFilter({ type: "anyValue" });
+    } else if (currentFilterValues.some(value => value.startsWith(">=") || value.startsWith("<="))) {
+      const minValue = currentFilterValues.find(value => value.startsWith(">="))?.substring(2);
+      const maxValue = currentFilterValues.find(value => value.startsWith("<="))?.substring(2);
+      setFilter({ type: "range", minValue, maxValue });
+    } else if (currentFilterValues.length > 0) {
+      const exactValue = currentFilterValues.find(value => value.startsWith(":"))?.substring(1);
+      setFilter({ type: "exactMatch", value: exactValue });
+    }
+  }, [filters[filterKey]]);
+  
 
   const handleFilterTypeSelect = (value: NumberFilter["type"]) => {
     let newFilter: NumberFilter;
@@ -244,7 +271,9 @@ export function NumberFilter({
   const { filterTypeDropdownI18N } = useFilterTranslations();
 
 
-  function filterFields(filter: NumberFilter): JSX.Element {
+  function filterFields(
+    filter: NumberFilter,
+  ) {
     if (filter.type === "range") {
       return (
         <Grid.Row>
@@ -296,7 +325,7 @@ export function NumberFilter({
           </Field.Label>
           <Input
             type="number"
-            value={filter.value}
+            value={filter.value ? filter.value : ""}
             onChange={(e) => {
               handleExactValueChanged(e.target.value, filter);
             }}
@@ -319,9 +348,9 @@ export function NumberFilter({
           </Field.Label>
           <Input
             type="number"
-            value={filter.value}
+            value={""}
             onChange={(e) => {
-              handleExactValueChanged(e.target.value, filter);
+              handleExactValueChanged(e.target.value, {type: "exactMatch", value: e.target.value});
             }}
             validation={errors.exactValue ? "error" : undefined}
           />
@@ -352,26 +381,7 @@ export function NumberFilter({
           )}
       </Fieldset>
 
-      {/*
-      <Field>
-        <Field.Label>
-          {t(
-            "guide-requests-app.filters-modal.enter-field-value",
-            "Enter {{field_name}}",
-            {
-              field_name: label,
-            }
-          )}
-        </Field.Label>
-        <Input
-          value={value}
-          onChange={handleChange}
-          validation={errors["textValue"] ? "error" : undefined}
-        />
-        <FieldError errors={errors} field="textValue" />
-      </Field>
-      */}
-
+      {filterFields(filter)}
 
     </>
   );
