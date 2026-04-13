@@ -22,30 +22,41 @@ import {isSystemFieldType} from "./SystemFieldCheck";
 
 type FormFieldKey = "filterType" | "minValue" | "maxValue" | "exactValue";
 
-interface AnyValueNumberFilter {
-  type: "anyValue"
-}
+//interface AnyValueNumberFilter {
+//  type: "anyValue"
+//}
 
-interface RangeNumberFilter {
-  type: "range";
-  minValue?: string;
-  maxValue?: string
-}
+//interface RangeNumberFilter {
+//  type: "range";
+//  minValue: string;
+//  maxValue: string
+//}
 
 interface ExactMatchNumberFilter {
   type: "exactMatch";
-  value?: string
+  value: string
 }
 
-type NumberFilter =
-  | AnyValueNumberFilter
-  | ExactMatchNumberFilter
-  | RangeNumberFilter;
+//type NumberFilter =
+////  | AnyValueNumberFilter
+//  | ExactMatchNumberFilter
+//  | RangeNumberFilter;
+
+
+  type NumberFilter = {
+    type: "range" | "exactMatch";
+    minValue?: string;
+    maxValue?: string;
+    value?: string;
+  }
 
 const filterOptions: NumberFilter[] = [{
-    type: "range"
+    type: "range",
+    minValue: "",
+    maxValue: ""
   }, {
-    type: "exactMatch"
+    type: "exactMatch",
+    value: ""
   }];
   
 
@@ -69,7 +80,7 @@ export function NumberFilter({
 }: NumberFilterProps): JSX.Element {
   const { t } = useTranslation();
 
-  const [filter, setFilter] = useState<NumberFilter>({ type: "anyValue" });
+  const [filter, setFilter] = useState<NumberFilter>({ type: "exactMatch", value: "" });
 
   const validateForm = (
     filter: NumberFilter,
@@ -77,11 +88,8 @@ export function NumberFilter({
   ): FormState<FormFieldKey> => {
     switch (filter.type) {
       case "exactMatch": {
-        let value: string | undefined = undefined;
 
-        if (filter.value) {
-          value = filter.value.trim();
-        }
+        let value:string = filter.value ? filter.value.trim() : "";
         
         if (type === "integer" && value && !Number.isInteger(Number(value))) {
           return {
@@ -113,30 +121,6 @@ export function NumberFilter({
         if (filter.maxValue){
           maxValue = parseFloat(filter.maxValue);
         }
-
-        //if (Number.isNaN(minValue)) {
-        //  return {
-        //    state: "invalid",
-        //    errors: {
-        //      minValue: t(
-        //        "guide-requests-app.filters-modal.no-text-value-error",
-        //        "Insert a value"
-        //      ),
-        //    },
-        //  };
-        //}
-
-        //if (Number.isNaN(maxValue)) {
-        //  return {
-        //    state: "invalid",
-        //    errors: {
-        //      maxValue: t(
-        //        "guide-requests-app.filters-modal.no-text-value-error",
-        //        "Insert a value"
-        //      ),
-        //    },
-        //  };
-        //}
 
         if (type === "integer" && minValue && !Number.isInteger(minValue)) {
           return {
@@ -207,43 +191,70 @@ export function NumberFilter({
 
   useEffect(() => {
     const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
-    if (currentFilterValues.includes(":*")) {
-      setFilter({ type: "anyValue" });
-    } else if (currentFilterValues.some(value => value.startsWith(">=") || value.startsWith("<="))) {
-      const minValue = currentFilterValues.find(value => value.startsWith(">="))?.substring(2);
-      const maxValue = currentFilterValues.find(value => value.startsWith("<="))?.substring(2);
-      setFilter({ type: "range", minValue, maxValue });
+    if (currentFilterValues.some(value => value.startsWith(">=") || value.startsWith("<="))) {
+      const minValue = currentFilterValues.find(value => value.startsWith(">="))?.substring(2) || "";
+      const maxValue = currentFilterValues.find(value => value.startsWith("<="))?.substring(2) || "";
+      setFilter({ ...filter, type: "range", minValue: minValue || "", maxValue: maxValue || "" });
+    } else if (currentFilterValues[0] == ":*") {
+      setFilter({ ...filter, type: "exactMatch", value: "" });
     } else if (currentFilterValues.length > 0) {
-      const exactValue = currentFilterValues.find(value => value.startsWith(":"))?.substring(1);
-      setFilter({ type: "exactMatch", value: exactValue });
+      const exactValue = currentFilterValues.find(value => value.startsWith(":"))?.substring(1) || "";
+      setFilter({ ...filter, type: "exactMatch", value: exactValue });
     }
   }, [filters[filterKey]]);
   
 
-  const handleFilterTypeSelect = (value: NumberFilter["type"]) => {
+  const handleFilterTypeSelect = (filterType: NumberFilter["type"]) => {
     let newFilter: NumberFilter;
-    switch (value) {
+
+    switch (filterType) {
       case "range": {
-        newFilter = { type: "range", minValue: "", maxValue: "" };
+        newFilter = { ...filter, type: filterType };
+        if (!newFilter.minValue && !newFilter.maxValue) {
+          setFilter(newFilter);
+          return;
+        }
         break;
       }
       case "exactMatch": {
-        newFilter = { type: "exactMatch", value: "" };
+        newFilter = { ...filter, type: filterType };
+        if (!filter.value) {
+          setFilter(newFilter);
+          return;
+        }
         break;
       }
       default: {
-        newFilter = { type: "anyValue" };
+        newFilter = { type: "exactMatch", value: "" };
         break;
       }
     }
 
-    setFilter(newFilter);
+    //setFilter(newFilter);
     onSelect(validateForm(newFilter, type));
   };
 
+ // const handleMinValueChanged = (
+ //   newValue: string,
+ //   filter: RangeNumberFilter
+ // ) => {
+ //   const newFilter = { ...filter, minValue: newValue };
+ //   setFilter(newFilter);
+ //   onSelect(validateForm(newFilter, type));
+ // };
+//
+ // const handleMaxValueChanged = (
+ //   newValue: string,
+ //   filter: RangeNumberFilter
+ // ) => {
+ //   const newFilter = { ...filter, maxValue: newValue };
+ //   setFilter(newFilter);
+ //   onSelect(validateForm(newFilter, type));
+ // };
+
   const handleMinValueChanged = (
     newValue: string,
-    filter: RangeNumberFilter
+    filter: NumberFilter
   ) => {
     const newFilter = { ...filter, minValue: newValue };
     setFilter(newFilter);
@@ -252,7 +263,7 @@ export function NumberFilter({
 
   const handleMaxValueChanged = (
     newValue: string,
-    filter: RangeNumberFilter
+    filter: NumberFilter
   ) => {
     const newFilter = { ...filter, maxValue: newValue };
     setFilter(newFilter);
@@ -261,11 +272,11 @@ export function NumberFilter({
 
   const handleExactValueChanged = (
     newValue: string,
-    filter: ExactMatchNumberFilter
+    filter: NumberFilter
   ) => {
-    const newFilter = { ...filter, value: newValue };
-    setFilter(newFilter);
-    onSelect(validateForm(newFilter, type));
+      const newFilter = { ...filter, value: newValue };
+      setFilter(newFilter);
+      onSelect(validateForm(newFilter, type));
   };
 
   const { filterTypeDropdownI18N } = useFilterTranslations();
@@ -311,53 +322,29 @@ export function NumberFilter({
           </Grid.Col>
         </Grid.Row>
       );
-    } else if (filter.type === "exactMatch") {
-      return (
-        <Field>
-          <Field.Label>
-            {t(
-              "guide-requests-app.filters-modal.enter-field-value",
-              "Enter {{field_name}}",
-              {
-                field_name: label,
-              }
-            )}
-          </Field.Label>
-          <Input
-            type="number"
-            value={filter.value ? filter.value : ""}
-            onChange={(e) => {
-              handleExactValueChanged(e.target.value, filter);
-            }}
-            validation={errors.exactValue ? "error" : undefined}
-          />
-          <FieldError errors={errors} field="exactValue" />
-        </Field>
-      );
-    } else {
-      return (
-        <Field>
-          <Field.Label>
-            {t(
-              "guide-requests-app.filters-modal.enter-field-value",
-              "Enter {{field_name}}",
-              {
-                field_name: label,
-              }
-            )}
-          </Field.Label>
-          <Input
-            type="number"
-            value={""}
-            onChange={(e) => {
-              handleExactValueChanged(e.target.value, {type: "exactMatch", value: e.target.value});
-            }}
-            validation={errors.exactValue ? "error" : undefined}
-          />
-          <FieldError errors={errors} field="exactValue" />
-        </Field>
-      );
     }
+    return (
+      <Field>
+        <Field.Label>
+          {t(
+            "guide-requests-app.filters-modal.enter-field-value",
+            "Enter {{field_name}}",
+            {
+              field_name: label,
+            }
+          )}
+        </Field.Label>
+        <Input
+          type="number"
+          value={""}
+          onChange={(e) => {
+            handleExactValueChanged(e.target.value, {type: "exactMatch", value: e.target.value});
+          }}
+          validation={errors.exactValue ? "error" : undefined}
+        />
+        <FieldError errors={errors} field="exactValue" />
+      </Field>
+    );
   }
 
   return (
