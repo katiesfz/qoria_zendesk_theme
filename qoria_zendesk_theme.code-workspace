@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveSassCompile.settings.compileOnWatch": true,
+		"python.terminal.useEnvFile": false
+	}
+}

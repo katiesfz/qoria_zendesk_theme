@@ -1,11 +1,10 @@
 import {
   Dropdown,
-  Item,
   Select,
   Field as DropdownField,
   Label as DropdownLabel,
 } from "@zendeskgarden/react-dropdowns.legacy";
-import { Field, Input } from "@zendeskgarden/react-forms";
+import { Field, Input, Radio, Fieldset } from "@zendeskgarden/react-forms";
 import { Grid } from "@zendeskgarden/react-grid";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -14,34 +13,38 @@ import { FieldError } from "./FieldError";
 import type { FormErrors, FormState } from "./FormState";
 import { useTranslation } from "react-i18next";
 import { ModalMenu } from "../../modal-menu/ModalMenu";
+import { FilterTypeDropdown } from "./FilterTypeDropdown";
+import { Menu, Item, IMenuProps } from '@zendeskgarden/react-dropdowns';
 
 type FormFieldKey = "filterType" | "minValue" | "maxValue" | "exactValue";
 
 interface AnyValueNumberFilter {
-  type: "anyValue";
+  type: "anyValue"
 }
 
 interface RangeNumberFilter {
   type: "range";
-  minValue: string;
-  maxValue: string;
+  minValue?: string;
+  maxValue?: string
 }
 
 interface ExactMatchNumberFilter {
   type: "exactMatch";
-  value: string;
+  value?: string
 }
 
 type NumberFilter =
   | AnyValueNumberFilter
-  | RangeNumberFilter
-  | ExactMatchNumberFilter;
+  | ExactMatchNumberFilter
+  | RangeNumberFilter;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${(p) => p.theme.space.sm};
-`;
+const filterOptions: NumberFilter[] = [{
+    type: "range"
+  }, {
+    type: "exactMatch"
+  }];
+
+
 
 interface NumberFilterProps {
   label: string;
@@ -49,6 +52,7 @@ interface NumberFilterProps {
   errors: FormErrors<FormFieldKey>;
   type: "decimal" | "integer";
 }
+
 
 export function NumberFilter({
   label,
@@ -58,59 +62,76 @@ export function NumberFilter({
 }: NumberFilterProps): JSX.Element {
   const { t } = useTranslation();
 
-  const [filter, setFilter] = useState<NumberFilter | null>(null);
+  const [filter, setFilter] = useState<NumberFilter>({ type: "anyValue" });
 
   const validateForm = (
-    filter: NumberFilter | null,
+    filter: NumberFilter,
     type: "decimal" | "integer"
   ): FormState<FormFieldKey> => {
-    if (filter === null) {
-      return {
-        state: "invalid",
-        errors: {
-          filterType: t(
-            "guide-requests-app.filters-modal.no-filter-type-error",
-            "Select a filter type"
-          ),
-        },
-      };
-    }
     switch (filter.type) {
-      case "anyValue": {
-        return {
-          state: "valid",
-          values: [":*"],
-        };
+      case "exactMatch": {
+        let value: string | undefined = undefined;
+
+        if (filter.value) {
+          value = filter.value.trim();
+        }
+        
+        if (type === "integer" && value && !Number.isInteger(Number(value))) {
+          return {
+            state: "invalid",
+            errors: {
+              exactValue: t(
+                "guide-requests-app.filter-modal.integer-value-error",
+                "Insert an integer value"
+              ),
+            },
+          };
+        }
+        
+        if (value) {
+          return { state: "valid", values: [`:${value}`] };
+        }
+
+        return { state: "valid", values: [`:*`] };
       }
+      
       case "range": {
-        const minValue = parseFloat(filter.minValue);
-        const maxValue = parseFloat(filter.maxValue);
+        let minValue: number | undefined = undefined;
+        let maxValue: number | undefined = undefined;
 
-        if (Number.isNaN(minValue)) {
-          return {
-            state: "invalid",
-            errors: {
-              minValue: t(
-                "guide-requests-app.filters-modal.no-text-value-error",
-                "Insert a value"
-              ),
-            },
-          };
+        if (filter.minValue){
+          minValue = parseFloat(filter.minValue);
         }
 
-        if (Number.isNaN(maxValue)) {
-          return {
-            state: "invalid",
-            errors: {
-              maxValue: t(
-                "guide-requests-app.filters-modal.no-text-value-error",
-                "Insert a value"
-              ),
-            },
-          };
+        if (filter.maxValue){
+          maxValue = parseFloat(filter.maxValue);
         }
 
-        if (type === "integer" && !Number.isInteger(minValue)) {
+        //if (Number.isNaN(minValue)) {
+        //  return {
+        //    state: "invalid",
+        //    errors: {
+        //      minValue: t(
+        //        "guide-requests-app.filters-modal.no-text-value-error",
+        //        "Insert a value"
+        //      ),
+        //    },
+        //  };
+        //}
+
+        //if (Number.isNaN(maxValue)) {
+        //  return {
+        //    state: "invalid",
+        //    errors: {
+        //      maxValue: t(
+        //        "guide-requests-app.filters-modal.no-text-value-error",
+        //        "Insert a value"
+        //      ),
+        //    },
+        //  };
+        //}
+
+        if (type === "integer" && minValue && !Number.isInteger(minValue)) {
           return {
             state: "invalid",
             errors: {
@@ -122,7 +143,7 @@ export function NumberFilter({
           };
         }
 
-        if (type === "integer" && !Number.isInteger(maxValue)) {
+        if (type === "integer" && maxValue && !Number.isInteger(maxValue)) {
           return {
             state: "invalid",
             errors: {
@@ -134,7 +155,7 @@ export function NumberFilter({
           };
         }
 
-        if (minValue >= maxValue) {
+        if (minValue && maxValue && (minValue >= maxValue)) {
           return {
             state: "invalid",
             errors: {
@@ -146,55 +167,45 @@ export function NumberFilter({
           };
         }
 
-        return { state: "valid", values: [`>=${minValue}`, `<=${maxValue}`] };
-      }
-      case "exactMatch": {
-        const { value } = filter;
-
-        if (value === "") {
-          return {
-            state: "invalid",
-            errors: {
-              exactValue: t(
-                "guide-requests-app.filters-modal.no-text-value-error",
-                "Insert a value"
-              ),
-            },
-          };
-        } else if (type === "integer" && !Number.isInteger(Number(value))) {
-          return {
-            state: "invalid",
-            errors: {
-              exactValue: t(
-                "guide-requests-app.filter-modal.integer-value-error",
-                "Insert an integer value"
-              ),
-            },
-          };
-        } else {
-          return { state: "valid", values: [`:${value}`] };
+        if (minValue && maxValue) {
+          return { state: "valid", values: [`>=${minValue}`, `<=${maxValue}`] };
         }
+
+        if (minValue) {
+          return { state: "valid", values: [`>=${minValue}`] };
+        }
+        
+        if (maxValue) {
+          return { state: "valid", values: [`<=${maxValue}`] };
+        }
+
+      }
+      default: {
+        return {
+          state: "valid",
+          values: [":*"],
+        };
       }
     }
   };
 
-  useEffect(() => {
-    onSelect(validateForm(null, type));
-  }, []);
+  //useEffect(() => {
+  //  onSelect(validateForm({ type: "anyValue" }, type));
+  //}, []);
 
   const handleFilterTypeSelect = (value: NumberFilter["type"]) => {
     let newFilter: NumberFilter;
     switch (value) {
-      case "anyValue": {
-        newFilter = { type: "anyValue" };
-        break;
-      }
       case "range": {
         newFilter = { type: "range", minValue: "", maxValue: "" };
         break;
       }
       case "exactMatch": {
         newFilter = { type: "exactMatch", value: "" };
+        break;
+      }
+      default: {
+        newFilter = { type: "anyValue" };
         break;
       }
     }
@@ -232,34 +243,13 @@ export function NumberFilter({
 
   const { filterTypeDropdownI18N } = useFilterTranslations();
 
-  return (
-    <Container>
-      <Dropdown selectedItem={filter?.type} onSelect={handleFilterTypeSelect}>
-        <DropdownField>
-          <DropdownLabel>
-            {t(
-              "guide-requests-app.filter-modal.filterTypeLabel",
-              "Filter type"
-            )}
-          </DropdownLabel>
-          <Select validation={errors.filterType ? "error" : undefined}>
-            {filter ? filterTypeDropdownI18N[filter.type] : ""}
-          </Select>
-          <FieldError errors={errors} field="filterType" />
-        </DropdownField>
-        <ModalMenu>
-          <Item value="anyValue">{filterTypeDropdownI18N.anyValue}</Item>
-          <Item value="range">{filterTypeDropdownI18N.range}</Item>
-          <Item value="exactMatch">{filterTypeDropdownI18N.exactMatch}</Item>
-        </ModalMenu>
-      </Dropdown>
-      {filter?.type === "range" && (
+
+  function filterFields(filter: NumberFilter): JSX.Element {
+    if (filter.type === "range") {
+      return (
         <Grid.Row>
           <Grid.Col>
             <Field>
-              <Field.Label>
-                {t("guide-requests-app.filter-modal.minValue", "Min value")}
-              </Field.Label>
               <Input
                 type="number"
                 value={filter.minValue}
@@ -268,14 +258,14 @@ export function NumberFilter({
                 }}
                 validation={errors.minValue ? "error" : undefined}
               />
+              <Field.Label>
+                {t("guide-requests-app.filter-modal.minValue", "Min value")}
+              </Field.Label>
               <FieldError errors={errors} field="minValue" />
             </Field>
           </Grid.Col>
           <Grid.Col>
             <Field>
-              <Field.Label>
-                {t("guide-requests-app.filter-modal.maxValue", "Max value")}
-              </Field.Label>
               <Input
                 type="number"
                 value={filter.maxValue}
@@ -285,11 +275,15 @@ export function NumberFilter({
                 validation={errors.maxValue ? "error" : undefined}
               />
               <FieldError errors={errors} field="maxValue" />
+              <Field.Label>
+                {t("guide-requests-app.filter-modal.maxValue", "Max value")}
+              </Field.Label>
             </Field>
           </Grid.Col>
         </Grid.Row>
-      )}
-      {filter?.type === "exactMatch" && (
+      );
+    } else if (filter.type === "exactMatch") {
+      return (
         <Field>
           <Field.Label>
             {t(
@@ -310,7 +304,75 @@ export function NumberFilter({
           />
           <FieldError errors={errors} field="exactValue" />
         </Field>
-      )}
-    </Container>
+      );
+    } else {
+      return (
+        <Field>
+          <Field.Label>
+            {t(
+              "guide-requests-app.filters-modal.enter-field-value",
+              "Enter {{field_name}}",
+              {
+                field_name: label,
+              }
+            )}
+          </Field.Label>
+          <Input
+            type="number"
+            value={filter.value}
+            onChange={(e) => {
+              handleExactValueChanged(e.target.value, filter);
+            }}
+            validation={errors.exactValue ? "error" : undefined}
+          />
+          <FieldError errors={errors} field="exactValue" />
+        </Field>
+      );
+    }
+  }
+
+  return (
+    <>
+      <Fieldset>
+        <Fieldset.Legend hidden>{label}</Fieldset.Legend>
+        
+          {filterOptions.map(filterType =>
+            <Field>
+              <Radio
+                name={label}
+                value={filterType.type}
+                checked={filter.type === filterType.type}
+                onChange={event => {
+                  handleFilterTypeSelect(event.target.value as NumberFilter["type"]);
+                }}
+              >
+                <Field.Label>{filterTypeDropdownI18N[filterType.type]}</Field.Label>
+              </Radio>
+            </Field>
+          )}
+      </Fieldset>
+
+      {/*
+      <Field>
+        <Field.Label>
+          {t(
+            "guide-requests-app.filters-modal.enter-field-value",
+            "Enter {{field_name}}",
+            {
+              field_name: label,
+            }
+          )}
+        </Field.Label>
+        <Input
+          value={value}
+          onChange={handleChange}
+          validation={errors["textValue"] ? "error" : undefined}
+        />
+        <FieldError errors={errors} field="textValue" />
+      </Field>
+      */}
+
+
+    </>
   );
 }

@@ -51,24 +51,84 @@ export function FilterPropertyField({
 
   const { t } = useTranslation();
 
-  return (
-    <>
-      <Accordion.Header>
-        <Accordion.Label>
-          {filterProperty.label}
-        </Accordion.Label>
-      </Accordion.Header>
-      <Accordion.Panel>
+  if (
+    filterProperty.identifier === "created_at" ||
+    filterProperty.identifier === "updated_at" ||
+    filterProperty.identifier === "status" ||
+    filterProperty.identifier === "custom_status_id" ||
+    filterProperty.identifier === "organization"
+  ) {
+    return (
+      <>
+        <Accordion.Header>
+          <Accordion.Label>
+            {filterProperty.label}
+          </Accordion.Label>
+        </Accordion.Header>
+        <Accordion.Panel>
+          <FilterValuesList
+          filters={filters}
+          filterProperty={filterProperty}
+          organizations={organizations}
+          customStatusOptions={customStatusOptions}
+          onSelect={(state) => onValueChanged(filterProperty, state)}
+          errors={errors}
+          ticketField={ticketField}
+        />
+        </Accordion.Panel>
+      </>
+    );
+  }
+  if (ticketField == null) {
+    return <></>;
+  }
+  const { type, title_in_portal } = ticketField;
+
+  switch (type) {
+    case "textarea":
+    case "text":
+    case "regexp": 
+    case "integer":
+    case "decimal":
+    case "checkbox":
+    case "partialcreditcard": {
+      return (
         <FilterValuesList
-        filters={filters}
-        filterProperty={filterProperty}
-        organizations={organizations}
-        customStatusOptions={customStatusOptions}
-        onSelect={(state) => onValueChanged(filterProperty, state)}
-        errors={errors}
-        ticketField={ticketField}
-      />
-      </Accordion.Panel>
-    </>
-  );
+          filters={filters}
+          filterProperty={filterProperty}
+          organizations={organizations}
+          customStatusOptions={customStatusOptions}
+          onSelect={(state) => onValueChanged(filterProperty, state)}
+          errors={errors}
+          ticketField={ticketField}
+        />
+      );
+    }
+    case "tagger":
+    case "multiselect": 
+    case "date": {
+      return (
+        <>
+          <Accordion.Header>
+            <Accordion.Label>
+              {filterProperty.label}
+            </Accordion.Label>
+          </Accordion.Header>
+          <Accordion.Panel>
+            <FilterValuesList
+            filters={filters}
+            filterProperty={filterProperty}
+            organizations={organizations}
+            customStatusOptions={customStatusOptions}
+            onSelect={(state) => onValueChanged(filterProperty, state)}
+            errors={errors}
+            ticketField={ticketField}
+          />
+          </Accordion.Panel>
+        </>
+      );
+    }
+    default:
+      return <></>;
+  }
 }

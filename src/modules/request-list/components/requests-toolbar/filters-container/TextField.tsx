@@ -2,13 +2,19 @@ import { Field, Input } from "@zendeskgarden/react-forms";
 import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { FieldError } from "./FieldError";
-import type { FilterTypeKey, FilterTypeValue } from "./FilterTypeDropdown";
+//import type { FilterTypeKey, FilterTypeValue } from "./FilterTypeDropdown";
 import { FilterTypeDropdown } from "./FilterTypeDropdown";
 import type { FormErrors, FormState } from "./FormState";
 import { useTranslation } from "react-i18next";
+import { useFilterTranslations } from "../i18n";
 import styled from "styled-components";
 import { input } from "@testing-library/user-event/dist/cjs/event/input.js";
+import { Menu, Item, IMenuProps } from '@zendeskgarden/react-dropdowns';
 
+const filterOptions = ["anyValue", "exactMatch"] as const;
+type FilterType = typeof filterOptions[number];
+
+type FilterTypeKey = "filterType";
 type FormFieldKey = FilterTypeKey | "textValue";
 
 interface TextFieldProps {
@@ -28,31 +34,17 @@ export const TextField = ({
 }: TextFieldProps): JSX.Element => {
   const { t } = useTranslation();
   const [value, setValue] = useState<string>("");
-  const [selectedFilter, setSelectedFilter] = useState<FilterTypeValue>("anyValue");
+  const [selectedFilter, setSelectedFilter] = useState<FilterType>("anyValue");
+
+  const { filterTypeDropdownI18N } = useFilterTranslations();
 
   const validateForm = (
-    filterType: FilterTypeValue,
     value: string
   ): FormState<FormFieldKey> => {
-    switch (filterType) {
-      case "anyValue": {
-        return { state: "valid", values: [":*"] };
-      }
-      case "exactMatch": {
-        if (value !== "") {
-          return { state: "valid", values: [`:"${value}"`] };
-        } else {
-          return {
-            state: "invalid",
-            errors: {
-              textValue: t(
-                "guide-requests-app.filters-modal.no-text-value-error",
-                "Insert a value"
-              ),
-            },
-          };
-        }
-      }
+    if (value !== "") {
+      return { state: "valid", values: [`:"${value}"`] };
+    } else {
+      return { state: "valid", values: [":*"] };
     }
   };
 
@@ -60,24 +52,43 @@ export const TextField = ({
   //  onSelect(validateForm(undefined, ""));
   //}, []);
 
-  const handleFilterTypeSelect = (filterType: FilterTypeValue) => {
+  const handleFilterTypeSelect = (filterType: FilterType) => {
     setSelectedFilter(filterType);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
-    console.log(inputValue);
     setValue(inputValue);
-    onSelect(validateForm(selectedFilter, inputValue));
+    onSelect(validateForm(inputValue));
   };
 
   return (
     <>
+      {/*
       <FilterTypeDropdown
         onFilterTypeSelect={handleFilterTypeSelect}
+        filterOptions={filterOptions}
         selectedFilter={selectedFilter}
         errors={errors}
       />
+      */}
+      
+      {/* <Field>
+        <Field.Label hidden>{t("guide-requests-app.filter-modal.filterTypeLabel", "Filter type")}</Field.Label>
+        <Menu button={selectedFilter} onChange={(e) => handleFilterTypeSelect(e.value as FilterType)}>
+          {filterOptions.map(filterType =>
+            <Item value={filterType}>{filterTypeDropdownI18N[filterType]}</Item>
+          )}
+        </Menu>
+        
+        <Select onChange={(e) => onFilterTypeSelect(e.currentTarget.value as FilterTypeValue)} value={selectedFilter}>
+          <option value="anyValue">{filterTypeDropdownI18N.anyValue}</option>
+          <option value="exactMatch">{filterTypeDropdownI18N.exactMatch}</option>
+        </Select>
+        
+        {selectedFilter && <FieldError errors={errors} field="filterType"/>}
+      </Field>*/}
+
       <Field>
         <Field.Label>
           {t(
