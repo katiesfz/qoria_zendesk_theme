@@ -288,6 +288,15 @@ export function NumberFilter({
     if (filter.type === "range") {
       return (
         <Grid.Row>
+          <Field.Label>
+            {t(
+              "guide-requests-app.filters-modal.enter-field-value",
+              "Enter {{field_name}}",
+              {
+                field_name: label,
+              }
+            )}
+          </Field.Label>
           <Grid.Col>
             <Field>
               <Input
@@ -336,7 +345,7 @@ export function NumberFilter({
         </Field.Label>
         <Input
           type="number"
-          value={""}
+          value={filter.value}
           onChange={(e) => {
             handleExactValueChanged(e.target.value, {type: "exactMatch", value: e.target.value});
           }}
