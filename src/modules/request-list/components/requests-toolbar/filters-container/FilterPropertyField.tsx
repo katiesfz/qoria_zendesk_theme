@@ -4,11 +4,13 @@ import { useTranslation } from "react-i18next";
 import type { FormErrors, FormState } from "./FormState";
 import { FilterValuesList } from "./FilterValuesList";
 import type { Organization, TicketField } from "../../../data-types";
-import type { FilterValuesMap } from "../../../data-types/FilterValue";
+import type { FilterValue, FilterValuesMap } from "../../../data-types/FilterValue";
 import type { MultiSelectOption } from "./Multiselect";
 import { Accordion } from '@zendeskgarden/react-accordions';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Tag } from '@zendeskgarden/react-tags';
 import { getColor } from '@zendeskgarden/react-theming';
+import { getFilterKey } from "./SystemFieldCheck";
 
 const StyledFilterContainer = styled.div`
   padding: ${props => props.theme.remSpace.lg} 0;
@@ -51,6 +53,26 @@ export function FilterPropertyField({
 }: FilterPropertyFieldProps): JSX.Element {
 
   const { t } = useTranslation();
+
+  
+  const [facets, setFacets] = useState<number>(0);
+  
+  const filterKey = getFilterKey(filterProperty.identifier);
+  
+  const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
+
+  
+  useEffect(() => {
+    const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
+    setFacets(currentFilterValues.length as number);
+  }, [filters[filterKey]]);
+  
+  
+  if (currentFilterValues.length > 0) {
+    setFacets(currentFilterValues.length as number);
+  } else {
+    setFacets(0);
+  }
 
   if (
     filterProperty.identifier === "created_at" ||
@@ -101,6 +123,11 @@ export function FilterPropertyField({
                 <Accordion.Label>
                   {filterProperty.label}
                 </Accordion.Label>
+                {facets > 0 && (
+                  <Tag isRound>
+                    <span>{facets}</span>
+                  </Tag>
+                )}
               </Accordion.Header>
               <Accordion.Panel>
                 <FilterValuesList
