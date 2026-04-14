@@ -8,7 +8,7 @@ import type { MultiSelectOption } from "./Multiselect";
 import { FilterPropertyField } from "./FilterPropertyField";
 import type { FilterProperty } from "./FilterPropertyField";
 import { Accordion } from '@zendeskgarden/react-accordions';
-import {isSystemFieldType} from "./SystemFieldCheck";
+import {getFilterKey, isSystemFieldType} from "./SystemFieldCheck";
 
 interface FilterPropertiesGroupProps {
   filters: FilterValuesMap;
@@ -102,14 +102,8 @@ export function FilterPropertiesGroup({
       setErrors({});
       
       if (state.state === "valid") {
-        const filterKey =
-          isSystemFieldType(property.identifier) ||
-          property.identifier === "created_at" ||
-          property.identifier === "updated_at" ||
-          property.identifier === "organization" ||
-          property.identifier === "custom_status_id"
-            ? property.identifier
-            : `custom_field_${property.identifier}`;
+        
+        const filterKey = getFilterKey(property.identifier);
   
         const newFiltersMap = { ...filterValuesMap };
         newFiltersMap[filterKey] = state.values;
