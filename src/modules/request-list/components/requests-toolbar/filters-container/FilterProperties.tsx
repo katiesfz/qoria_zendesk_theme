@@ -8,6 +8,7 @@ import type { MultiSelectOption } from "./Multiselect";
 import { FilterPropertyField } from "./FilterPropertyField";
 import type { FilterProperty } from "./FilterPropertyField";
 import { Accordion } from '@zendeskgarden/react-accordions';
+import {isSystemFieldType} from "./SystemFieldCheck";
 
 interface FilterPropertiesGroupProps {
   filters: FilterValuesMap;
@@ -17,24 +18,6 @@ interface FilterPropertiesGroupProps {
   customStatusOptions: MultiSelectOption[];
   filterValuesMap: FilterValuesMap;
   onFiltersChanged: (filters: FilterValuesMap) => void;
-}
-
-const systemType = [
-  "subject",
-  "description",
-  "status",
-  "custom_status",
-  "type",
-  "priority",
-  "basic_priority",
-  "assignee",
-  "group",
-  "tickettype",
-  "requester",
-];
-
-function isSystemFieldType(type: string): boolean {
-  return systemType.includes(type);
 }
   
 export function FilterPropertiesGroup({
@@ -141,9 +124,8 @@ export function FilterPropertiesGroup({
   
 
   return (
-    <Accordion level={4} isExpandable>
+    <>
       {filterProperties.map((property) => (
-        <Accordion.Section key={property.identifier}>
         <FilterPropertyField
           filters={filters}
           filterProperty={property}
@@ -152,8 +134,7 @@ export function FilterPropertiesGroup({
           onValueChanged={handlePropertyFilterChanged}
           errors={errors}
           ticketField={checkTicketField(property) ?? emptyTicketField} />
-          </Accordion.Section>
       ))}
-    </Accordion>
+    </>
   );
 }

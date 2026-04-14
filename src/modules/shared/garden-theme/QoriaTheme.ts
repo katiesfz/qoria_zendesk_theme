@@ -444,5 +444,15 @@ export const qoriaTheme = {
         lg: "24px",
         xl: "32px",
         xxl: "40px"
+    },
+    remSpace: {
+        base: 4,
+        xxs: ".25rem",
+        xs: ".5rem",
+        sm: ".75rem",
+        md: "1rem",
+        lg: "1.25rem",
+        xl: "1.5rem",
+        xxl: "2rem"
     }
   } as IGardenTheme;

@@ -287,54 +287,44 @@ export function NumberFilter({
   ) {
     if (filter.type === "range") {
       return (
-        <Grid.Row>
-          <Field.Label>
-            {t(
-              "guide-requests-app.filters-modal.enter-field-value",
-              "Enter {{field_name}}",
-              {
-                field_name: label,
-              }
-            )}
-          </Field.Label>
-          <Grid.Col>
-            <Field>
-              <Input
-                type="number"
-                value={filter.minValue}
-                onChange={(e) => {
-                  handleMinValueChanged(e.target.value, filter);
-                }}
-                validation={errors.minValue ? "error" : undefined}
-              />
-              <Field.Label>
-                {t("guide-requests-app.filter-modal.minValue", "Min value")}
-              </Field.Label>
-              <FieldError errors={errors} field="minValue" />
-            </Field>
-          </Grid.Col>
-          <Grid.Col>
-            <Field>
-              <Input
-                type="number"
-                value={filter.maxValue}
-                onChange={(e) => {
-                  handleMaxValueChanged(e.target.value, filter);
-                }}
-                validation={errors.maxValue ? "error" : undefined}
-              />
-              <FieldError errors={errors} field="maxValue" />
-              <Field.Label>
-                {t("guide-requests-app.filter-modal.maxValue", "Max value")}
-              </Field.Label>
-            </Field>
-          </Grid.Col>
-        </Grid.Row>
+          <Grid.Row>
+            <Grid.Col>
+              <Field>
+                <Input
+                  type="number"
+                  value={filter.minValue}
+                  onChange={(e) => {
+                    handleMinValueChanged(e.target.value, filter);
+                  }}
+                  validation={errors.minValue ? "error" : undefined}
+                />
+                <Field.Label> {t("guide-requests-app.filter-modal.minValue", "Min value")}
+                </Field.Label>
+                <FieldError errors={errors} field="minValue" />
+              </Field>
+            </Grid.Col>
+            <Grid.Col>
+              <Field>
+                <Input
+                  type="number"
+                  value={filter.maxValue}
+                  onChange={(e) => {
+                    handleMaxValueChanged(e.target.value, filter);
+                  }}
+                  validation={errors.maxValue ? "error" : undefined}
+                />
+                <FieldError errors={errors} field="maxValue" />
+                <Field.Label>
+                  {t("guide-requests-app.filter-modal.maxValue", "Max value")}
+                </Field.Label>
+              </Field>
+            </Grid.Col>
+          </Grid.Row>
       );
     }
     return (
       <Field>
-        <Field.Label>
+        <Field.Label hidden>
           {t(
             "guide-requests-app.filters-modal.enter-field-value",
             "Enter {{field_name}}",
@@ -359,7 +349,7 @@ export function NumberFilter({
   return (
     <>
       <Fieldset>
-        <Fieldset.Legend hidden>{label}</Fieldset.Legend>
+        <Fieldset.Legend>{label}</Fieldset.Legend>
         
           {filterOptions.map(filterType =>
             <Field>
@@ -376,7 +366,6 @@ export function NumberFilter({
             </Field>
           )}
       </Fieldset>
-
       {filterFields(filter)}
 
     </>
