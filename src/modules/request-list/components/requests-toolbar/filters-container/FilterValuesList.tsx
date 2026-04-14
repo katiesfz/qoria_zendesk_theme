@@ -201,15 +201,13 @@ export function FilterValuesList({
     }
     case "checkbox": {
       return (
-        <ThemeProvider theme={singleFilterTheme}>
-          <CheckboxFilter
-            label={title_in_portal}
-            filters={filters}
-            filterProperty={filterProperty}
-            onSelect={onSelect}
-            errors={errors}
-          />
-        </ThemeProvider>
+        <CheckboxFilter
+          label={title_in_portal}
+          filters={filters}
+          filterProperty={filterProperty}
+          onSelect={onSelect}
+          errors={errors}
+        />
       );
     }
     case "partialcreditcard": {
