@@ -61,12 +61,11 @@ export function FilterPropertyField({
   
   const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
 
-  
   useEffect(() => {
     const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
     setFacets(currentFilterValues.length as number);
   }, [filters[filterKey]]);
-  
+
   
   if (currentFilterValues.length > 0) {
     setFacets(currentFilterValues.length as number);
@@ -123,7 +122,7 @@ export function FilterPropertyField({
                 <Accordion.Label>
                   {filterProperty.label}
                 </Accordion.Label>
-                {facets > 0 && (
+                {(facets > 0) && (
                   <Tag isRound>
                     <span>{facets}</span>
                   </Tag>
