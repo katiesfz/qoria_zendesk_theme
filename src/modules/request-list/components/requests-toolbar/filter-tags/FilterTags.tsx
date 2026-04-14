@@ -13,9 +13,9 @@ import { removeFilterValuesFromMap } from "./removeFilterValuesFromMap";
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: ${props => props.theme.remSpace.xs};
   min-height: 0;
-  margin-bottom: 0;
+  margin-bottom: ${props => props.theme.remSpace.md};
 `;
 
 interface FilterTagsProps {
@@ -40,25 +40,27 @@ export function FilterTags({
   }
 
   return (
-    <Container>
-      {Object.entries(filters).map(([field, values]) => {
-        return (
-          <FieldTags
-            key={field}
-            ticketFields={ticketFields}
-            organizations={organizations}
-            customStatusOptions={customStatusOptions}
-            values={values}
-            identifier={field}
-            onFilterRemoved={(values) => removeFilter(field, values)}
-          />
-        );
-      })}
-      {Object.keys(filters).length > 0 && (
+    <>
+    {Object.keys(filters).length > 0 && (
+      <Container>
+        {Object.entries(filters).map(([field, values]) => {
+          return (
+            <FieldTags
+              key={field}
+              ticketFields={ticketFields}
+              organizations={organizations}
+              customStatusOptions={customStatusOptions}
+              values={values}
+              identifier={field}
+              onFilterRemoved={(values) => removeFilter(field, values)}
+            />
+          );
+        })}
         <Button size="small" isLink onClick={() => onFiltersChanged({})}>
           {t("guide-requests-app.clearFilters", "Clear filters")}
         </Button>
+      </Container>
       )}
-    </Container>
+    </>
   );
 }

@@ -16,6 +16,12 @@ const StyledFilterContainer = styled.div`
   border-bottom: 1px solid ${props => getColor({ theme: props.theme, variable: "border.default" })};
 `;
 
+const StyledFilterHeading = styled.p`
+  font-size: ${p => p.theme.fontSizes.md};
+  line-height: 1.5;
+  margin-bottom: ${p => p.theme.remSpace.md};
+`;
+
 type FormFieldKey = "ticketField";
 
 export interface FilterProperty {
@@ -120,6 +126,9 @@ export function FilterPropertyField({
     case "partialcreditcard": {
       return (
         <StyledFilterContainer>
+          <StyledFilterHeading>
+            {filterProperty.label}
+          </StyledFilterHeading>
           <FilterValuesList
             filters={filters}
             filterProperty={filterProperty}

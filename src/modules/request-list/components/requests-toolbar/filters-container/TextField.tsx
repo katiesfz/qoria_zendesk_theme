@@ -7,9 +7,10 @@ import { FilterTypeDropdown } from "./FilterTypeDropdown";
 import type { FormErrors, FormState } from "./FormState";
 import { useTranslation } from "react-i18next";
 import { useFilterTranslations } from "../i18n";
-import styled from "styled-components";
+import styled, { css, DefaultTheme } from "styled-components";
 import { input } from "@testing-library/user-event/dist/cjs/event/input.js";
 import { Menu, Item, IMenuProps } from '@zendeskgarden/react-dropdowns';
+import { qoriaTheme } from "../../../../shared";
 
 const filterOptions = ["anyValue", "exactMatch"] as const;
 type FilterType = typeof filterOptions[number];
@@ -26,6 +27,8 @@ interface TextFieldProps {
 const Gap = styled.div`
   height: ${(p) => p.theme.space.md};
 `;
+
+
 
 export const TextField = ({
   label,
@@ -90,7 +93,7 @@ export const TextField = ({
       </Field>*/}
 
       <Field>
-        <Field.Label>
+        <Field.Label hidden>
           {t(
             "guide-requests-app.filters-modal.enter-field-value",
             "Enter {{field_name}}",

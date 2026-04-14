@@ -1,7 +1,7 @@
 import type { IButtonProps } from "@zendeskgarden/react-buttons";
 import type { IGardenTheme } from "@zendeskgarden/react-theming";
 import { DEFAULT_THEME, getColor, PALETTE } from "@zendeskgarden/react-theming";
-import { css } from "styled-components";
+import { css, DefaultTheme } from "styled-components";
 
 export interface Settings {
   background_color: string;
@@ -317,6 +317,10 @@ export const qoriaTheme = {
         'forms.radio_label': inputLabelStyle,
         'forms.toggle_label': inputLabelStyle,
         'forms.fieldset_legend': inputLabelStyle,
+        //"accordions.accordion": css`
+        //    &:not(:last-child) {
+        //        border-bottom: 1px solid ${p => getColor({ theme: p.theme, variable: "border.default" })};
+        //    }`,
         "accordions.button": css`
             padding: 1.25rem 0;
             line-height: 1;
@@ -455,4 +459,4 @@ export const qoriaTheme = {
         xl: "1.5rem",
         xxl: "2rem"
     }
-  } as IGardenTheme;
+  } as DefaultTheme;

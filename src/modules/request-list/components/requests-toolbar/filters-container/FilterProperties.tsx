@@ -120,9 +120,6 @@ export function FilterPropertiesGroup({
       }
     };
 
-    
-  
-
   return (
     <>
       {filterProperties.map((property) => (
