@@ -8,7 +8,7 @@ import type { FormErrors, FormState } from "./FormState";
 import { useTranslation } from "react-i18next";
 import type { FilterProperty } from "./FilterPropertyField";
 import { Grid } from '@zendeskgarden/react-grid';
-import {isSystemFieldType} from "./SystemFieldCheck";
+import {getFilterKey} from "./SystemFieldCheck";
 
 
 export interface MultiSelectOption {
@@ -44,14 +44,7 @@ export function Multiselect({
     []
   );
 
-  const filterKey =
-    isSystemFieldType(filterProperty.identifier) ||
-    filterProperty.identifier === "created_at" ||
-    filterProperty.identifier === "updated_at" ||
-    filterProperty.identifier === "organization" ||
-    filterProperty.identifier === "custom_status_id"
-      ? filterProperty.identifier
-      : `custom_field_${filterProperty.identifier}`;
+  const filterKey = getFilterKey(filterProperty.identifier);
 
   useEffect(() => {
     const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];

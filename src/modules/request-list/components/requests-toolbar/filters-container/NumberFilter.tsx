@@ -18,7 +18,7 @@ import { ModalMenu } from "../../modal-menu/ModalMenu";
 import { FilterTypeDropdown } from "./FilterTypeDropdown";
 import { Menu, Item, IMenuProps } from '@zendeskgarden/react-dropdowns';
 import { FilterValue } from "../../../data-types";
-import {isSystemFieldType} from "./SystemFieldCheck";
+import {getFilterKey} from "./SystemFieldCheck";
 
 type FormFieldKey = "filterType" | "minValue" | "maxValue" | "exactValue";
 
@@ -180,14 +180,8 @@ export function NumberFilter({
     }
   };
 
-  const filterKey =
-    isSystemFieldType(filterProperty.identifier) ||
-    filterProperty.identifier === "created_at" ||
-    filterProperty.identifier === "updated_at" ||
-    filterProperty.identifier === "organization" ||
-    filterProperty.identifier === "custom_status_id"
-      ? filterProperty.identifier
-      : `custom_field_${filterProperty.identifier}`;
+
+  const filterKey = getFilterKey(filterProperty.identifier);
 
   useEffect(() => {
     const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];

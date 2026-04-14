@@ -48,6 +48,9 @@ const filterContainerTheme = {
         font-size: ${p => p.theme.fontSizes.md};
         margin-bottom: ${(p) => p.theme.remSpace.md};
     `,
+    "forms.fieldset": css`
+        margin-bottom: ${(p) => p.theme.remSpace.md};
+    `,
   }
 } as DefaultTheme;
 

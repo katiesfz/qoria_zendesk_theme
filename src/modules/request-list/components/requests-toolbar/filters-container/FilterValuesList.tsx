@@ -143,6 +143,8 @@ export function FilterValuesList({
         <ThemeProvider theme={singleFilterTheme}>
           <TextField
             label={title_in_portal}
+            filters={filters}
+            filterProperty={filterProperty}
             onSelect={onSelect}
             errors={errors}
           />
@@ -202,6 +204,8 @@ export function FilterValuesList({
         <ThemeProvider theme={singleFilterTheme}>
           <CheckboxFilter
             label={title_in_portal}
+            filters={filters}
+            filterProperty={filterProperty}
             onSelect={onSelect}
             errors={errors}
           />

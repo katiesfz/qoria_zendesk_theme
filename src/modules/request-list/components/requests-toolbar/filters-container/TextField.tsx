@@ -5,8 +5,12 @@ import { FieldError } from "./FieldError";
 //import type { FilterTypeKey, FilterTypeValue } from "./FilterTypeDropdown";
 import { FilterTypeDropdown } from "./FilterTypeDropdown";
 import type { FormErrors, FormState } from "./FormState";
+import type { FilterValuesMap } from "../../../data-types/FilterValue";
+import type { FilterProperty } from "./FilterPropertyField";
 import { useTranslation } from "react-i18next";
 import { useFilterTranslations } from "../i18n";
+import type { FilterValue } from "../../../data-types/FilterValue";
+import {getFilterKey} from "./SystemFieldCheck";
 import styled, { css, DefaultTheme } from "styled-components";
 import { input } from "@testing-library/user-event/dist/cjs/event/input.js";
 import { Menu, Item, IMenuProps } from '@zendeskgarden/react-dropdowns';
@@ -20,6 +24,8 @@ type FormFieldKey = FilterTypeKey | "textValue";
 
 interface TextFieldProps {
   label: string;
+  filters: FilterValuesMap;
+  filterProperty: FilterProperty;
   onSelect: (state: FormState) => void;
   errors: FormErrors<FormFieldKey>;
 }
@@ -32,32 +38,41 @@ const Gap = styled.div`
 
 export const TextField = ({
   label,
+  filters,
+  filterProperty,
   onSelect,
   errors,
 }: TextFieldProps): JSX.Element => {
   const { t } = useTranslation();
   const [value, setValue] = useState<string>("");
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>("anyValue");
 
   const { filterTypeDropdownI18N } = useFilterTranslations();
 
   const validateForm = (
     value: string
   ): FormState<FormFieldKey> => {
-    if (value !== "") {
+    if (value) {
       return { state: "valid", values: [`:"${value}"`] };
     } else {
       return { state: "valid", values: [":*"] };
     }
   };
+  const filterKey = getFilterKey(filterProperty.identifier);
 
-  //useEffect(() => {
-  //  onSelect(validateForm(undefined, ""));
-  //}, []);
-
-  const handleFilterTypeSelect = (filterType: FilterType) => {
-    setSelectedFilter(filterType);
-  };
+    useEffect(() => {
+      const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
+      if (currentFilterValues.length > 0) {
+        const currentValue = currentFilterValues[0] as string;
+        if (currentValue === ":*") {
+          setValue("");
+          return;
+        }
+        const rawValue = currentValue.replace(/^:"(.*)"$/, "$1");
+        setValue(rawValue);
+      } else {
+          setValue("");
+      }
+    }, [filters[filterKey]]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -67,40 +82,9 @@ export const TextField = ({
 
   return (
     <>
-      {/*
-      <FilterTypeDropdown
-        onFilterTypeSelect={handleFilterTypeSelect}
-        filterOptions={filterOptions}
-        selectedFilter={selectedFilter}
-        errors={errors}
-      />
-      */}
-      
-      {/* <Field>
-        <Field.Label hidden>{t("guide-requests-app.filter-modal.filterTypeLabel", "Filter type")}</Field.Label>
-        <Menu button={selectedFilter} onChange={(e) => handleFilterTypeSelect(e.value as FilterType)}>
-          {filterOptions.map(filterType =>
-            <Item value={filterType}>{filterTypeDropdownI18N[filterType]}</Item>
-          )}
-        </Menu>
-        
-        <Select onChange={(e) => onFilterTypeSelect(e.currentTarget.value as FilterTypeValue)} value={selectedFilter}>
-          <option value="anyValue">{filterTypeDropdownI18N.anyValue}</option>
-          <option value="exactMatch">{filterTypeDropdownI18N.exactMatch}</option>
-        </Select>
-        
-        {selectedFilter && <FieldError errors={errors} field="filterType"/>}
-      </Field>*/}
-
       <Field>
-        <Field.Label hidden>
-          {t(
-            "guide-requests-app.filters-modal.enter-field-value",
-            "Enter {{field_name}}",
-            {
-              field_name: label,
-            }
-          )}
+        <Field.Label>
+          {label}
         </Field.Label>
         <Input
           value={value}
