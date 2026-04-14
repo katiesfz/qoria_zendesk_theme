@@ -61,12 +61,11 @@ export function FilterPropertyField({
   
   const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
 
-  useEffect(() => {
-    const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
-    setFacets(currentFilterValues.length as number);
-  }, [filters[filterKey]]);
+  //useEffect(() => {
+  //  const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
+  //  setFacets(currentFilterValues.length as number);
+  //}, [filters[filterKey]]);
 
-  
   if (currentFilterValues.length > 0) {
     setFacets(currentFilterValues.length as number);
   } else {
