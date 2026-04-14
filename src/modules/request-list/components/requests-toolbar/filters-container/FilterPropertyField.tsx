@@ -20,6 +20,7 @@ const StyledFilterHeading = styled.p`
   font-size: ${p => p.theme.fontSizes.md};
   line-height: 1.5;
   margin-bottom: ${p => p.theme.remSpace.md};
+  font-weight: 600;
 `;
 
 type FormFieldKey = "ticketField";
@@ -60,7 +61,7 @@ export function FilterPropertyField({
   ) {
     return (
       <>
-        <Accordion level={4} isExpandable>
+        <Accordion level={4} isExpandable defaultExpandedSections={[]}>
           <Accordion.Section key={filterProperty.identifier}>
             <Accordion.Header>
               <Accordion.Label>
@@ -94,7 +95,7 @@ export function FilterPropertyField({
     case "date": {
       return (
         <>
-          <Accordion level={4} isExpandable>
+          <Accordion level={4} isExpandable defaultExpandedSections={[]}>
             <Accordion.Section key={filterProperty.identifier}>
               <Accordion.Header>
                 <Accordion.Label>
@@ -126,9 +127,9 @@ export function FilterPropertyField({
     case "partialcreditcard": {
       return (
         <StyledFilterContainer>
-          <StyledFilterHeading>
+          {/*<StyledFilterHeading>
             {filterProperty.label}
-          </StyledFilterHeading>
+          </StyledFilterHeading> */}
           <FilterValuesList
             filters={filters}
             filterProperty={filterProperty}
