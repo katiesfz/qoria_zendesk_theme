@@ -51,7 +51,7 @@ export const TextField = ({
   const validateForm = (
     value: string
   ): FormState<FormFieldKey> => {
-    if (value) {
+    if (value != "") {
       return { state: "valid", values: [`:"${value}"`] };
     } else {
       return { state: "valid", values: [":*"] };

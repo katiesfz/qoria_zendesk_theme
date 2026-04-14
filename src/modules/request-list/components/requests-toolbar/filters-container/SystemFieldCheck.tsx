@@ -29,5 +29,4 @@ export function getFilterKey(identifier: FilterProperty["identifier"]): string {
       : `custom_field_${identifier}`
   )
 }
-
   
