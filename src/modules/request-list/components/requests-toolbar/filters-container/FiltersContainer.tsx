@@ -43,6 +43,7 @@ interface FiltersContainerProps {
 const filterContainerTheme = {
   ...qoriaTheme,
   "components": {
+    ...qoriaTheme.components,
     "forms.fieldset_legend": css`
         font-size: ${p => p.theme.fontSizes.md};
         margin-bottom: ${(p) => p.theme.remSpace.md};
