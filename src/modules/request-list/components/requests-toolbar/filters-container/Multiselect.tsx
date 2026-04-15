@@ -117,9 +117,11 @@ export function Multiselect({
             </Checkbox>
           </Field>
       ))}
-      <Field>
-        <FieldError errors={errors} field="selectedOptions"/>
-      </Field>
+      {errors["selectedOptions"] && (
+        <Field>
+          <FieldError errors={errors} field="selectedOptions"/>
+        </Field>
+      )}
     </Fieldset>
   );
 }

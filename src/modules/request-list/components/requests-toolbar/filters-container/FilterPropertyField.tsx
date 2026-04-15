@@ -185,17 +185,15 @@ export function FilterPropertyField({
                 )}
               </Accordion.Header>
               <Accordion.Panel>
-                <ThemeProvider theme={singleFilterTheme}>
-                  <FilterValuesList
-                    filters={filters}
-                    filterProperty={filterProperty}
-                    organizations={organizations}
-                    customStatusOptions={customStatusOptions}
-                    onSelect={(state) => onValueChanged(filterProperty, state)}
-                    errors={errors}
-                    ticketField={ticketField}
-                  />
-                </ThemeProvider>
+                <FilterValuesList
+                  filters={filters}
+                  filterProperty={filterProperty}
+                  organizations={organizations}
+                  customStatusOptions={customStatusOptions}
+                  onSelect={(state) => onValueChanged(filterProperty, state)}
+                  errors={errors}
+                  ticketField={ticketField}
+                />
               </Accordion.Panel>
             </Accordion.Section>
           </Accordion>
