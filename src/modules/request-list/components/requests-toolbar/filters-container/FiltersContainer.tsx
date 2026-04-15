@@ -16,11 +16,6 @@ import {
 } from '@zendeskgarden/react-theming';
 import { qoriaTheme } from "../../../../shared";
 
-
-export const Gap = styled.div`
-  height: ${(p) => p.theme.remSpace.md};
-`;
-
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,9 +41,6 @@ const filterContainerTheme = {
     ...qoriaTheme.components,
     "forms.fieldset_legend": css`
         font-size: ${p => p.theme.fontSizes.md};
-        margin-bottom: ${(p) => p.theme.remSpace.md};
-    `,
-    "forms.fieldset": css`
         margin-bottom: ${(p) => p.theme.remSpace.md};
     `,
   }

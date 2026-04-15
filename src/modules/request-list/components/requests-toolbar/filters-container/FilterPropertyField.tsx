@@ -81,6 +81,11 @@ export function FilterPropertyField({
               <Accordion.Label>
                 {filterProperty.label}
               </Accordion.Label>
+              {(facets > 0) && (
+                <Tag isRound size="small">
+                  <span>{facets}</span>
+                </Tag>
+              )}
             </Accordion.Header>
             <Accordion.Panel>
               <FilterValuesList
@@ -116,7 +121,7 @@ export function FilterPropertyField({
                   {filterProperty.label}
                 </Accordion.Label>
                 {(facets > 0) && (
-                  <Tag isRound>
+                  <Tag isRound size="small">
                     <span>{facets}</span>
                   </Tag>
                 )}
@@ -145,20 +150,33 @@ export function FilterPropertyField({
     case "checkbox":
     case "partialcreditcard": {
       return (
-        <StyledFilterContainer>
-          {/*<StyledFilterHeading>
-            {filterProperty.label}
-          </StyledFilterHeading> */}
-          <FilterValuesList
-            filters={filters}
-            filterProperty={filterProperty}
-            organizations={organizations}
-            customStatusOptions={customStatusOptions}
-            onSelect={(state) => onValueChanged(filterProperty, state)}
-            errors={errors}
-            ticketField={ticketField}
-          />
-        </StyledFilterContainer>
+        <>
+          <Accordion level={4} isExpandable defaultExpandedSections={[]}>
+            <Accordion.Section key={filterProperty.identifier}>
+              <Accordion.Header>
+                <Accordion.Label>
+                  {filterProperty.label}
+                </Accordion.Label>
+                {(facets > 0) && (
+                  <Tag isRound size="small">
+                    <span>1</span>
+                  </Tag>
+                )}
+              </Accordion.Header>
+              <Accordion.Panel>
+                <FilterValuesList
+                  filters={filters}
+                  filterProperty={filterProperty}
+                  organizations={organizations}
+                  customStatusOptions={customStatusOptions}
+                  onSelect={(state) => onValueChanged(filterProperty, state)}
+                  errors={errors}
+                  ticketField={ticketField}
+                />
+              </Accordion.Panel>
+            </Accordion.Section>
+          </Accordion>
+        </>
       );
     }
     default:

@@ -19,6 +19,7 @@ import { FilterTypeDropdown } from "./FilterTypeDropdown";
 import { Menu, Item, IMenuProps } from '@zendeskgarden/react-dropdowns';
 import { FilterValue } from "../../../data-types";
 import {getFilterKey} from "./SystemFieldCheck";
+import { Gap } from "./Gap";
 
 type FormFieldKey = "filterType" | "minValue" | "maxValue" | "exactValue";
 
@@ -185,15 +186,17 @@ export function NumberFilter({
 
   useEffect(() => {
     const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
-    if (currentFilterValues.some(value => value.startsWith(">=") || value.startsWith("<="))) {
-      const minValue = currentFilterValues.find(value => value.startsWith(">="))?.substring(2) || "";
-      const maxValue = currentFilterValues.find(value => value.startsWith("<="))?.substring(2) || "";
+    if (currentFilterValues.some(filterValue => filterValue.startsWith(">=") || filterValue.startsWith("<="))) {
+      const minValue = currentFilterValues.find(filterValue => filterValue.startsWith(">="))?.substring(2) || "";
+      const maxValue = currentFilterValues.find(filterValue => filterValue.startsWith("<="))?.substring(2) || "";
       setFilter({ ...filter, type: "range", minValue: minValue || "", maxValue: maxValue || "" });
     } else if (currentFilterValues[0] == ":*") {
       setFilter({ ...filter, type: "exactMatch", value: "" });
     } else if (currentFilterValues.length > 0) {
       const exactValue = currentFilterValues.find(value => value.startsWith(":"))?.substring(1) || "";
       setFilter({ ...filter, type: "exactMatch", value: exactValue });
+    } else {
+      setFilter({ ...filter, type: "exactMatch", value: "" });
     }
   }, [filters[filterKey]]);
   
@@ -360,6 +363,7 @@ export function NumberFilter({
             </Field>
           )}
       </Fieldset>
+      <Gap />
       {filterFields(filter)}
 
     </>
