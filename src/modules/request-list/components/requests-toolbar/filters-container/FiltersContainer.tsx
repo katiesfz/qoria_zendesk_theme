@@ -43,34 +43,6 @@ const filterContainerTheme = {
         font-size: ${p => p.theme.fontSizes.md};
         margin-bottom: ${(p) => p.theme.remSpace.md};
     `,
-    "modals.drawer_modal": css`
-      right: auto;
-      left: 0;
-
-      &.garden-drawer-transition-enter {
-        -webkit-transform:translateX(-380px);
-        -ms-transform:translateX(-380px);
-        transform:translateX(-380px);
-      }
-
-      &.garden-drawer-transition-enter-active {
-        -webkit-transform:translateX(0);
-        -ms-transform:translateX(0);
-        transform:translateX(0);
-        -webkit-transition:-webkit-transform 0.25s ease-in-out;
-        -webkit-transition:transform 0.25s ease-in-out;
-        transition:transform 0.25s ease-in-out;
-      }
-
-      &.garden-drawer-transition-exit-active {
-        -webkit-transform:translateX(-380px);
-        -ms-transform:translateX(-380px);
-        transform:translateX(-380px);
-        -webkit-transition:-webkit-transform 0.25s ease-in-out;
-        -webkit-transition:transform 0.25s ease-in-out;
-        transition:transform 0.25s ease-in-out;
-      }
-    `
   }
 } as DefaultTheme;
 

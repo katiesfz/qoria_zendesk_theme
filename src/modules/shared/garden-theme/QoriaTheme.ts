@@ -45,6 +45,10 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
             })};
     }
 
+    &:focus-visible {
+        box-shadow: inset rgb(255, 255, 255) 0px 0px 0px 1px, inset rgb(99, 113, 187) 0px 0px 0px 3px;
+    }
+
     box-shadow: unset;
     padding: ${p => p.theme.space.md};
     border-width: 1px;
@@ -346,7 +350,7 @@ export const qoriaTheme = {
             gap: 8px;
             margin-bottom: 0rem;
             max-height: 8rem;
-            overflow: auto;
+            overflow-y: auto;
 
             & > [data-garden-id="forms.field"] {
                 margin-top: 0;
@@ -377,6 +381,33 @@ export const qoriaTheme = {
        "forms.textarea": accessibleFormInputStyle,
        "forms.faux_input": accessibleFormInputStyle,
        "dropdowns.combobox.trigger": accessibleFormWrapperStyle,
+        "modals.drawer_modal": css`
+            right: auto;
+            left: 0;
+
+            &.garden-drawer-transition-enter {
+                -webkit-transform:translateX(-380px);
+                -ms-transform:translateX(-380px);
+                transform:translateX(-380px);
+            }
+
+            &.garden-drawer-transition-enter-active {
+                -webkit-transform:translateX(0);
+                -ms-transform:translateX(0);
+                transform:translateX(0);
+                -webkit-transition:-webkit-transform 0.25s ease-in-out;
+                -webkit-transition:transform 0.25s ease-in-out;
+                transition:transform 0.25s ease-in-out;
+            }
+
+            &.garden-drawer-transition-exit-active {
+                -webkit-transform:translateX(-380px);
+                -ms-transform:translateX(-380px);
+                transform:translateX(-380px);
+                -webkit-transition:-webkit-transform 0.25s ease-in-out;
+                -webkit-transition:transform 0.25s ease-in-out;
+                transition:transform 0.25s ease-in-out;
+            }`,
     },
     fonts: {
         mono: "SFMono-Regular,Consolas,\"Liberation Mono\",Menlo,Courier,monospace",

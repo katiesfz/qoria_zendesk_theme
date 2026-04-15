@@ -49,7 +49,7 @@ const Container = styled.aside`
   flex: 1 0 auto;
   margin-bottom: 16px;
   position: sticky;
-  top: 0px;
+  top: 71px;
   ${media.desktop`
     border: 0;
     flex: 0 0 25%;
@@ -178,74 +178,76 @@ export default function RequestsToolbar({
       <SearchBlock>
         <RequestsSearch query={query} onSearchSubmit={onSearchSubmit} filterDrawer={toggleDrawer}/>
       </SearchBlock>
-      <div className="requests-sidebar-sticky request-filter-container">
-        {isOrganizationTab && (
-          <OrganizationBlock>
-            <OrganizationsDropdown
+
+
+      <Mobile>
+        <Drawer isOpen={isDrawerOpen} onClose={toggleDrawer}>
+          <Drawer.Header tag="h2">{t("guide-requests-app.filters-modal.title", "Filters")}</Drawer.Header>
+          <Drawer.Body>
+            <FilterTags
+              filters={filters}
+              ticketFields={ticketFields}
               organizations={organizations}
-              currentOrganizationId={selectedTab.organizationId}
-              onOrganizationSelected={onOrganizationSelected}
+              customStatusOptions={customStatusOptions}
+              onFiltersChanged={onFiltersChanged}
             />
-            {hasOrganizations && user && (
-              <Mobile>
+            <FiltersContainer
+              filters={filters}
+              ticketFields={ticketFields}
+              filterValuesMap={filters}
+              onFiltersChanged={onFiltersChanged}
+              organizations={isOrganizationTab ? [] : organizations}
+              customStatusesEnabled={customStatusesEnabled}
+              customStatusOptions={customStatusOptions}
+            />
+          </Drawer.Body>
+          <Drawer.Footer>
+            <Drawer.FooterItem>
+              <Button isBasic onClick={close}>
+                Cancel
+              </Button>
+            </Drawer.FooterItem>
+            <Drawer.FooterItem>
+              <Button isPrimary onClick={close}>
+                Confirm
+              </Button>
+            </Drawer.FooterItem>
+          </Drawer.Footer>
+          <Drawer.Close />
+        </Drawer>
+      </Mobile>
+
+
+      <Desktop>
+        <div className="requests-sidebar-sticky request-filter-container">
+          {isOrganizationTab && (
+            <OrganizationBlock>
+              <OrganizationsDropdown
+                organizations={organizations}
+                currentOrganizationId={selectedTab.organizationId}
+                onOrganizationSelected={onOrganizationSelected}
+              />
+              {hasOrganizations && user && (
+                <Mobile>
+                  <OrganizationsManagement
+                    organizations={organizations}
+                    user={user}
+                  />
+                </Mobile>
+              )}
+            </OrganizationBlock>
+          )}
+          {isOrganizationTab && hasOrganizations && user && (
+            <OrganizationsManagementBlock>
+              <Desktop>
                 <OrganizationsManagement
                   organizations={organizations}
                   user={user}
                 />
-              </Mobile>
-            )}
-          </OrganizationBlock>
-        )}
-        {isOrganizationTab && hasOrganizations && user && (
-          <OrganizationsManagementBlock>
-            <Desktop>
-              <OrganizationsManagement
-                organizations={organizations}
-                user={user}
-              />
-            </Desktop>
-          </OrganizationsManagementBlock>
-        )}
+              </Desktop>
+            </OrganizationsManagementBlock>
+          )}
 
-
-        <Mobile>
-          <Drawer isOpen={isDrawerOpen} onClose={toggleDrawer}>
-            <Drawer.Header tag="h2">{t("guide-requests-app.filters-modal.title", "Filters")}</Drawer.Header>
-            <Drawer.Body>
-              <FilterTags
-                filters={filters}
-                ticketFields={ticketFields}
-                organizations={organizations}
-                customStatusOptions={customStatusOptions}
-                onFiltersChanged={onFiltersChanged}
-              />
-              <FiltersContainer
-                filters={filters}
-                ticketFields={ticketFields}
-                filterValuesMap={filters}
-                onFiltersChanged={onFiltersChanged}
-                organizations={isOrganizationTab ? [] : organizations}
-                customStatusesEnabled={customStatusesEnabled}
-                customStatusOptions={customStatusOptions}
-              />
-            </Drawer.Body>
-            <Drawer.Footer>
-              <Drawer.FooterItem>
-                <Button isBasic onClick={close}>
-                  Cancel
-                </Button>
-              </Drawer.FooterItem>
-              <Drawer.FooterItem>
-                <Button isPrimary onClick={close}>
-                  Confirm
-                </Button>
-              </Drawer.FooterItem>
-            </Drawer.Footer>
-            <Drawer.Close />
-          </Drawer>
-        </Mobile>
-
-        <Desktop>
           <FormTitle>
             {t("guide-requests-app.filters-modal.title", "Filters")}
           </FormTitle>
@@ -265,8 +267,8 @@ export default function RequestsToolbar({
             customStatusesEnabled={customStatusesEnabled}
             customStatusOptions={customStatusOptions}
           />
-        </Desktop>
-      </div>
+        </div>
+      </Desktop>
     </Container>
   );
 }
