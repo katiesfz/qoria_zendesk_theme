@@ -242,6 +242,8 @@ The same applies for the description. */
     case "decimal": {
       const value = getCustomFieldValue(identifier);
 
+      console.log(`Value for field ${identifier}:`, value);
+
       return (
         <TruncatedTableCell identifier={identifier}>
           {value ? value.toString() : undefined}
