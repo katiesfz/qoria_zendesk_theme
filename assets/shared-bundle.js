@@ -73,7 +73,7 @@ function e(e,t){return t.forEach(function(t){t&&"string"!=typeof t&&!Array.isArr
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0rem;
             max-height: 8rem;
             overflow: auto;
 
