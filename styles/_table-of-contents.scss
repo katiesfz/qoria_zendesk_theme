@@ -4,12 +4,8 @@
 .table-of-contents-container, .activity-filter-container, .request-filter-container {
   
   background: #FFFFFF;
-  padding: $gutter;
+  padding: $padding;
   padding-bottom: 0;
-
-  @include desktop {
-    padding: $padding;
-  }
 
   @include tablet {
     margin-left: 0 !important;

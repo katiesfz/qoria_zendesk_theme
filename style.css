@@ -4766,13 +4766,8 @@ code.hljs {
 /* TOC */
 .table-of-contents-container, .search-results-sidebar, .activity-filter-container, .request-filter-container {
   background: #FFFFFF;
-  padding: 16px;
+  padding: 32px;
   padding-bottom: 0;
-}
-@media (min-width: 1024px) {
-  .table-of-contents-container, .search-results-sidebar, .activity-filter-container, .request-filter-container {
-    padding: 32px;
-  }
 }
 @media (min-width: 768px) {
   .table-of-contents-container, .search-results-sidebar, .activity-filter-container, .request-filter-container {

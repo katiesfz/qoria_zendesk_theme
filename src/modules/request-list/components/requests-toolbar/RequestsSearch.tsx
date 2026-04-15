@@ -72,6 +72,8 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
   `;
 };
 
+const accessibleFormInputStyle = createAccessibleFormControlStyle(false);
+
 const SearchInputTheme = {
   ...qoriaTheme,
   "components": {
@@ -80,7 +82,7 @@ const SearchInputTheme = {
         font-size: ${p => p.theme.fontSizes.md};
         margin-bottom: ${(p) => p.theme.remSpace.md};
     `,
-    "forms.faux_input": createAccessibleFormControlStyle(false),
+    "forms.faux_input": accessibleFormInputStyle,
     "buttons.button": css`
         height: 100%;
     `
