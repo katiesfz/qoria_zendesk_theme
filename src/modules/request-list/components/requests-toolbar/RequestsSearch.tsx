@@ -1,22 +1,23 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import type { FormEvent } from "react";
-import { Field, MediaInput } from "@zendeskgarden/react-forms";
+import { Field, MediaInput, InputGroup } from "@zendeskgarden/react-forms";
 import { media, Mobile, Desktop } from "../../utils/mediaQuery";
 //import SearchIcon from "@zendeskgarden/svg-icons/src/16/search-stroke.svg";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@awesome.me/kit-b56161fd23/icons/classic/regular';
+import { faSearch, faSlidersH } from '@awesome.me/kit-b56161fd23/icons/classic/regular';
+import { Button } from '@zendeskgarden/react-buttons';
 
 
 const SearchIcon = <FontAwesomeIcon icon={faSearch} />;
+const SlidersIcon = <FontAwesomeIcon icon={faSlidersH} />;
 
 interface RequestsSearchProps {
   query: string;
   onSearchSubmit: (value: string) => void;
+  filterDrawer: () => void;
 }
-
-
 
 const Form = styled.form`
   flex: 1 0 auto;
@@ -29,6 +30,7 @@ const Form = styled.form`
 export default function RequestsSearch({
   query,
   onSearchSubmit,
+  filterDrawer,
 }: RequestsSearchProps): JSX.Element {
   const { t } = useTranslation();
 
@@ -47,13 +49,29 @@ export default function RequestsSearch({
         <Field.Label hidden>
           {t("guide-requests-app.searchField.Label", "Search")}
         </Field.Label>
-        <MediaInput
-          end={SearchIcon}
-          ref={searchInputRef}
-          type="search"
-          defaultValue={query}
-        />
+        <Mobile>
+        <InputGroup>
+          <Button focusInset isNeutral onClick={filterDrawer}>
+            <FontAwesomeIcon icon={faSlidersH} />
+          </Button>
+          <MediaInput
+            end={SearchIcon}
+            ref={searchInputRef}
+            type="search"
+            defaultValue={query}
+          />
+        </InputGroup>
+        </Mobile>
+        <Desktop>
+          <MediaInput
+            end={SearchIcon}
+            ref={searchInputRef}
+            type="search"
+            defaultValue={query}
+          />
+        </Desktop>
       </Field>
     </Form>
+    
   );
 }

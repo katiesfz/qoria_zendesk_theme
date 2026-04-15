@@ -7,6 +7,7 @@ import OrganizationsDropdown from "./organizations-dropdown/OrganizationsDropdow
 import OrganizationsManagement from "./organizatios-management/OrganizationsManagement";
 import { media, Mobile, Desktop } from "../../utils/mediaQuery";
 import ChevronIcon from '@zendeskgarden/svg-icons/src/16/chevron-right-stroke.svg';
+import AdjustIcon from '@zendeskgarden/svg-icons/src/16/adjust-stroke.svg';
 
 import type {
   CustomStatus,
@@ -169,19 +170,13 @@ export default function RequestsToolbar({
   const isOrganizationTab = selectedTab.name === ORG_REQUESTS_TAB_NAME;
   const hasOrganizations = organizations.length > 0;
 
-  const [isOpen, setIsOpen] = useState(false);
-  const open = () => {
-    setIsOpen(true);
-  };
-  const close = () => {
-    setIsOpen(false);
-  };
-
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   return (
     <Container aria-labelledby="section-requests-title">
       <SearchBlock>
-        <RequestsSearch query={query} onSearchSubmit={onSearchSubmit} />
+        <RequestsSearch query={query} onSearchSubmit={onSearchSubmit} filterDrawer={toggleDrawer}/>
       </SearchBlock>
       <div className="requests-sidebar-sticky request-filter-container">
         {isOrganizationTab && (
@@ -214,13 +209,7 @@ export default function RequestsToolbar({
 
 
         <Mobile>
-          <Button onClick={open} isBasic isStretched>
-            {t("guide-requests-app.filters-modal.title", "Filters")}
-            <Button.EndIcon>
-              <ChevronIcon />
-            </Button.EndIcon>
-          </Button>
-          <Drawer isOpen={isOpen} onClose={close}>
+          <Drawer isOpen={isDrawerOpen} onClose={toggleDrawer}>
             <Drawer.Header tag="h2">{t("guide-requests-app.filters-modal.title", "Filters")}</Drawer.Header>
             <Drawer.Body>
               <FilterTags
