@@ -203,12 +203,7 @@ export default function RequestsToolbar({
           </Drawer.Body>
           <Drawer.Footer>
             <Drawer.FooterItem>
-              <Button isBasic onClick={close}>
-                Cancel
-              </Button>
-            </Drawer.FooterItem>
-            <Drawer.FooterItem>
-              <Button isPrimary onClick={close}>
+              <Button isPrimary onClick={toggleDrawer}>
                 Confirm
               </Button>
             </Drawer.FooterItem>

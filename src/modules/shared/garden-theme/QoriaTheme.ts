@@ -384,6 +384,7 @@ export const qoriaTheme = {
         "modals.drawer_modal": css`
             right: auto;
             left: 0;
+            font-family: inherit;
 
             &.garden-drawer-transition-enter {
                 -webkit-transform:translateX(-380px);
@@ -408,6 +409,10 @@ export const qoriaTheme = {
                 -webkit-transition:transform 0.25s ease-in-out;
                 transition:transform 0.25s ease-in-out;
             }`,
+            "modals.backdrop": css`
+                font-family: inherit;
+                z-index: 500;
+            `
     },
     fonts: {
         mono: "SFMono-Regular,Consolas,\"Liberation Mono\",Menlo,Courier,monospace",

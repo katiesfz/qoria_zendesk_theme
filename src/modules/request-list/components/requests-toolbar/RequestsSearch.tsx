@@ -81,6 +81,9 @@ const SearchInputTheme = {
         margin-bottom: ${(p) => p.theme.remSpace.md};
     `,
     "forms.faux_input": createAccessibleFormControlStyle(false),
+    "buttons.button": css`
+        height: 100%;
+    `
   }
 } as DefaultTheme;
 
