@@ -333,6 +333,9 @@ export const qoriaTheme = {
         `,
         "accordions.step_inner_panel": css`
             padding: 0;
+            & > *:last-child {
+                margin-bottom: ${p => p.theme.remSpace.lg};
+            }
         `,
         "accordions.panel": css`
             padding: 0;
@@ -341,7 +344,7 @@ export const qoriaTheme = {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0rem;
             max-height: 8rem;
             overflow: auto;
 

@@ -83,7 +83,7 @@ export const TextField = ({
   return (
     <>
       <Field>
-        <Field.Label>
+        <Field.Label hidden>
           {label}
         </Field.Label>
         <Input

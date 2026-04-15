@@ -346,7 +346,7 @@ export function NumberFilter({
   return (
     <>
       <Fieldset>
-        <Fieldset.Legend>{label}</Fieldset.Legend>
+        <Fieldset.Legend hidden>{label}</Fieldset.Legend>
         
           {filterOptions.map(filterType =>
             <Field>

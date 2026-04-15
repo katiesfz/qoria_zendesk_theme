@@ -83,7 +83,7 @@ export function CheckboxFilter({
   return (
     <>
       <Fieldset>
-        <Fieldset.Legend>{label}</Fieldset.Legend>
+        <Fieldset.Legend hidden>{label}</Fieldset.Legend>
             <Field>
               <Radio
                 name={label}

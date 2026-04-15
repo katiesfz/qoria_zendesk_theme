@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useTheme } from 'styled-components';
 import { useTranslation } from "react-i18next";
 import type { FormErrors, FormState } from "./FormState";
@@ -11,6 +10,8 @@ import { useEffect, useState } from "react";
 import { Tag } from '@zendeskgarden/react-tags';
 import { getColor } from '@zendeskgarden/react-theming';
 import { getFilterKey } from "./SystemFieldCheck";
+import { qoriaTheme } from "../../../../shared";
+import styled, { css, DefaultTheme, ThemeProvider } from "styled-components";
 
 const StyledFilterContainer = styled.div`
   padding: ${props => props.theme.remSpace.lg} 0;
@@ -24,6 +25,26 @@ const StyledFilterHeading = styled.p`
   margin-bottom: ${p => p.theme.remSpace.md};
   font-weight: 600;
 `;
+
+
+const inputLabelStyle = css`
+  font-size: ${p => p.theme.fontSizes.md};
+  margin-bottom: ${p => p.theme.remSpace.md};
+  font-weight: 600;
+`;
+
+const singleFilterTheme = {
+  ...qoriaTheme,
+  "components": {
+    ...qoriaTheme.components,
+    'forms.input_label': inputLabelStyle,
+    'forms.checkbox_label': inputLabelStyle,
+    'forms.radio_label': inputLabelStyle,
+    'forms.toggle_label': inputLabelStyle,
+    'forms.fieldset_legend': inputLabelStyle
+  }
+} as DefaultTheme;
+
 
 type FormFieldKey = "ticketField";
 
@@ -164,15 +185,17 @@ export function FilterPropertyField({
                 )}
               </Accordion.Header>
               <Accordion.Panel>
-                <FilterValuesList
-                  filters={filters}
-                  filterProperty={filterProperty}
-                  organizations={organizations}
-                  customStatusOptions={customStatusOptions}
-                  onSelect={(state) => onValueChanged(filterProperty, state)}
-                  errors={errors}
-                  ticketField={ticketField}
-                />
+                <ThemeProvider theme={singleFilterTheme}>
+                  <FilterValuesList
+                    filters={filters}
+                    filterProperty={filterProperty}
+                    organizations={organizations}
+                    customStatusOptions={customStatusOptions}
+                    onSelect={(state) => onValueChanged(filterProperty, state)}
+                    errors={errors}
+                    ticketField={ticketField}
+                  />
+                </ThemeProvider>
               </Accordion.Panel>
             </Accordion.Section>
           </Accordion>

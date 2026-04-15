@@ -26,25 +26,6 @@ interface FilterValuesListProps {
   ticketField?: TicketField;
 }
 
-const inputLabelStyle = css`
-  font-size: ${p => p.theme.fontSizes.md};
-  margin-bottom: ${p => p.theme.remSpace.md};
-  font-weight: 600;
-`;
-
-const singleFilterTheme = {
-  ...qoriaTheme,
-  "components": {
-    ...qoriaTheme.components,
-    'forms.input_label': inputLabelStyle,
-    'forms.checkbox_label': inputLabelStyle,
-    'forms.radio_label': inputLabelStyle,
-    'forms.toggle_label': inputLabelStyle,
-    'forms.fieldset_legend': inputLabelStyle
-  }
-} as DefaultTheme;
-
-
 export function FilterValuesList({
   filters,
   filterProperty,
@@ -140,7 +121,6 @@ export function FilterValuesList({
     case "text":
     case "regexp": {
       return (
-        <ThemeProvider theme={singleFilterTheme}>
           <TextField
             label={title_in_portal}
             filters={filters}
@@ -148,7 +128,6 @@ export function FilterValuesList({
             onSelect={onSelect}
             errors={errors}
           />
-        </ThemeProvider>
       );
     }
     case "tagger":
