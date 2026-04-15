@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import styled, { css, DefaultTheme } from "styled-components";
+import styled, { css, DefaultTheme, ThemeProvider } from "styled-components";
 import type { FormEvent } from "react";
 import { Field, MediaInput, InputGroup } from "@zendeskgarden/react-forms";
 import { media, Mobile, Desktop } from "../../utils/mediaQuery";
@@ -105,26 +105,28 @@ export default function RequestsSearch({
   };
 
   return (
-    <Form onSubmit={onSearchChange}>
-      <Field>
-        <Field.Label hidden>
-          {t("guide-requests-app.searchField.Label", "Search")}
-        </Field.Label>
-        <InputGroup>
-          <Mobile>
-            <Button isPrimary onClick={filterDrawer}>
-              <FontAwesomeIcon icon={faSlidersH} />
-            </Button>
-          </Mobile>
-          <MediaInput
-            end={SearchIcon}
-            ref={searchInputRef}
-            type="search"
-            defaultValue={query}
-          />
-        </InputGroup>
-      </Field>
-    </Form>
+    <ThemeProvider theme={SearchInputTheme}>
+      <Form onSubmit={onSearchChange}>
+        <Field>
+          <Field.Label hidden>
+            {t("guide-requests-app.searchField.Label", "Search")}
+          </Field.Label>
+          <InputGroup>
+            <Mobile>
+              <Button isPrimary onClick={filterDrawer}>
+                <FontAwesomeIcon icon={faSlidersH} />
+              </Button>
+            </Mobile>
+            <MediaInput
+              end={SearchIcon}
+              ref={searchInputRef}
+              type="search"
+              defaultValue={query}
+            />
+          </InputGroup>
+        </Field>
+      </Form>
+    </ThemeProvider>
     
   );
 }

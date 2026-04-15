@@ -242,6 +242,7 @@ The same applies for the description. */
     case "decimal": {
       const value = getCustomFieldValue(identifier);
 
+      console.log(`Ticket:`, request);
       console.log(`Value for field ${identifier}:`, value);
 
       return (
