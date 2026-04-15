@@ -1,10 +1,13 @@
 import styled from "styled-components";
+import React from 'react';
 import { Span } from "@zendeskgarden/react-typography";
 import { useTranslation } from "react-i18next";
 import RequestsSearch from "./RequestsSearch";
 import OrganizationsDropdown from "./organizations-dropdown/OrganizationsDropdown";
 import OrganizationsManagement from "./organizatios-management/OrganizationsManagement";
 import { media, Mobile, Desktop } from "../../utils/mediaQuery";
+import ChevronIcon from '@zendeskgarden/svg-icons/src/16/chevron-right-stroke.svg';
+
 import type {
   CustomStatus,
   Organization,
@@ -21,6 +24,7 @@ import { Button } from "@zendeskgarden/react-buttons";
 import { FilterTags } from "./filter-tags/FilterTags";
 import type { MultiSelectOption } from "./filter-modal/Multiselect";
 import { StyledSpan } from "../../../shared/styles"; 
+import { Drawer } from '@zendeskgarden/react-modals';
 
 interface RequestsToolbarProps {
   query: string;
@@ -165,6 +169,15 @@ export default function RequestsToolbar({
   const isOrganizationTab = selectedTab.name === ORG_REQUESTS_TAB_NAME;
   const hasOrganizations = organizations.length > 0;
 
+  const [isOpen, setIsOpen] = useState(false);
+  const open = () => {
+    setIsOpen(true);
+  };
+  const close = () => {
+    setIsOpen(false);
+  };
+
+
   return (
     <Container aria-labelledby="section-requests-title">
       <SearchBlock>
@@ -198,26 +211,72 @@ export default function RequestsToolbar({
             </Desktop>
           </OrganizationsManagementBlock>
         )}
-        
-        <FormTitle>
-          {t("guide-requests-app.filters-modal.title", "Filters")}
-        </FormTitle>
-        <FilterTags
-          filters={filters}
-          ticketFields={ticketFields}
-          organizations={organizations}
-          customStatusOptions={customStatusOptions}
-          onFiltersChanged={onFiltersChanged}
-        />
-        <FiltersContainer
-          filters={filters}
-          ticketFields={ticketFields}
-          filterValuesMap={filters}
-          onFiltersChanged={onFiltersChanged}
-          organizations={isOrganizationTab ? [] : organizations}
-          customStatusesEnabled={customStatusesEnabled}
-          customStatusOptions={customStatusOptions}
-        />
+
+
+        <Mobile>
+          <Button onClick={open} isBasic isStretched>
+            {t("guide-requests-app.filters-modal.title", "Filters")}
+            <Button.EndIcon>
+              <ChevronIcon />
+            </Button.EndIcon>
+          </Button>
+          <Drawer isOpen={isOpen} onClose={close}>
+            <Drawer.Header tag="h2">{t("guide-requests-app.filters-modal.title", "Filters")}</Drawer.Header>
+            <Drawer.Body>
+              <FilterTags
+                filters={filters}
+                ticketFields={ticketFields}
+                organizations={organizations}
+                customStatusOptions={customStatusOptions}
+                onFiltersChanged={onFiltersChanged}
+              />
+              <FiltersContainer
+                filters={filters}
+                ticketFields={ticketFields}
+                filterValuesMap={filters}
+                onFiltersChanged={onFiltersChanged}
+                organizations={isOrganizationTab ? [] : organizations}
+                customStatusesEnabled={customStatusesEnabled}
+                customStatusOptions={customStatusOptions}
+              />
+            </Drawer.Body>
+            <Drawer.Footer>
+              <Drawer.FooterItem>
+                <Button isBasic onClick={close}>
+                  Cancel
+                </Button>
+              </Drawer.FooterItem>
+              <Drawer.FooterItem>
+                <Button isPrimary onClick={close}>
+                  Confirm
+                </Button>
+              </Drawer.FooterItem>
+            </Drawer.Footer>
+            <Drawer.Close />
+          </Drawer>
+        </Mobile>
+
+        <Desktop>
+          <FormTitle>
+            {t("guide-requests-app.filters-modal.title", "Filters")}
+          </FormTitle>
+          <FilterTags
+            filters={filters}
+            ticketFields={ticketFields}
+            organizations={organizations}
+            customStatusOptions={customStatusOptions}
+            onFiltersChanged={onFiltersChanged}
+          />
+          <FiltersContainer 
+            filters={filters}
+            ticketFields={ticketFields}
+            filterValuesMap={filters}
+            onFiltersChanged={onFiltersChanged}
+            organizations={isOrganizationTab ? [] : organizations}
+            customStatusesEnabled={customStatusesEnabled}
+            customStatusOptions={customStatusOptions}
+          />
+        </Desktop>
       </div>
     </Container>
   );

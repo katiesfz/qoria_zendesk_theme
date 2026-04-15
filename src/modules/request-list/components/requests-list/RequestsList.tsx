@@ -27,6 +27,9 @@ import { useTicketFields } from "../../hooks/useTicketFields";
 import { useCustomStatuses } from "../../hooks/useCustomStatuses";
 import { RequestLoadingState } from "./RequestLoadingState";
 import { useShowManyUsers } from "../../hooks/useShowManyUsers";
+import { useEffect, useState } from "react";
+import { qoriaTheme } from "../../../shared";
+
 export interface RequestsListProps {
   locale: string;
   customStatusesEnabled: boolean;
@@ -148,6 +151,16 @@ export function RequestsList({
 
   console.log("Initial filters: ", filters);
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkSize = () => {
+      setIsMobile(window.innerWidth < parseInt(qoriaTheme.breakpoints.md, 10));
+    };
+    checkSize();
+    window.addEventListener('resize', checkSize);
+    return () => window.removeEventListener('resize', checkSize);
+  }, []);
+
   return (
     <>
       {isLoading ? (
@@ -171,7 +184,7 @@ export function RequestsList({
             customStatusesEnabled={customStatusesEnabled}
             customStatuses={customStatuses}
           />
-
+          
           <article className="requests">
             <RequestsTabs
               organizations={organizations}

@@ -83,12 +83,12 @@ $input-background: $background-subtle;
   grid-template-columns: [left] 1fr [right];
   grid-template-rows: [top] auto [center] auto [bottom];
   column-gap: 8px;
+  row-gap: 8px;
 
   @include tablet {
       display: grid;
       grid-template-rows: [top] 1fr [bottom];
       grid-template-columns: [left] 1fr [center] auto [right];
-      row-gap: 8px;
   }
   
   [dir="ltr"] &::after {
