@@ -1638,7 +1638,7 @@ ul {
   position: sticky;
   top: 53px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .sidebar-sticky {
     top: 71px;
   }
@@ -1652,7 +1652,7 @@ ul {
   background: #FFFFFF;
   padding: 24px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .sidebar-section {
     padding: 32px;
   }
@@ -3072,7 +3072,8 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
 .article-return-to-top a {
   color: #0f172a;
   display: block;
-  padding: 20px 0;
+  padding: 0;
+  margin-top: 16px;
 }
 .article-return-to-top a:hover, .article-return-to-top a:focus {
   text-decoration: none;
@@ -4706,7 +4707,7 @@ code.hljs {
 .collapsible-sidebar-title {
   font-size: 1em;
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 @media (min-width: 1024px) {
   .collapsible-sidebar-title {
@@ -4715,14 +4716,17 @@ code.hljs {
 }
 .collapsible-sidebar-toggle {
   position: absolute;
-  top: 16px;
-  right: 8px;
+  top: 0;
+  right: 0;
   padding: 0;
   border: 0;
   background: none;
-  width: 25px;
-  height: 25px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 @media (min-width: 1024px) {
   .collapsible-sidebar-toggle {
@@ -4748,6 +4752,7 @@ code.hljs {
 }
 .collapsible-sidebar-body {
   display: none;
+  margin-top: 16px;
 }
 @media (min-width: 1024px) {
   .collapsible-sidebar-body {

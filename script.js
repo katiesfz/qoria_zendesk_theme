@@ -728,19 +728,9 @@
 
           if (headings) {
               const tocContainer = document.querySelector(".table-of-contents");
-              const tocOuterContainer = document.querySelector(".table-of-contents-container");
+              document.querySelector(".table-of-contents-container");
               const ul = document.createElement("ul");
               const mobileHeader = document.getElementById("tocHeading");
-
-              window.onscroll = function() {
-                  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-                      tocOuterContainer.style.marginLeft = "calc(-.5 * var(--gutter-x))";
-                      tocOuterContainer.style.marginRight = "calc(-.5 * var(--gutter-x))";
-                  } else {
-                      tocOuterContainer.style.marginLeft = "";
-                      tocOuterContainer.style.marginRight = "";
-                  }
-              };
 
               ul.classList.add("collapsible-sidebar-body");
               tocContainer.appendChild(ul);
@@ -800,6 +790,20 @@
           }
 
       }
+      
+      const stickySidebars = document.getElementsByClassName("sidebar", "sidebar-sticky");
+
+      window.onscroll = function() {
+          stickySidebars.forEach((sidebar) => {
+              if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                  sidebar.style.marginLeft = "calc(-.5 * var(--gutter-x))";
+                  sidebar.style.marginRight = "calc(-.5 * var(--gutter-x))";
+              } else {
+                  sidebar.style.marginLeft = "";
+                  sidebar.style.marginRight = "";
+              }
+          });
+      };
 
   });
 
