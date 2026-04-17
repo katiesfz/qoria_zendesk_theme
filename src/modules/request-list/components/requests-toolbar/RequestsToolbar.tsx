@@ -218,14 +218,14 @@ export default function RequestsToolbar({
 
       <Desktop>
         
-        <div className="requests-sidebar-sticky request-filter-container">
+        <div className="request-filter-container mb-3">
           <RequestsTabs
             organizations={organizations}
             selectedTab={selectedTab}
             onTabSelected={onTabSelected}
           />
         </div>
-        <div className="requests-sidebar-sticky request-filter-container">
+        <div className="request-filter-container">
           {isOrganizationTab && (
             <OrganizationBlock>
               <OrganizationsDropdown

@@ -214,27 +214,7 @@
   }
 
   &-sidebar {
-    @include tablet {
-      border: 0;
-      flex: 0 0 25%;
-      height: auto;
-      max-width: 25%;
-      margin-right: $gutter;
-    }
-
-    flex: 1 0 auto; //Explicit values needed with flex-direction: column for IE11
-    margin-bottom: $gutter;
-    position: sticky;
-    top: 0px;
-
-    &-sticky {
-      position: sticky;
-      top: 71px;
-    }
-
-    > section {
-      margin-bottom: $padding;
-    }
+    @extend .sidebar;
 
     .search-container {
       margin-bottom: $gutter;
@@ -366,29 +346,7 @@
   }
 
   &-sidebar {
-    @include tablet {
-      border: 0;
-      flex: 0 0 25%;
-      height: auto;
-      max-width: 25%;
-      margin-right: $gutter;
-    }
-
-    flex: 1 0 auto; //Explicit values needed with flex-direction: column for IE11
-    margin-bottom: $gutter;
-    position: sticky;
-    top: 0px;
-
-    &-sticky {
-      position: sticky;
-      top: 71px;
-    }
-
-    section {
-      margin-bottom: $padding;
-    }
-
-
+    @extend .sidebar;
   }
 
     .subscriptions-subscribe button {

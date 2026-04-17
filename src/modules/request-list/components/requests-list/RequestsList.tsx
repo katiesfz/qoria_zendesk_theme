@@ -6,6 +6,7 @@ import RequestsToolbar from "../requests-toolbar/RequestsToolbar";
 import { RequestsTable } from "../requests-table/RequestsTable";
 import RequestsTabs from "../requests-tabs/RequestsTabs";
 import { StyledSpan } from "../../../shared/styles"; 
+import { media, Mobile, Desktop } from "../../utils/mediaQuery";
 import type { FilterValuesMap } from "../../data-types/FilterValue";
 import type {
   RequestListParams,
@@ -175,11 +176,13 @@ export function RequestsList({
           />
           
           <article className="requests">
-            {/*<RequestsTabs
-              organizations={organizations}
-              selectedTab={selectedTab}
-              onTabSelected={handleTabSelected}
-            />*/}
+            <Mobile>
+              <RequestsTabs
+                organizations={organizations}
+                selectedTab={selectedTab}
+                onTabSelected={handleTabSelected}
+              />
+            </Mobile>
             <RequestsTable
               onSort={onSort}
               requests={requests}

@@ -154,40 +154,27 @@
   }
 
   &-sidebar {
-    @include tablet {
-      border: 0;
-      flex: 0 0 25%;
-      height: auto;
-      max-width: 25%;
-      margin-right: $gutter;
-    }
-
-    flex: 1 0 auto; //Explicit values needed with flex-direction: column for IE11
-    margin-bottom: $gutter;
-    position: sticky;    
-    top: 71px;
+    @extend .sidebar;
 
     .article-share {
       display: none;
       @include tablet {
         display: block;
       }
+      
     }
 
     .search-container-desktop {
-      margin-bottom: $gutter;
       display: none;
       @include tablet {
         display: block;
       }
     }
-
   }
 
   &-share {
     background: #FFFFFF;
-    padding: 16px;
-    margin-top: 16px;
+    padding: $padding;
   }
 
   &-relatives {

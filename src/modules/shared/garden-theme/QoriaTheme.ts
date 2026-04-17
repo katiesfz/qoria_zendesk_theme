@@ -172,6 +172,19 @@ const qoriaPalette = {
         "1000": "#262A6E",
         "1100": "#110A4E",
         "1200": "#110A4E"
+    },
+    "neutral": {
+        "100": "#ffffff",
+        "200": "#f1f5f9",
+        "300": "#e2e8f0",
+        "400": "#d2dae5",
+        "500": "#a0adc0",
+        "600": "#7d8ca1",
+        "700": "#68768b",
+        "800": "#4d5a6b",
+        "900": "#364255",
+        "1000": "#0f172a",
+        "1100": "#020617",
     }
 };
 
@@ -206,7 +219,7 @@ export const qoriaTheme = {
         dangerHue: "red",
         warningHue: "yellow",
         successHue: "green",
-        neutralHue: "grey",
+        neutralHue: "neutral",
         chromeHue: "purple",
         variables: {
             dark: {
@@ -265,8 +278,8 @@ export const qoriaTheme = {
                 background: {
                     default: "palette.white",
                     raised: "palette.white",
-                    recessed: "neutralHue.100",
-                    subtle: "neutralHue.100",
+                    recessed: "neutralHue.200",
+                    subtle: "neutralHue.200",
                     emphasis: "neutralHue.700",
                     success: "successHue.100",
                     warning: "warningHue.100",
@@ -278,9 +291,9 @@ export const qoriaTheme = {
                     disabled: "rgba(neutralHue.700, 100)"
                 },
                 border: {
-                    default: "neutralHue.300",
-                    emphasis: "neutralHue.600",
-                    subtle: "neutralHue.200",
+                    default: "neutralHue.400",
+                    emphasis: "neutralHue.500",
+                    subtle: "neutralHue.300",
                     success: "successHue.300",
                     warning: "warningHue.300",
                     danger: "dangerHue.300",
@@ -295,8 +308,8 @@ export const qoriaTheme = {
                     disabled: "neutralHue.300"
                 },
                 foreground: {
-                    default: "neutralHue.900",
-                    subtle: "neutralHue.700",
+                    default: "neutralHue.1000",
+                    subtle: "neutralHue.800",
                     onEmphasis: "palette.white",
                     primary: "primaryHue.700",
                     success: "successHue.700",
@@ -305,7 +318,7 @@ export const qoriaTheme = {
                     successEmphasis: "successHue.900",
                     warningEmphasis: "warningHue.900",
                     dangerEmphasis: "dangerHue.900",
-                    disabled: "neutralHue.600"
+                    disabled: "neutralHue.700"
                 },
                 shadow: {
                     small: "rgba(neutralHue.1200, 200)",
@@ -412,6 +425,24 @@ export const qoriaTheme = {
             "modals.backdrop": css`
                 font-family: inherit;
                 z-index: 500;
+            `,
+            "tabs.tab": css`
+                margin-bottom: 0;
+                border-width: ${p => p.theme.borderWidths.sm};
+                &:hover {
+                    color: currentColor;
+                    background-color:  ${(p) =>
+                            getColor({
+                            theme: p.theme,
+                            variable: "background.subtle"
+                        })};
+                &.active {
+                    color: currentColor;
+                    background-color:  ${(p) =>
+                            getColor({
+                            theme: p.theme,
+                            variable: "background.subtle"
+                        })};
             `
     },
     fonts: {

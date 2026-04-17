@@ -722,75 +722,78 @@
       
   document.addEventListener("DOMContentLoaded", function(event) {
       
-      if (document.getElementsByClassName("table-of-contents").length > 0) {
+      if (document.getElementById("tableOfContents").length > 0) {
 
           const headings = Array.from(document.getElementById("main-content").querySelectorAll('h2, h3, h4'));
-          const tocContainer = document.querySelector(".table-of-contents");
-          const tocOuterContainer = document.querySelector(".table-of-contents-container");
-          const ul = document.createElement("ul");
-          const mobileHeader = document.getElementById("tocHeading");
 
-          window.onscroll = function() {
-              if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-                  tocOuterContainer.classList.add("row");
-              } else {
-                  tocOuterContainer.classList.remove("row");
-              }
-          };
+          if (headings) {
+              const tocContainer = document.querySelector(".table-of-contents");
+              const tocOuterContainer = document.querySelector(".table-of-contents-container");
+              const ul = document.createElement("ul");
+              const mobileHeader = document.getElementById("tocHeading");
 
-          ul.classList.add("collapsible-sidebar-body");
-          tocContainer.appendChild(ul);
-          headings.map((heading, index) => {
-              if (heading.classList.contains("no-toc")) {
-                  return;
-              } else {
-                  var id = "";
-                  if (heading.id) {
-                      id = heading.id;
+              window.onscroll = function() {
+                  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                      tocOuterContainer.classList.add("row");
                   } else {
-                      id = heading.innerText.toLowerCase().replaceAll(" ", "_");
-                      heading.setAttribute("id", id);
+                      tocOuterContainer.classList.remove("row");
                   }
-                  var level = 1;
-                  if (heading.tagName == "H2") {
-                      level = 1; 
-                  } else if (heading.tagName == "H3") {
-                      level = 2;
-                  } else if (heading.tagName == "H4") {
-                      level = 3;
-                  }
-                  var anchorElement = `<a href="#${id}">${heading.textContent}</a>`;
-                  if (index === 0) {
-                      anchorElement = `<a href="#${id}" class="toc-level-${level} active current">${heading.textContent}</a>`;
+              };
+
+              ul.classList.add("collapsible-sidebar-body");
+              tocContainer.appendChild(ul);
+              headings.map((heading, index) => {
+                  if (heading.classList.contains("no-toc")) {
+                      return;
                   } else {
-                      anchorElement = `<a href="#${id}" class="toc-level-${level}">${heading.textContent}</a>`;
-                  }
-                  var keyPointer = `<li>${anchorElement}</li>`;
-                  ul.insertAdjacentHTML("beforeend", keyPointer);
-              }
-          });
-
-          const tocAnchors = tocContainer.querySelectorAll("a");
-
-          const obFunc = (entries) => {
-              entries.forEach((entry) => {
-                  if (entry.isIntersecting) {
-                      const index = headings.indexOf(entry.target);
-                      tocAnchors.forEach((tab) => {
-                          tab.classList.remove("active", "current");
-                      });
-                      tocAnchors[index].classList.add("active", "current");
-                      mobileHeader.innerText = tocAnchors[index].innerText;
+                      var id = "";
+                      if (heading.id) {
+                          id = heading.id;
+                      } else {
+                          id = heading.innerText.toLowerCase().replaceAll(" ", "_");
+                          heading.setAttribute("id", id);
+                      }
+                      var level = 1;
+                      if (heading.tagName == "H2") {
+                          level = 1; 
+                      } else if (heading.tagName == "H3") {
+                          level = 2;
+                      } else if (heading.tagName == "H4") {
+                          level = 3;
+                      }
+                      var anchorElement = `<a href="#${id}">${heading.textContent}</a>`;
+                      if (index === 0) {
+                          anchorElement = `<a href="#${id}" class="toc-level-${level} active current">${heading.textContent}</a>`;
+                      } else {
+                          anchorElement = `<a href="#${id}" class="toc-level-${level}">${heading.textContent}</a>`;
+                      }
+                      var keyPointer = `<li>${anchorElement}</li>`;
+                      ul.insertAdjacentHTML("beforeend", keyPointer);
                   }
               });
-          };
-          const obOption = {
-              rootMargin: "0px 0% -20%",
-              threshold: 1
-          };
 
-          const observer = new IntersectionObserver(obFunc, obOption);
-          headings.forEach((hTwo) => observer.observe(hTwo));
+              const tocAnchors = tocContainer.querySelectorAll("a");
+
+              const obFunc = (entries) => {
+                  entries.forEach((entry) => {
+                      if (entry.isIntersecting) {
+                          const index = headings.indexOf(entry.target);
+                          tocAnchors.forEach((tab) => {
+                              tab.classList.remove("active", "current");
+                          });
+                          tocAnchors[index].classList.add("active", "current");
+                          mobileHeader.innerText = tocAnchors[index].innerText;
+                      }
+                  });
+              };
+              const obOption = {
+                  rootMargin: "0px 0% -20%",
+                  threshold: 1
+              };
+
+              const observer = new IntersectionObserver(obFunc, obOption);
+              headings.forEach((hTwo) => observer.observe(hTwo));
+          }
 
       }
 

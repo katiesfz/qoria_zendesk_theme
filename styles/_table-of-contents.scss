@@ -1,11 +1,10 @@
 /* TOC */
 
+.table-of-contents-container {
+  display: none;
+}
 
 .table-of-contents-container, .activity-filter-container, .request-filter-container {
-  
-  background: #FFFFFF;
-  padding: $padding;
-  padding-bottom: 0;
 
   @include tablet {
     margin-left: 0 !important;
