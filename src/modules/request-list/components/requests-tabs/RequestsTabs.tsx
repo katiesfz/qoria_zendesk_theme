@@ -111,45 +111,22 @@ export default function RequestsTabs({
   return (
     <Container>
       <Mobile>
-        <Dropdown
-          onSelect={handleMobileTabSelected}
-          onStateChange={({ isOpen }) => {
-            if (isOpen != null) {
-              setIconIsRotated(isOpen);
-            }
-          }}
-        >
-          <Trigger>
-            <StyledButton isBasic isStretched>
-              {getTabLabel(selectedTab.name)}
-              <Button.EndIcon isRotated={iconIsRotated}>
-                <ChevronIcon />
-              </Button.EndIcon>
-            </StyledButton>
-          </Trigger>
-          <StyledMenu
-            popperModifiers={{
-              offset: {
-                fn(data) {
-                  data.styles.width = `${parseInt(
-                    String(data.offsets.reference.width),
-                    10
-                  )}px`;
-                  return data;
-                },
-              },
-            }}
-          >
+        <Tabs onChange={handleMobileTabSelected} selectedItem={selectedTab.name}>
+          <Tabs.TabList>
             {availableTabs.map((tabName) => (
-              <Item key={tabName} value={tabName}>
+              <Tabs.Tab
+                key={tabName}
+                data-test-id={`tab-${tabName}`}
+                item={tabName}
+              >
                 {getTabLabel(tabName)}
-              </Item>
+              </Tabs.Tab>
             ))}
-          </StyledMenu>
-        </Dropdown>
+          </Tabs.TabList>
+        </Tabs>
       </Mobile>
       <Desktop>
-        <Tabs onChange={handleTabSelect} selectedItem={selectedTab.name}>
+        <Tabs onChange={handleTabSelect} selectedItem={selectedTab.name} isVertical>
           <Tabs.TabList>
             {availableTabs.map((tabName) => (
               <Tabs.Tab

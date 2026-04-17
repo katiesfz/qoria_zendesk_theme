@@ -149,18 +149,6 @@ export function RequestsList({
   const from = (page - 1) * requestsPerPage + 1;
   let to = from + requestsPerPage - 1;
 
-  console.log("Initial filters: ", filters);
-
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const checkSize = () => {
-      setIsMobile(window.innerWidth < parseInt(qoriaTheme.breakpoints.md, 10));
-    };
-    checkSize();
-    window.addEventListener('resize', checkSize);
-    return () => window.removeEventListener('resize', checkSize);
-  }, []);
-
   return (
     <>
       {isLoading ? (
@@ -179,6 +167,7 @@ export function RequestsList({
             onFiltersChanged={handleFiltersChanged}
             organizations={organizations}
             selectedTab={selectedTab}
+            onTabSelected={handleTabSelected}
             onOrganizationSelected={handleOrganizationSelected}
             user={user}
             customStatusesEnabled={customStatusesEnabled}
@@ -186,11 +175,11 @@ export function RequestsList({
           />
           
           <article className="requests">
-            <RequestsTabs
+            {/*<RequestsTabs
               organizations={organizations}
               selectedTab={selectedTab}
               onTabSelected={handleTabSelected}
-            />
+            />*/}
             <RequestsTable
               onSort={onSort}
               requests={requests}

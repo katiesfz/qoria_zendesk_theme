@@ -26,6 +26,7 @@ import { FilterTags } from "./filter-tags/FilterTags";
 import type { MultiSelectOption } from "./filter-modal/Multiselect";
 import { StyledSpan } from "../../../shared/styles"; 
 import { Drawer } from '@zendeskgarden/react-modals';
+import RequestsTabs from "../requests-tabs/RequestsTabs";
 
 interface RequestsToolbarProps {
   query: string;
@@ -33,6 +34,7 @@ interface RequestsToolbarProps {
   filters: FilterValuesMap;
   onFiltersChanged: (items: FilterValuesMap) => void;
   selectedTab: SelectedTab;
+  onTabSelected: (clickedTab: SelectedTab) => void;
   onOrganizationSelected: (organizationId: number) => void;
   hasPagination: boolean;
   page: number;
@@ -150,6 +152,7 @@ export default function RequestsToolbar({
   onFiltersChanged,
   organizations,
   selectedTab,
+  onTabSelected,
   onOrganizationSelected,
   user,
   ticketFields,
@@ -214,6 +217,14 @@ export default function RequestsToolbar({
 
 
       <Desktop>
+        
+        <div className="requests-sidebar-sticky request-filter-container">
+          <RequestsTabs
+            organizations={organizations}
+            selectedTab={selectedTab}
+            onTabSelected={onTabSelected}
+          />
+        </div>
         <div className="requests-sidebar-sticky request-filter-container">
           {isOrganizationTab && (
             <OrganizationBlock>
