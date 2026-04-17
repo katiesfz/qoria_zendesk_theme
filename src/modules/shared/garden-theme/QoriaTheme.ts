@@ -436,7 +436,7 @@ export const qoriaTheme = {
                             theme: p.theme,
                             variable: "background.subtle"
                         })};
-                &.active {
+                &:active {
                     color: currentColor;
                     background-color:  ${(p) =>
                             getColor({

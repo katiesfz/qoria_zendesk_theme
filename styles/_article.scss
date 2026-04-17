@@ -306,7 +306,8 @@
     a {
       color: $text_color;
       display: block;
-      padding: 20px 0;
+      padding: 0;
+      margin-top: $gutter;
 
       &:hover,
       &:focus {

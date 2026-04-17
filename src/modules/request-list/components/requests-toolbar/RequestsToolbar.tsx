@@ -48,21 +48,6 @@ interface RequestsToolbarProps {
 }
 
 const Container = styled.aside`
-  flex: 1 0 auto;
-  margin-bottom: 16px;
-  position: sticky;
-  top: 71px;
-  ${media.desktop`
-    border: 0;
-    flex: 0 0 25%;
-    height: auto;
-    max-width: 25%;
-    margin-right: 16px;
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  `};
 `;
 
 const Block = styled.div`
@@ -177,7 +162,7 @@ export default function RequestsToolbar({
   const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   return (
-    <Container aria-labelledby="section-requests-title">
+    <Container aria-labelledby="section-requests-title" className="sidebar">
       <SearchBlock>
         <RequestsSearch query={query} onSearchSubmit={onSearchSubmit} filterDrawer={toggleDrawer}/>
       </SearchBlock>
@@ -217,62 +202,63 @@ export default function RequestsToolbar({
 
 
       <Desktop>
-        
-        <div className="request-filter-container mb-3">
-          <RequestsTabs
-            organizations={organizations}
-            selectedTab={selectedTab}
-            onTabSelected={onTabSelected}
-          />
-        </div>
-        <div className="request-filter-container">
-          {isOrganizationTab && (
-            <OrganizationBlock>
-              <OrganizationsDropdown
-                organizations={organizations}
-                currentOrganizationId={selectedTab.organizationId}
-                onOrganizationSelected={onOrganizationSelected}
-              />
-              {hasOrganizations && user && (
-                <Mobile>
+        <div className="sidebar-contents">
+          <div className="request-filter-container sidebar-section">
+            <RequestsTabs
+              organizations={organizations}
+              selectedTab={selectedTab}
+              onTabSelected={onTabSelected}
+            />
+          </div>
+          <div className="request-filter-container sidebar-section">
+            {isOrganizationTab && (
+              <OrganizationBlock>
+                <OrganizationsDropdown
+                  organizations={organizations}
+                  currentOrganizationId={selectedTab.organizationId}
+                  onOrganizationSelected={onOrganizationSelected}
+                />
+                {hasOrganizations && user && (
+                  <Mobile>
+                    <OrganizationsManagement
+                      organizations={organizations}
+                      user={user}
+                    />
+                  </Mobile>
+                )}
+              </OrganizationBlock>
+            )}
+            {isOrganizationTab && hasOrganizations && user && (
+              <OrganizationsManagementBlock>
+                <Desktop>
                   <OrganizationsManagement
                     organizations={organizations}
                     user={user}
                   />
-                </Mobile>
-              )}
-            </OrganizationBlock>
-          )}
-          {isOrganizationTab && hasOrganizations && user && (
-            <OrganizationsManagementBlock>
-              <Desktop>
-                <OrganizationsManagement
-                  organizations={organizations}
-                  user={user}
-                />
-              </Desktop>
-            </OrganizationsManagementBlock>
-          )}
+                </Desktop>
+              </OrganizationsManagementBlock>
+            )}
 
-          <FormTitle>
-            {t("guide-requests-app.filters-modal.title", "Filters")}
-          </FormTitle>
-          <FilterTags
-            filters={filters}
-            ticketFields={ticketFields}
-            organizations={organizations}
-            customStatusOptions={customStatusOptions}
-            onFiltersChanged={onFiltersChanged}
-          />
-          <FiltersContainer 
-            filters={filters}
-            ticketFields={ticketFields}
-            filterValuesMap={filters}
-            onFiltersChanged={onFiltersChanged}
-            organizations={isOrganizationTab ? [] : organizations}
-            customStatusesEnabled={customStatusesEnabled}
-            customStatusOptions={customStatusOptions}
-          />
+            <FormTitle>
+              {t("guide-requests-app.filters-modal.title", "Filters")}
+            </FormTitle>
+            <FilterTags
+              filters={filters}
+              ticketFields={ticketFields}
+              organizations={organizations}
+              customStatusOptions={customStatusOptions}
+              onFiltersChanged={onFiltersChanged}
+            />
+            <FiltersContainer 
+              filters={filters}
+              ticketFields={ticketFields}
+              filterValuesMap={filters}
+              onFiltersChanged={onFiltersChanged}
+              organizations={isOrganizationTab ? [] : organizations}
+              customStatusesEnabled={customStatusesEnabled}
+              customStatusOptions={customStatusOptions}
+            />
+          </div>
         </div>
       </Desktop>
     </Container>

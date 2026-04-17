@@ -3089,7 +3089,8 @@ section.hero .hero-faqs {
 .article-return-to-top a {
   color: #0f172a;
   display: block;
-  padding: 20px 0;
+  padding: 0;
+  margin-top: 16px;
 }
 .article-return-to-top a:hover, .article-return-to-top a:focus {
   text-decoration: none;
@@ -4736,7 +4737,7 @@ code.hljs {
 }
 .collapsible-sidebar-title {
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 @media (min-width: 1024px) {
   .collapsible-sidebar-toggle {
@@ -4745,8 +4746,8 @@ code.hljs {
 }
 .collapsible-sidebar-toggle {
   position: absolute;
-  top: 16px;
-  right: 8px;
+  top: 0;
+  right: 0;
   padding: 0;
   border: 0;
   background: none;

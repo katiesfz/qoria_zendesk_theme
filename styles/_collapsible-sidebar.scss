@@ -15,14 +15,14 @@
     font-size: $font-size-h4;
   }
     margin-top: 0;
-    margin-bottom: 16px;
+    margin-bottom: 0;
   }
 
   &-toggle {
     @include desktop { display: none; }
     position: absolute;
-    top: $gutter;
-    right: math.div($gutter,2);
+    top: 0;
+    right: 0;
     padding: 0;
     border: 0;
     background: none;
