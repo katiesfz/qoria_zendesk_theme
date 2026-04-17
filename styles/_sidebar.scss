@@ -9,6 +9,9 @@
 
     flex: 1 0 auto; //Explicit values needed with flex-direction: column for IE11
     margin-bottom: $gutter;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 
     &-sticky {
       position: sticky;

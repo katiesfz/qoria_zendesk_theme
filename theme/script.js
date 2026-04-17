@@ -734,9 +734,11 @@
 
               window.onscroll = function() {
                   if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-                      tocOuterContainer.classList.add("row");
+                      tocOuterContainer.style.marginLeft = "calc(-.5 * var(--gutter-x))";
+                      tocOuterContainer.style.marginRight = "calc(-.5 * var(--gutter-x))";
                   } else {
-                      tocOuterContainer.classList.remove("row");
+                      tocOuterContainer.style.marginLeft = "";
+                      tocOuterContainer.style.marginRight = "";
                   }
               };
 

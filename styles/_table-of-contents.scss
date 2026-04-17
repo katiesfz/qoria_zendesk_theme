@@ -1,14 +1,10 @@
 /* TOC */
 
-.table-of-contents-container {
-  display: none;
-}
-
 .table-of-contents-container, .activity-filter-container, .request-filter-container {
 
   @include tablet {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+  //  margin-left: 0 !important;
+  //  margin-right: 0 !important;
   }
 
   li {

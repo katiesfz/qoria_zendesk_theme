@@ -1634,6 +1634,9 @@ ul {
 .sidebar, .profile-sidebar, .activities-sidebar, .requests-sidebar, .article-sidebar {
   flex: 1 0 auto;
   margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 .sidebar-sticky {
   position: sticky;
@@ -4780,16 +4783,6 @@ code.hljs {
 }
 
 /* TOC */
-.table-of-contents-container, .search-results-sidebar {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .table-of-contents-container, .search-results-sidebar, .activity-filter-container, .request-filter-container {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-}
 .table-of-contents-container li a, .search-results-sidebar li a, .activity-filter-container li a, .request-filter-container li a {
   font-size: 1rem;
   padding: 5px 5px 5px 16px;
