@@ -62,10 +62,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         {{search scoped=settings.scoped_kb_search submit=false class="search search-full search-transparent"}}
       </div>
       <aside class="article-sidebar sidebar sidebar-sticky" aria-labelledby="section-articles-title">
-        <div class="sidebar-contents">
-          <div class="search-container-desktop">
-            {{search scoped=settings.scoped_kb_search submit=false class="search search-full search-transparent"}}
-          </div>
+        <div class="sidebar-contents search-container-desktop">
+          {{search scoped=settings.scoped_kb_search submit=false class="search search-full search-transparent"}}
         </div>
         <div class="sidebar-sticky sidebar-contents">
           <div id="tableOfContents" class="visibility-hidden">

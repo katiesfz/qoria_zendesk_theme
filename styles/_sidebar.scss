@@ -1,35 +1,37 @@
 .sidebar {
+  @include tablet {
+    border: 0;
+    flex: 0 0 25%;
+    height: auto;
+    max-width: 25%;
+    margin-right: $gutter;
+  }
+
+  flex: 1 0 auto; //Explicit values needed with flex-direction: column for IE11
+  margin-bottom: $gutter;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &-sticky {
+    position: sticky;
+    top: 53px;
     @include tablet {
-      border: 0;
-      flex: 0 0 25%;
-      height: auto;
-      max-width: 25%;
-      margin-right: $gutter;
+      top: 71px;
     }
+  }
+  
+  &-contents {
+      display: flex;
+      flex-direction: column;
+      gap: $gutter;
+  }
 
-    flex: 1 0 auto; //Explicit values needed with flex-direction: column for IE11
-    margin-bottom: $gutter;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    &-sticky {
-      position: sticky;
-      top: 53px;
-      @include tablet {
-        top: 71px;
-      }
+  &-section {
+    background: #FFFFFF;
+    padding: calc($padding * .75);
+    @include tablet {
+      padding: $padding;
     }
-    
-    &-contents {
-        display: flex;
-        flex-direction: column;
-        gap: $gutter;
-    }
-
-    &-section {
-        background: #FFFFFF;
-        padding: $padding;
-        margin-bottom: $gutter;
-    }
+  }
 }
