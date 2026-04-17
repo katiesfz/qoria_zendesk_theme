@@ -4733,11 +4733,13 @@ code.hljs {
 @media (min-width: 1024px) {
   .collapsible-sidebar-title {
     font-size: 1.375rem;
+    width: 100%;
   }
 }
 .collapsible-sidebar-title {
   margin-top: 0;
   margin-bottom: 0;
+  width: calc(100% - 1.5rem);
 }
 @media (min-width: 1024px) {
   .collapsible-sidebar-toggle {
