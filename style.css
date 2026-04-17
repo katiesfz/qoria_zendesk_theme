@@ -1650,8 +1650,12 @@ ul {
 }
 .sidebar-section {
   background: #FFFFFF;
-  padding: 32px;
-  margin-bottom: 16px;
+  padding: 24px;
+}
+@media (min-width: 768px) {
+  .sidebar-section {
+    padding: 32px;
+  }
 }
 
 /***** User info in header *****/
