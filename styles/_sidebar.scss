@@ -16,7 +16,7 @@
   &-sticky {
     position: sticky;
     top: 53px;
-    @include desktop {
+    @include tablet {
       top: 71px;
     }
   }
@@ -30,8 +30,17 @@
   &-section {
     background: #FFFFFF;
     padding: calc($padding * .75);
-    @include desktop {
+    @include tablet {
       padding: $padding;
+    }
+  }
+
+  &-flush {
+    margin-left: calc(-.5 * var(--gutter-x));
+    margin-right: calc(-.5 * var(--gutter-x));
+    @include tablet {
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 }
