@@ -722,7 +722,7 @@
       
   document.addEventListener("DOMContentLoaded", function(event) {
       
-      if (document.getElementById("tableOfContents").length > 0) {
+      if (document.getElementById("tableOfContents")) {
 
           const headings = Array.from(document.getElementById("main-content").querySelectorAll('h2, h3, h4'));
 
