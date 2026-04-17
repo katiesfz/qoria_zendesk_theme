@@ -1642,7 +1642,7 @@ ul {
   position: sticky;
   top: 53px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .sidebar-sticky {
     top: 71px;
   }
@@ -1656,7 +1656,7 @@ ul {
   background: #FFFFFF;
   padding: 24px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .sidebar-section {
     padding: 32px;
   }
@@ -4750,9 +4750,12 @@ code.hljs {
   padding: 0;
   border: 0;
   background: none;
-  width: 25px;
-  height: 25px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 [dir=rtl] .collapsible-sidebar-toggle {
   left: 0;
@@ -4778,6 +4781,7 @@ code.hljs {
 }
 .collapsible-sidebar-body {
   display: none;
+  margin-top: 16px;
 }
 .collapsible-sidebar[aria-expanded=true] {
   max-height: none;

@@ -16,7 +16,7 @@
   &-sticky {
     position: sticky;
     top: 53px;
-    @include tablet {
+    @include desktop {
       top: 71px;
     }
   }
@@ -30,7 +30,7 @@
   &-section {
     background: #FFFFFF;
     padding: calc($padding * .75);
-    @include tablet {
+    @include desktop {
       padding: $padding;
     }
   }
