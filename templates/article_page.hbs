@@ -61,29 +61,34 @@ document.addEventListener('DOMContentLoaded', (event) => {
       <div class="search-container-mobile">
         {{search scoped=settings.scoped_kb_search submit=false class="search search-full search-transparent"}}
       </div>
-      <aside class="article-sidebar" aria-labelledby="section-articles-title">
-        <div class="search-container-desktop">
-          {{search scoped=settings.scoped_kb_search submit=false class="search search-full search-transparent"}}
+      <aside class="article-sidebar sidebar" aria-labelledby="section-articles-title">
+        <div class="sidebar-contents">
+          <div class="search-container-desktop">
+            {{search scoped=settings.scoped_kb_search submit=false class="search search-full search-transparent"}}
+          </div>
         </div>
-        <div class="article-sidebar-sticky">
-          <div class="table-of-contents-container collapsible-sidebar">
-            <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="">
-              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
-              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
-            </button>
-            <h4 class="collapsible-sidebar-title sidenav-title sidenav-title-desktop">Table of contents</h4>
-            <h4 class="collapsible-sidebar-title sidenav-title sidenav-title-mobile" id="tocHeading">Table of contents</h4>
-            <div class="table-of-contents">
-            </div>
-            <div class="article-return-to-top">
-              <a href="#article-container">
-                <i class="fas fa-arrow-up" style="margin-right: 10px;"></i>
-                {{t 'return_to_top'}}
-              </a>
+        <div class="sidebar-sticky sidebar-contents">
+            <div id="tableOfContents" class="visibility-hidden">
+              <div class="table-of-contents-container sidebar-section collapsible-sidebar">
+                <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="">
+                  <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
+                  <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
+                </button>
+                <h4 class="collapsible-sidebar-title sidenav-title sidenav-title-desktop">Table of contents</h4>
+                <h4 class="collapsible-sidebar-title sidenav-title sidenav-title-mobile" id="tocHeading">Table of contents</h4>
+                <div class="table-of-contents">
+                </div>
+                <div class="article-return-to-top">
+                  <a href="#article-container">
+                    <i class="fas fa-arrow-up" style="margin-right: 10px;"></i>
+                    {{t 'return_to_top'}}
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
           {{#if settings.show_article_sharing}}
-            <div class="article-share">
+            <div class="article-share sidebar-section">
               <h4 class="sidenav-title collapsible-sidebar-title">Share this article</h4>
               {{share}}
             </div>
