@@ -13,7 +13,7 @@
     </div>
     <div class="row">
       <div class="col">
-        {{search scoped=true submit=false class="search search-full search-transparent"}}
+        {{search scoped=settings.scoped_kb_search submit=false class="search search-full search-transparent"}}
       </div>
     </div>
   </div>
@@ -176,21 +176,23 @@
                       </a>
                     </h2>
                     <div class="search-result-icons">
-                      {{#if vote_sum}}
-                        <span class="search-result-votes">
-                          <span class="visibility-hidden">
-                            {{t 'votes_sum' count=vote_sum}}
+                      {{#if user.agent}}
+                        {{#if vote_sum}}
+                          <span class="search-result-votes visibility-hidden">
+                            <span class="visibility-hidden">
+                              {{t 'votes_sum' count=vote_sum}}
+                            </span>
+                            <span aria-hidden="true">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-result-votes-icon">
+                                <g fill="none" stroke="currentColor">
+                                  <path stroke-linejoin="round" d="M10.77 4.5a.73.73 0 01.73.73C11.43 7 11.21 11.5 10 11.5H5a.5.5 0 01-.5-.5V4.5s1-.5 1-3a1 1 0 012 0v3z"/>
+                                  <rect width="2" height="7" x=".5" y="4.5" rx=".5" ry=".5"/>
+                                </g>
+                              </svg>
+                              {{vote_sum}}
+                            </span>
                           </span>
-                          <span aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-result-votes-icon">
-                              <g fill="none" stroke="currentColor">
-                                <path stroke-linejoin="round" d="M10.77 4.5a.73.73 0 01.73.73C11.43 7 11.21 11.5 10 11.5H5a.5.5 0 01-.5-.5V4.5s1-.5 1-3a1 1 0 012 0v3z"/>
-                                <rect width="2" height="7" x=".5" y="4.5" rx=".5" ry=".5"/>
-                              </g>
-                            </svg>
-                            {{vote_sum}}
-                          </span>
-                        </span>
+                        {{/if}}
                       {{/if}}
                       {{#if comment_count}}
                         <span class="search-result-meta-count">
