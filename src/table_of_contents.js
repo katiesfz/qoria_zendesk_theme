@@ -75,6 +75,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             const observer = new IntersectionObserver(obFunc, obOption);
             headings.forEach((hTwo) => observer.observe(hTwo));
+            
+            document.getElementById("tableOfContents").classList.remove("visibility-hidden");
         }
 
     }
