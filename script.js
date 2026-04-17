@@ -794,7 +794,7 @@
       const stickySidebars = document.getElementsByClassName("sidebar", "sidebar-sticky");
 
       window.onscroll = function() {
-          stickySidebars.forEach((sidebar) => {
+          Array.from(stickySidebars).forEach((sidebar) => {
               if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
                   sidebar.style.marginLeft = "calc(-.5 * var(--gutter-x))";
                   sidebar.style.marginRight = "calc(-.5 * var(--gutter-x))";
