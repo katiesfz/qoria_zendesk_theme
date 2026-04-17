@@ -130,15 +130,22 @@ function e(e,t){return t.forEach(function(t){t&&"string"!=typeof t&&!Array.isArr
             }`,"modals.backdrop":gn`
                 font-family: inherit;
                 z-index: 500;
-            `,"tabs.tab":gn`
-                margin-bottom: 0;
-                border-width: ${e=>e.theme.borderWidths.sm};
-                &:hover {
-                    color: currentColor;
-                    background-color:  ${e=>Bo({theme:e.theme,variable:"background.subtle"})};
-                &:active {
-                    color: currentColor;
-                    background-color:  ${e=>Bo({theme:e.theme,variable:"background.subtle"})};
+            `,"tabs.tabs":e=>gn`
+                width: 100%;
+                ${e.isVertical?gn`
+                    [data-garden-id="tabs.tab"] {
+                        padding: 5px 5px 5px 16px;
+                        border-left: 1px solid #cbcbcb;
+                        margin-bottom: 0;
+                        border-width: ${e=>e.theme.borderWidths.sm};
+                        &:hover {
+                            color: currentColor;
+                            background-color:  ${e=>Bo({theme:e.theme,variable:"background.subtle"})};
+                        &:active {
+                            color: currentColor;
+                            background-color:  ${e=>Bo({theme:e.theme,variable:"background.subtle"})};
+                            }
+                `:""}
             `},fonts:{mono:'SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace',system:'system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif'},fontSizes:{xs:"12px",sm:"14px",md:"16px",lg:"14px",xl:"22px",xxl:"26px",xxxl:"36px"},fontWeights:{thin:100,extralight:200,light:300,regular:400,medium:500,semibold:600,bold:700,extrabold:800,black:900},iconSizes:{sm:"12px",md:"16px",lg:"26px"},lineHeights:{sm:"16px",md:"20px",lg:"24px",xl:"28px",xxl:"32px",xxxl:"44px"},opacity:{100:.08,200:.16,300:.24,400:.32,500:.4,600:.48,700:.56,800:.64,900:.72,1e3:.8,1100:.88,1200:.96},palette:Ii,rtl:"rtl"===document.dir,shadowWidths:{xs:"1px",sm:"2px",md:"3px"},space:{base:4,xxs:"4px",xs:"8px",sm:"12px",md:"16px",lg:"24px",xl:"32px",xxl:"40px"},remSpace:{base:4,xxs:".25rem",xs:".5rem",sm:".75rem",md:"1rem",lg:"1.25rem",xl:"1.5rem",xxl:"2rem"}},_i=p.createContext(null),ji=Nn.div`
   z-index: ${2147483647};
   position: fixed;
