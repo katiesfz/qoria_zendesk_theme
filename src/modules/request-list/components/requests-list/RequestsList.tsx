@@ -11,9 +11,11 @@ import type { FilterValuesMap } from "../../data-types/FilterValue";
 import type {
   RequestListParams,
   SelectedTab,
+  SelectedTabName,
 } from "../../data-types/request-list-params";
 
 import {
+  CCD_REQUESTS_TAB_NAME,
   MY_REQUESTS_TAB_NAME,
   ORG_REQUESTS_TAB_NAME,
 } from "../../data-types/request-list-params";
@@ -30,6 +32,7 @@ import { RequestLoadingState } from "./RequestLoadingState";
 import { useShowManyUsers } from "../../hooks/useShowManyUsers";
 import { useEffect, useState } from "react";
 import { qoriaTheme } from "../../../shared";
+import styled from "styled-components";
 
 export interface RequestsListProps {
   locale: string;
@@ -55,6 +58,13 @@ export function RequestsList({
   );
 
   const { query, page, sort, selectedTab, filters } = params;
+
+const FormTitle = styled.h2`
+  margin: 0;
+  margin-bottom: 1em;
+  font-size: 18px;
+  font-weight: 600;
+`;
 
   const { user, isLoading: isLoadingUser, error: userError } = useUser();
   const { organizations } = useOrganizations(user);
@@ -150,6 +160,28 @@ export function RequestsList({
   const from = (page - 1) * requestsPerPage + 1;
   let to = from + requestsPerPage - 1;
 
+  const getTabLabel = (tab: SelectedTabName) => {
+    switch (tab) {
+      case ORG_REQUESTS_TAB_NAME:
+        return t(
+          "guide-requests-app.organizationalRequests",
+          "Organizational requests"
+        );
+      case MY_REQUESTS_TAB_NAME:
+        return t("guide-requests-app.myRequests", "My requests");
+      case CCD_REQUESTS_TAB_NAME:
+        return t("guide-requests-app.ccdRequests", "Requests I am CC'd on");
+    }
+  };
+
+  const availableTabs: SelectedTabName[] = [
+    MY_REQUESTS_TAB_NAME,
+    CCD_REQUESTS_TAB_NAME,
+  ];
+  if (organizations.length > 0) {
+    availableTabs.push(ORG_REQUESTS_TAB_NAME);
+  }
+
   return (
     <>
       {isLoading ? (
@@ -176,6 +208,9 @@ export function RequestsList({
           />
           
           <article className="requests">
+            <FormTitle>
+              {getTabLabel(selectedTab.name)}
+            </FormTitle>
             <Mobile>
               <RequestsTabs
                 organizations={organizations}

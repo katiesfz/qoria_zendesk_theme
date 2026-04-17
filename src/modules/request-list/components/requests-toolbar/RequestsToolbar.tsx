@@ -204,6 +204,9 @@ export default function RequestsToolbar({
       <Desktop>
         <div className="sidebar-contents">
           <div className="request-filter-container sidebar-section">
+            <FormTitle>
+              Views
+            </FormTitle>
             <RequestsTabs
               organizations={organizations}
               selectedTab={selectedTab}

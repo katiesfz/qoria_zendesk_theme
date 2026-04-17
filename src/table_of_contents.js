@@ -76,11 +76,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     window.onscroll = function() {
         Array.from(stickySidebars).forEach((sidebar) => {
             if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-                sidebar.style.marginLeft = "calc(-.5 * var(--gutter-x))";
-                sidebar.style.marginRight = "calc(-.5 * var(--gutter-x))";
+                sidebar.classList.add("sidebar-flush");
             } else {
-                sidebar.style.marginLeft = "";
-                sidebar.style.marginRight = "";
+                sidebar.classList.remove("sidebar-flush");
             }
         });
     };

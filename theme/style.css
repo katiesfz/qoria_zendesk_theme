@@ -1638,7 +1638,7 @@ ul {
   position: sticky;
   top: 53px;
 }
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .sidebar-sticky {
     top: 71px;
   }
@@ -1652,9 +1652,19 @@ ul {
   background: #FFFFFF;
   padding: 24px;
 }
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .sidebar-section {
     padding: 32px;
+  }
+}
+.sidebar-flush {
+  margin-left: calc(-0.5 * var(--gutter-x));
+  margin-right: calc(-0.5 * var(--gutter-x));
+}
+@media (min-width: 768px) {
+  .sidebar-flush {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 

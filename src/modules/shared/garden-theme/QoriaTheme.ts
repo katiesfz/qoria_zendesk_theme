@@ -1,4 +1,5 @@
 import type { IButtonProps } from "@zendeskgarden/react-buttons";
+import type { ITabsProps } from "@zendeskgarden/react-tabs";
 import type { IGardenTheme } from "@zendeskgarden/react-theming";
 import { DEFAULT_THEME, getColor, PALETTE } from "@zendeskgarden/react-theming";
 import { css, DefaultTheme } from "styled-components";
@@ -426,23 +427,30 @@ export const qoriaTheme = {
                 font-family: inherit;
                 z-index: 500;
             `,
-            "tabs.tab": css`
-                margin-bottom: 0;
-                border-width: ${p => p.theme.borderWidths.sm};
-                &:hover {
-                    color: currentColor;
-                    background-color:  ${(p) =>
-                            getColor({
-                            theme: p.theme,
-                            variable: "background.subtle"
-                        })};
-                &:active {
-                    color: currentColor;
-                    background-color:  ${(p) =>
-                            getColor({
-                            theme: p.theme,
-                            variable: "background.subtle"
-                        })};
+            "tabs.tabs": (props: ITabsProps) => css`
+                width: 100%;
+                ${props.isVertical ? css`
+                    [data-garden-id="tabs.tab"] {
+                        padding: 5px 5px 5px 16px;
+                        border-left: 1px solid #cbcbcb;
+                        margin-bottom: 0;
+                        border-width: ${p => p.theme.borderWidths.sm};
+                        &:hover {
+                            color: currentColor;
+                            background-color:  ${(p) =>
+                                    getColor({
+                                    theme: p.theme,
+                                    variable: "background.subtle"
+                                })};
+                        &:active {
+                            color: currentColor;
+                            background-color:  ${(p) =>
+                                    getColor({
+                                    theme: p.theme,
+                                    variable: "background.subtle"
+                                })};
+                            }
+                ` : ''}
             `
     },
     fonts: {
