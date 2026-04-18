@@ -427,9 +427,10 @@ export const qoriaTheme = {
                 font-family: inherit;
                 z-index: 500;
             `,
-        "tabs.tabs": (props: ITabsProps) => css`
+        "tabs.tabs": css`
             width: 100%;
-            ${(props.isVertical && css`
+            ${(props: ITabsProps) => 
+                props.isVertical && css`
                 [data-garden-id="tabs.tab"] {
                     padding: 5px 5px 5px 16px;
                     border-left: 1px solid #cbcbcb;
@@ -450,7 +451,7 @@ export const qoriaTheme = {
                                 variable: "background.subtle"
                             })};
                 }
-            `)}
+            `}
         `,
     },
     fonts: {
