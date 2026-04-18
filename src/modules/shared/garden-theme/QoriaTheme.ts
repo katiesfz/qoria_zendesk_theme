@@ -423,35 +423,35 @@ export const qoriaTheme = {
                 -webkit-transition:transform 0.25s ease-in-out;
                 transition:transform 0.25s ease-in-out;
             }`,
-            "modals.backdrop": css`
+        "modals.backdrop": css`
                 font-family: inherit;
                 z-index: 500;
             `,
-            "tabs.tabs": (props: ITabsProps) => css`
-                width: 100%;
-                ${props.isVertical ? css`
-                    [data-garden-id="tabs.tab"] {
-                        padding: 5px 5px 5px 16px;
-                        border-left: 1px solid #cbcbcb;
-                        margin-bottom: 0;
-                        border-width: ${p => p.theme.borderWidths.sm};
-                        &:hover {
-                            color: currentColor;
-                            background-color:  ${(p) =>
-                                    getColor({
-                                    theme: p.theme,
-                                    variable: "background.subtle"
-                                })};
-                        &:active {
-                            color: currentColor;
-                            background-color:  ${(p) =>
-                                    getColor({
-                                    theme: p.theme,
-                                    variable: "background.subtle"
-                                })};
-                            }
-                ` : ''}
-            `
+        "tabs.tabs": (props: ITabsProps) => css`
+            width: 100%;
+            ${(props.isVertical && css`
+                [data-garden-id="tabs.tab"] {
+                    padding: 5px 5px 5px 16px;
+                    border-left: 1px solid #cbcbcb;
+                    margin-bottom: 0;
+                    border-width: ${p => p.theme.borderWidths.sm};
+                    &:hover {
+                        color: currentColor;
+                        background-color:  ${(p) =>
+                                getColor({
+                                theme: p.theme,
+                                variable: "background.subtle"
+                            })};
+                    &:active {
+                        color: currentColor;
+                        background-color:  ${(p) =>
+                                getColor({
+                                theme: p.theme,
+                                variable: "background.subtle"
+                            })};
+                }
+            `)}
+        `,
     },
     fonts: {
         mono: "SFMono-Regular,Consolas,\"Liberation Mono\",Menlo,Courier,monospace",

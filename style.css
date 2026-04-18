@@ -1668,7 +1668,7 @@ ul {
 @media (min-width: 768px) {
   .sidebar-flush {
     margin-left: 0;
-    margin-right: 0;
+    margin-right: 16px;
   }
 }
 

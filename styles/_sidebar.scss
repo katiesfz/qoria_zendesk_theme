@@ -40,7 +40,7 @@
     margin-right: calc(-.5 * var(--gutter-x));
     @include tablet {
       margin-left: 0;
-      margin-right: 0;
+      margin-right: $gutter;
     }
   }
 }

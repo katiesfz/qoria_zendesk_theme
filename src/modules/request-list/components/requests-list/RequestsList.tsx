@@ -66,6 +66,11 @@ const FormTitle = styled.h2`
   font-weight: 600;
 `;
 
+const H2 = styled.h2`
+  margin: 0;
+  margin-bottom: 1em;
+`;
+
   const { user, isLoading: isLoadingUser, error: userError } = useUser();
   const { organizations } = useOrganizations(user);
   const {
@@ -208,9 +213,9 @@ const FormTitle = styled.h2`
           />
           
           <article className="requests">
-            <FormTitle>
+            <H2 data-test-id="requests-list-title">
               {getTabLabel(selectedTab.name)}
-            </FormTitle>
+            </H2>
             <Mobile>
               <RequestsTabs
                 organizations={organizations}
