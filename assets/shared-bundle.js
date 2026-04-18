@@ -130,9 +130,9 @@ function e(e,t){return t.forEach(function(t){t&&"string"!=typeof t&&!Array.isArr
             }`,"modals.backdrop":gn`
                 font-family: inherit;
                 z-index: 500;
-            `,"tabs.tabs":e=>gn`
+            `,"tabs.tabs":gn`
             width: 100%;
-            ${e.isVertical&&gn`
+            ${e=>e.isVertical&&gn`
                 [data-garden-id="tabs.tab"] {
                     padding: 5px 5px 5px 16px;
                     border-left: 1px solid #cbcbcb;
