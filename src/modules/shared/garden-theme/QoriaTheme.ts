@@ -384,12 +384,11 @@ export const qoriaTheme = {
             color: ${themeSettings.visited_link_color};
             }
         `,
-       "buttons.button": css`
-         ${(props: IButtonProps) =>
-           props.isPrimary &&
-           css`
-             color: ${themeSettings.brand_text_color};
-           `}
+       "buttons.button": (props: IButtonProps) => css`
+            ${props.isPrimary &&
+                css`
+                    color: ${themeSettings.brand_text_color};
+                `}
        `,
        "forms.input": accessibleFormInputStyle,
        "forms.textarea": accessibleFormInputStyle,
@@ -427,32 +426,37 @@ export const qoriaTheme = {
                 font-family: inherit;
                 z-index: 500;
             `,
-        "tabs.tabs": css`
+        "tabs.tabs": (props: ITabsProps) => css`
             width: 100%;
-            ${(props: ITabsProps) => 
-                props.isVertical && css`
+            ${props.isVertical && css`
+                
+                color: #000000;
+            
                 [data-garden-id="tabs.tab"] {
                     padding: 5px 5px 5px 16px;
                     border-left: 1px solid #cbcbcb;
                     margin-bottom: 0;
-                    border-width: ${p => p.theme.borderWidths.sm};
+                    border-width: ${p=> p.theme.borderWidths.sm};
                     &:hover {
                         color: currentColor;
                         background-color:  ${(p) =>
-                                getColor({
-                                theme: p.theme,
-                                variable: "background.subtle"
-                            })};
+                            getColor({
+                            theme: p.theme,
+                            variable: "background.subtle"
+                            })
+                        };
+                    }
                     &:active {
                         color: currentColor;
                         background-color:  ${(p) =>
-                                getColor({
-                                theme: p.theme,
-                                variable: "background.subtle"
-                            })};
+                            getColor({
+                            theme: p.theme,
+                            variable: "background.subtle"
+                        })};
+                    }
                 }
             `}
-        `,
+        }`,
     },
     fonts: {
         mono: "SFMono-Regular,Consolas,\"Liberation Mono\",Menlo,Courier,monospace",
