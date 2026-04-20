@@ -143,7 +143,7 @@ function e(e,t){return t.forEach(function(t){t&&"string"!=typeof t&&!Array.isArr
                     color: currentColor;
                     background-color:  ${e=>Bo({theme:e.theme,variable:"background.subtle"})};
                 }
-                &:active {
+                &:active, &:focus {
                     color: currentColor;
                     background-color:  ${e=>Bo({theme:e.theme,variable:"background.subtle"})};
                 }

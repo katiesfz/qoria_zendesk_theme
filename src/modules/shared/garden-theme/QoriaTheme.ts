@@ -452,7 +452,7 @@ export const qoriaTheme = {
                         })
                     };
                 }
-                &:active {
+                &:active, &:focus {
                     color: currentColor;
                     background-color:  ${(p) =>
                         getColor({
