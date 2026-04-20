@@ -77,6 +77,14 @@ const themeSettings = {
     visited_link_color: "#515ba5"
 }
 
+
+interface IStyledTabProps {
+  $isSelected?: boolean;
+  $isVertical?: boolean;
+  theme: IGardenTheme;
+}
+
+
 const qoriaPalette = {
     ...PALETTE,
     "black": "#000",
@@ -426,9 +434,13 @@ export const qoriaTheme = {
                 font-family: inherit;
                 z-index: 500;
         `,
-        "tabs.tabs": (props: ITabsProps) => css`
+        "tabs.tabs": css`
             width: 100%;
-            ${props.isVertical && css`
+        `,
+        "tabs.tab": (props: IStyledTabProps) => {
+            console.log('Garden Tab Props:', props);
+            css`
+            ${props.$isVertical && css`
                 
                 color: #000000;
             
@@ -456,7 +468,7 @@ export const qoriaTheme = {
                     }
                 }
             `}
-        `
+        `}
     },
     fonts: {
         mono: "SFMono-Regular,Consolas,\"Liberation Mono\",Menlo,Courier,monospace",
