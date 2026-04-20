@@ -384,16 +384,15 @@ export const qoriaTheme = {
             color: ${themeSettings.visited_link_color};
             }
         `,
-       "buttons.button": (props: IButtonProps) => css`
-            ${props.isPrimary &&
-                css`
+        "buttons.button": (props: IButtonProps) => css`
+            ${props.isPrimary && css`
                     color: ${themeSettings.brand_text_color};
-                `}
-       `,
-       "forms.input": accessibleFormInputStyle,
-       "forms.textarea": accessibleFormInputStyle,
-       "forms.faux_input": accessibleFormInputStyle,
-       "dropdowns.combobox.trigger": accessibleFormWrapperStyle,
+            `}
+        `,
+        "forms.input": accessibleFormInputStyle,
+        "forms.textarea": accessibleFormInputStyle,
+        "forms.faux_input": accessibleFormInputStyle,
+        "dropdowns.combobox.trigger": accessibleFormWrapperStyle,
         "modals.drawer_modal": css`
             right: auto;
             left: 0;
@@ -421,11 +420,12 @@ export const qoriaTheme = {
                 -webkit-transition:-webkit-transform 0.25s ease-in-out;
                 -webkit-transition:transform 0.25s ease-in-out;
                 transition:transform 0.25s ease-in-out;
-            }`,
+            }
+        `,
         "modals.backdrop": css`
                 font-family: inherit;
                 z-index: 500;
-            `,
+        `,
         "tabs.tabs": (props: ITabsProps) => css`
             width: 100%;
             ${props.isVertical && css`
@@ -456,7 +456,7 @@ export const qoriaTheme = {
                     }
                 }
             `}
-        }`,
+        `
     },
     fonts: {
         mono: "SFMono-Regular,Consolas,\"Liberation Mono\",Menlo,Courier,monospace",
