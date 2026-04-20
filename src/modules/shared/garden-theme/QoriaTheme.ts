@@ -81,7 +81,7 @@ const themeSettings = {
 interface IStyledTabProps {
   $isSelected?: boolean;
   $isVertical?: boolean;
-  theme: IGardenTheme;
+  theme: DefaultTheme;
 }
 
 
@@ -439,36 +439,37 @@ export const qoriaTheme = {
         `,
         "tabs.tab": (props: IStyledTabProps) => {
             console.log('Garden Tab Props:', props);
-            css`
-            ${props.$isVertical && css`
+            if (props.$isVertical) {
+                return css`
+                    color: #000000;
                 
-                color: #000000;
-            
-                [data-garden-id="tabs.tab"] {
-                    padding: 5px 5px 5px 16px;
-                    border-left: 1px solid #cbcbcb;
-                    margin-bottom: 0;
-                    border-width: ${p=> p.theme.borderWidths.sm};
-                    &:hover {
-                        color: currentColor;
-                        background-color:  ${(p) =>
-                            getColor({
-                            theme: p.theme,
-                            variable: "background.subtle"
-                            })
-                        };
+                    [data-garden-id="tabs.tab"] {
+                        padding: 5px 5px 5px 16px;
+                        border-left: 1px solid #cbcbcb;
+                        margin-bottom: 0;
+                        border-width: ${p=> p.theme.borderWidths.sm};
+                        &:hover {
+                            color: currentColor;
+                            background-color:  ${(p) =>
+                                getColor({
+                                theme: p.theme,
+                                variable: "background.subtle"
+                                })
+                            };
+                        }
+                        &:active {
+                            color: currentColor;
+                            background-color:  ${(p) =>
+                                getColor({
+                                theme: p.theme,
+                                variable: "background.subtle"
+                            })};
+                        }
                     }
-                    &:active {
-                        color: currentColor;
-                        background-color:  ${(p) =>
-                            getColor({
-                            theme: p.theme,
-                            variable: "background.subtle"
-                        })};
-                    }
-                }
-            `}
-        `}
+                `
+            }
+            return css``
+        }
     },
     fonts: {
         mono: "SFMono-Regular,Consolas,\"Liberation Mono\",Menlo,Courier,monospace",
