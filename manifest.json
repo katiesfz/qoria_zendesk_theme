@@ -215,6 +215,87 @@
           "type": "file",
           "description": "Product 3 icon",
           "label": "Product 3 icon"
+        },
+        {
+          "identifier": "product_4_name",
+          "type": "text",
+          "description": "product_4_name_description",
+          "label": "Product 4 name",
+          "value": "Classwize"
+        },
+        {
+          "identifier": "product_4_description",
+          "type": "text",
+          "description": "product_4_description_description",
+          "label": "Product 4 description",
+          "value": "Classwize gives teachers real-time visibility and control over students' online activities in class."
+        },
+        {
+          "identifier": "product_4_link",
+          "type": "text",
+          "description": "product_4_link_description",
+          "label": "Product 4 link",
+          "value": "https://help.classwize.net/"
+        },
+        {
+          "identifier": "product_4_icon",
+          "type": "file",
+          "description": "Product 4 icon",
+          "label": "Product 4 icon"
+        },
+        {
+          "identifier": "product_5_name",
+          "type": "text",
+          "description": "product_5_name_description",
+          "label": "Product 5 name",
+          "value": "Classwize"
+        },
+        {
+          "identifier": "product_5_description",
+          "type": "text",
+          "description": "product_5_description_description",
+          "label": "Product 5 description",
+          "value": "Classwize gives teachers real-time visibility and control over students' online activities in class."
+        },
+        {
+          "identifier": "product_5_link",
+          "type": "text",
+          "description": "product_5_link_description",
+          "label": "Product 5 link",
+          "value": "https://help.classwize.net/"
+        },
+        {
+          "identifier": "product_5_icon",
+          "type": "file",
+          "description": "Product 5 icon",
+          "label": "Product 5 icon"
+        },
+        {
+          "identifier": "product_6_name",
+          "type": "text",
+          "description": "product_6_name_description",
+          "label": "Product 6 name",
+          "value": "Classwize"
+        },
+        {
+          "identifier": "product_6_description",
+          "type": "text",
+          "description": "product_6_description_description",
+          "label": "Product 6 description",
+          "value": "Classwize gives teachers real-time visibility and control over students' online activities in class."
+        },
+        {
+          "identifier": "product_6_link",
+          "type": "text",
+          "description": "product_6_link_description",
+          "label": "Product 6 link",
+          "value": "https://help.classwize.net/"
+        },
+        {
+          "identifier": "product_6_icon",
+          "type": "file",
+          "description": "Product 6 icon",
+          "label": "Product 6 icon"
         }
       ]
     },
