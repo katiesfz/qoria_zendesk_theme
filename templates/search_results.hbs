@@ -22,115 +22,119 @@
 <div class="container">
   <div class="search-results-container" id="search-results-container">
     {{#if results}}
-      <aside class="search-results-sidebar" aria-labelledby="search-results">
-        {{#if source_filters}}
-          <section class="filters-in-section collapsible-sidebar">
-            <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_source_menu'}}">
-              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
-              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
-            </button>
-            <h5 class="collapsible-sidebar-title sidenav-title">{{t 'filter_source'}}</h5>
-            <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
-              {{#each source_filters}}
-                <li>
-                {{#if selected}}
-                  <a href="{{url}}" class="sidenav-item active" aria-current="page">
-                {{else}}
-                  <a href="{{url}}" class="sidenav-item">
-                {{/if}}
-                    <span class="sidenav-subitem filter-name">{{name}}</span>
-                    <span class="sidenav-subitem doc-count">{{count}}</span>
-                  </a>
-                </li>
-              {{/each}}
-              <button class="see-all-filters" aria-hidden="true" aria-label="{{t 'show_more_sources'}}">{{t 'show_more_sources'}}</button>
-            </ul>
-          </section>
-        {{/if}}
-        {{#if type_filters}}
-          <section class="filters-in-section collapsible-sidebar">
-            <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_type_menu'}}">
-              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
-              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
-            </button>
-            <h5 class="collapsible-sidebar-title sidenav-title">{{t 'filter_type'}}</h5>
-            <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
-              {{#each type_filters}}
-                <li>
-                {{#if selected}}
-                  <a href="{{url}}" class="sidenav-item active" aria-current="page">
-                {{else}}
-                  <a href="{{url}}" class="sidenav-item">
-                {{/if}}
-                    <span class="sidenav-subitem filter-name">{{name}}</span>
-                    <span class="sidenav-subitem doc-count">{{count}}</span>
-                  </a>
-                </li>
-              {{/each}}
-            </ul>
-          </section>
-        {{/if}}
-        {{#if subfilters}}
-          <section class="filters-in-section collapsible-sidebar">
-            <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_subfilter_menu'}}">
-              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
-              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
-            </button>
-            {{#is current_filter.identifier 'knowledge_base'}}
-              <h5 class="collapsible-sidebar-title sidenav-title">{{t 'filter_by_category'}}</h5>
-            {{/is}}
-            {{#is current_filter.identifier 'community'}}
-              <h5 class="collapsible-sidebar-title sidenav-title">{{t 'filter_by_topic'}}</h5>
-            {{/is}}
-            <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
-              {{#each subfilters}}
-                <li>
-                  {{#if selected}}
-                    <a href="{{url}}" class="sidenav-item active" aria-current="page">
-                  {{else}}
-                    <a href="{{url}}" class="sidenav-item">
-                  {{/if}}
-                    <span class="sidenav-subitem filter-name">{{name}}</span>
-                    <span class="sidenav-subitem doc-count">{{count}}</span>
-                  </a>
-                </li>
-              {{/each}}
-              {{#is current_filter.identifier 'knowledge_base'}}
-                <button class="see-all-filters" aria-hidden="true" aria-label="{{t 'show_more_categories'}}">{{t 'show_more_categories'}}</button>
-              {{/is}}
-              {{#is current_filter.identifier 'community'}}
-                <button class="see-all-filters" aria-hidden="true" aria-label="{{t 'show_more_topics'}}">{{t 'show_more_topics'}}</button>
-              {{/is}}
-            </ul>
-          </section>
-        {{/if}}
-        {{#if content_tag_filters}}
-          <section class="filters-in-section collapsible-sidebar">
-            <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false">
-              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
-              <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
-            </button>
-            <h5 class="collapsible-sidebar-title sidenav-title">{{t 'filter_content_tag'}}</h5>
-            <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
-              {{#each content_tag_filters}}
-                {{#if selected}}
-                  <li class="sidenav-tag">
-                    <div class="content-tag">
-                      <span class="label">{{name}}</span>
-                      <a href="{{url}}" aria-current="page">
-                        <span>
-                          <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false"  aria-hidden="true" >
-                              <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
-                          </svg>
-                        </span>
+      <aside class="search-results-sidebar sidebar sidebar-sticky">
+        <div class="sidebar-contents">
+          <div class="sidebar-section">
+            {{#if source_filters}}
+              <section class="filters-in-section collapsible-sidebar" aria-labelledby="filter-source">
+                <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_source_menu'}}">
+                  <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
+                  <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
+                </button>
+                <h5 class="collapsible-sidebar-title sidenav-title" id="filter-source">{{t 'filter_source'}}</h5>
+                <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
+                  {{#each source_filters}}
+                    <li>
+                    {{#if selected}}
+                      <a href="{{url}}" class="sidenav-item active" aria-current="page">
+                    {{else}}
+                      <a href="{{url}}" class="sidenav-item">
+                    {{/if}}
+                        <span class="sidenav-subitem filter-name">{{name}}</span>
+                        <span class="sidenav-subitem doc-count">{{count}}</span>
                       </a>
-                    </div>
-                  </li>
-                {{/if}}
-              {{/each}}
-            </ul>
-          </section>
-        {{/if}}
+                    </li>
+                  {{/each}}
+                  <button class="see-all-filters" aria-hidden="true" aria-label="{{t 'show_more_sources'}}">{{t 'show_more_sources'}}</button>
+                </ul>
+              </section>
+            {{/if}}
+            {{#if type_filters}}
+              <section class="filters-in-section collapsible-sidebar" aria-labelledby="filter-type">
+                <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_type_menu'}}">
+                  <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
+                  <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
+                </button>
+                <h5 class="collapsible-sidebar-title sidenav-title" id="filter-type">{{t 'filter_type'}}</h5>
+                <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
+                  {{#each type_filters}}
+                    <li>
+                    {{#if selected}}
+                      <a href="{{url}}" class="sidenav-item active" aria-current="page">
+                    {{else}}
+                      <a href="{{url}}" class="sidenav-item">
+                    {{/if}}
+                        <span class="sidenav-subitem filter-name">{{name}}</span>
+                        <span class="sidenav-subitem doc-count">{{count}}</span>
+                      </a>
+                    </li>
+                  {{/each}}
+                </ul>
+              <section>
+            {{/if}}
+            {{#if subfilters}}
+              <section class="filters-in-section collapsible-sidebar" aria-labelledby="filter-category">
+                <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_subfilter_menu'}}">
+                  <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
+                  <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
+                </button>
+                {{#is current_filter.identifier 'knowledge_base'}}
+                  <h5 class="collapsible-sidebar-title sidenav-title" id="filter-category">{{t 'filter_by_category'}}</h5>
+                {{/is}}
+                {{#is current_filter.identifier 'community'}}
+                  <h5 class="collapsible-sidebar-title sidenav-title" id="filter-category">{{t 'filter_by_topic'}}</h5>
+                {{/is}}
+                <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
+                  {{#each subfilters}}
+                    <li>
+                      {{#if selected}}
+                        <a href="{{url}}" class="sidenav-item active" aria-current="page">
+                      {{else}}
+                        <a href="{{url}}" class="sidenav-item">
+                      {{/if}}
+                        <span class="sidenav-subitem filter-name">{{name}}</span>
+                        <span class="sidenav-subitem doc-count">{{count}}</span>
+                      </a>
+                    </li>
+                  {{/each}}
+                  {{#is current_filter.identifier 'knowledge_base'}}
+                    <button class="see-all-filters" aria-hidden="true" aria-label="{{t 'show_more_categories'}}">{{t 'show_more_categories'}}</button>
+                  {{/is}}
+                  {{#is current_filter.identifier 'community'}}
+                    <button class="see-all-filters" aria-hidden="true" aria-label="{{t 'show_more_topics'}}">{{t 'show_more_topics'}}</button>
+                  {{/is}}
+                </ul>
+              </section>
+            {{/if}}
+            {{#if content_tag_filters}}
+              <section class="filters-in-section collapsible-sidebar" aria-labelledby="filter-tag">
+                <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false">
+                  <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
+                  <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
+                </button>
+                <h5 class="collapsible-sidebar-title sidenav-title" id="filter-tag">{{t 'filter_content_tag'}}</h5>
+                <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
+                  {{#each content_tag_filters}}
+                    {{#if selected}}
+                      <li class="sidenav-tag">
+                        <div class="content-tag">
+                          <span class="label">{{name}}</span>
+                          <a href="{{url}}" aria-current="page">
+                            <span>
+                              <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false"  aria-hidden="true" >
+                                  <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
+                              </svg>
+                            </span>
+                          </a>
+                        </div>
+                      </li>
+                    {{/if}}
+                  {{/each}}
+                </ul>
+              </section>
+            {{/if}}
+          </div>
+        </div>
       </aside>
       <article id="main-content" class="search-results">
         <h1 class="search-results-subheading">
