@@ -15,16 +15,16 @@
 
 <div class="container">
   <div class="activities-container" id="activities-container">
-    <aside class="activities-sidebar" aria-labelledby="section-activities-title">
+    <aside class="activities-sidebar sidebar" aria-labelledby="section-activities-title">
       <div class="sidebar-sticky activity-filter-container sidebar-contents">
         <div class="sidebar-section">
-          <section class="filters-in-section collapsible-sidebar">
+          <section class="filters-in-section collapsible-sidebar" aria-labelledby="activities">
             <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="">
               <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
               <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
             </button>
             
-            <h4 class="collapsible-sidebar-title sidenav-title">Activities</h4>
+            <h4 class="collapsible-sidebar-title sidenav-title" id="activities">Activities</h4>
             <div class="collapsible-sidebar-body">
               <ul>
                 <li>{{link 'contributions'}}</li>
@@ -34,22 +34,24 @@
               </ul>
             </div>
           </section>
-          <section class="filters-in-section collapsible-sidebar">
+          <section class="filters-in-section collapsible-sidebar" aria-labelledby="filter-type">
             <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="">
               <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon chevron-icon far fa-chevron-down"></i>
               <i focusable="false" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon far fa-times"></i>
             </button>
           
-            <h4 class="collapsible-sidebar-title sidenav-title">Filter by type</h4>
-            <ul>
-              {{#each filters}}
-                {{#if selected}}
-                  <li class=""><a href="{{url}}" class="current active" aria-current="page">{{name}}</a></li>
-                {{else}}
-                  <li><a href="{{url}}">{{name}}</a></li>
-                {{/if}}
-              {{/each}}
-            </ul>
+            <h4 class="collapsible-sidebar-title sidenav-title" id="filter-type">Filter by type</h4>
+            <div class="collapsible-sidebar-body">
+              <ul>
+                {{#each filters}}
+                  {{#if selected}}
+                    <li class=""><a href="{{url}}" class="current active" aria-current="page">{{name}}</a></li>
+                  {{else}}
+                    <li><a href="{{url}}">{{name}}</a></li>
+                  {{/if}}
+                {{/each}}
+              </ul>
+            </div>
           </section>
         </div>
       </div>
