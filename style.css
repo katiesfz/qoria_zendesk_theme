@@ -1625,7 +1625,7 @@ ul {
   flex-direction: column;
   gap: 16px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .sidebar, .profile-sidebar, .activities-sidebar, .requests-sidebar, .article-sidebar {
     border: 0;
     flex: 0 0 25%;
@@ -1638,7 +1638,7 @@ ul {
   position: sticky;
   top: 53px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .sidebar-sticky {
     top: 71px;
   }
@@ -1652,7 +1652,7 @@ ul {
   background: #FFFFFF;
   padding: 24px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .sidebar-section {
     padding: 32px;
   }
@@ -1661,7 +1661,7 @@ ul {
   margin-left: calc(-0.5 * var(--gutter-x));
   margin-right: calc(-0.5 * var(--gutter-x));
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .sidebar-flush {
     margin-left: 0;
     margin-right: 16px;
@@ -2864,7 +2864,42 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   list-style-type: disc;
 }
 .article-body pre:has(> code) {
-  padding: 0;
+  border-radius: 4px;
+  background-color: #364255;
+  border: none;
+  padding: 32px;
+  font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: #ffffff;
+  overflow-x: auto;
+  position: relative;
+}
+.article-body pre:has(> code) .code-copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 16px;
+  background-color: #364255;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.825rem;
+}
+.article-body pre:has(> code) .code-copy-button:hover {
+  background-color: #303b4c;
+}
+.article-body pre:has(> code) .code-copy-button:focus::before, .article-body pre:has(> code) .code-copy-button:focus::after, .article-body pre:has(> code) .code-copy-button:hover::before, .article-body pre:has(> code) .code-copy-button:hover::after {
+  opacity: 0;
+}
+.article-body pre:has(> code) .code-copy-button.copied::before, .article-body pre:has(> code) .code-copy-button.copied::after {
+  opacity: 1;
+  content: "Copied!";
+}
+.article-body pre:has(> code) .code-copy-button.copied::before, .article-body pre:has(> code) .code-copy-button.copied::after {
+  animation-duration: 0.2s;
+  animation-name: tooltip-slide-top;
+}
+.article-body pre:has(> code) .code-copy-button.copied::after {
+  animation-name: tooltip-caret-slide-top;
 }
 .article-body pre:not(:has(> code)) {
   border-radius: 4px;
@@ -2878,10 +2913,12 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   display: inline-block;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
+  max-width: 100%;
 }
 .article-body pre {
   overflow: auto;
   white-space: pre;
+  max-width: 100%;
 }
 .article-body blockquote {
   padding: 16px;
@@ -3809,7 +3846,42 @@ code.hljs {
   list-style-type: disc;
 }
 .comment-body pre:has(> code) {
-  padding: 0;
+  border-radius: 4px;
+  background-color: #364255;
+  border: none;
+  padding: 32px;
+  font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: #ffffff;
+  overflow-x: auto;
+  position: relative;
+}
+.comment-body pre:has(> code) .code-copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 16px;
+  background-color: #364255;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.825rem;
+}
+.comment-body pre:has(> code) .code-copy-button:hover {
+  background-color: #303b4c;
+}
+.comment-body pre:has(> code) .code-copy-button:focus::before, .comment-body pre:has(> code) .code-copy-button:focus::after, .comment-body pre:has(> code) .code-copy-button:hover::before, .comment-body pre:has(> code) .code-copy-button:hover::after {
+  opacity: 0;
+}
+.comment-body pre:has(> code) .code-copy-button.copied::before, .comment-body pre:has(> code) .code-copy-button.copied::after {
+  opacity: 1;
+  content: "Copied!";
+}
+.comment-body pre:has(> code) .code-copy-button.copied::before, .comment-body pre:has(> code) .code-copy-button.copied::after {
+  animation-duration: 0.2s;
+  animation-name: tooltip-slide-top;
+}
+.comment-body pre:has(> code) .code-copy-button.copied::after {
+  animation-name: tooltip-caret-slide-top;
 }
 .comment-body pre:not(:has(> code)) {
   border-radius: 4px;
@@ -3823,10 +3895,12 @@ code.hljs {
   display: inline-block;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
+  max-width: 100%;
 }
 .comment-body pre {
   overflow: auto;
   white-space: pre;
+  max-width: 100%;
 }
 .comment-body blockquote {
   padding: 16px;
@@ -4433,7 +4507,42 @@ code.hljs {
   list-style-type: disc;
 }
 .post-body pre:has(> code) {
-  padding: 0;
+  border-radius: 4px;
+  background-color: #364255;
+  border: none;
+  padding: 32px;
+  font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: #ffffff;
+  overflow-x: auto;
+  position: relative;
+}
+.post-body pre:has(> code) .code-copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 16px;
+  background-color: #364255;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.825rem;
+}
+.post-body pre:has(> code) .code-copy-button:hover {
+  background-color: #303b4c;
+}
+.post-body pre:has(> code) .code-copy-button:focus::before, .post-body pre:has(> code) .code-copy-button:focus::after, .post-body pre:has(> code) .code-copy-button:hover::before, .post-body pre:has(> code) .code-copy-button:hover::after {
+  opacity: 0;
+}
+.post-body pre:has(> code) .code-copy-button.copied::before, .post-body pre:has(> code) .code-copy-button.copied::after {
+  opacity: 1;
+  content: "Copied!";
+}
+.post-body pre:has(> code) .code-copy-button.copied::before, .post-body pre:has(> code) .code-copy-button.copied::after {
+  animation-duration: 0.2s;
+  animation-name: tooltip-slide-top;
+}
+.post-body pre:has(> code) .code-copy-button.copied::after {
+  animation-name: tooltip-caret-slide-top;
 }
 .post-body pre:not(:has(> code)) {
   border-radius: 4px;
@@ -4447,10 +4556,12 @@ code.hljs {
   display: inline-block;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
+  max-width: 100%;
 }
 .post-body pre {
   overflow: auto;
   white-space: pre;
+  max-width: 100%;
 }
 .post-body blockquote {
   padding: 16px;
@@ -5197,7 +5308,42 @@ code.hljs {
   list-style-type: disc;
 }
 .activities-body pre:has(> code) {
-  padding: 0;
+  border-radius: 4px;
+  background-color: #364255;
+  border: none;
+  padding: 32px;
+  font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: #ffffff;
+  overflow-x: auto;
+  position: relative;
+}
+.activities-body pre:has(> code) .code-copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 16px;
+  background-color: #364255;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.825rem;
+}
+.activities-body pre:has(> code) .code-copy-button:hover {
+  background-color: #303b4c;
+}
+.activities-body pre:has(> code) .code-copy-button:focus::before, .activities-body pre:has(> code) .code-copy-button:focus::after, .activities-body pre:has(> code) .code-copy-button:hover::before, .activities-body pre:has(> code) .code-copy-button:hover::after {
+  opacity: 0;
+}
+.activities-body pre:has(> code) .code-copy-button.copied::before, .activities-body pre:has(> code) .code-copy-button.copied::after {
+  opacity: 1;
+  content: "Copied!";
+}
+.activities-body pre:has(> code) .code-copy-button.copied::before, .activities-body pre:has(> code) .code-copy-button.copied::after {
+  animation-duration: 0.2s;
+  animation-name: tooltip-slide-top;
+}
+.activities-body pre:has(> code) .code-copy-button.copied::after {
+  animation-name: tooltip-caret-slide-top;
 }
 .activities-body pre:not(:has(> code)) {
   border-radius: 4px;
@@ -5211,10 +5357,12 @@ code.hljs {
   display: inline-block;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
+  max-width: 100%;
 }
 .activities-body pre {
   overflow: auto;
   white-space: pre;
+  max-width: 100%;
 }
 .activities-body blockquote {
   padding: 16px;
@@ -6262,22 +6410,6 @@ code.hljs {
     flex-direction: row;
   }
 }
-.search-results-sidebar {
-  flex: 1 0 auto;
-  margin-bottom: 16px;
-}
-@media (min-width: 1024px) {
-  .search-results-sidebar {
-    border: 0;
-    flex: 0 0 25%;
-    height: auto;
-    max-width: 25%;
-    margin-right: 16px;
-  }
-}
-.search-results-sidebar section {
-  margin-bottom: 16px;
-}
 .search-results-sidebar .see-all-filters[aria-hidden=true] {
   display: none;
 }
@@ -6972,4 +7104,208 @@ zd-summary-block {
 }
 [dir=rtl] zd-summary-block {
   border-right-color: #859fa1;
+}
+
+/**
+ * Tooltip ([data-tooltip]) from Pico CSS
+ */
+[data-tooltip], .article-body pre:has(> code) .code-copy-button, .comment-body pre:has(> code) .code-copy-button, .post-body pre:has(> code) .code-copy-button, .activities-body pre:has(> code) .code-copy-button {
+  position: relative;
+}
+[data-tooltip]:not(a, button, input), .article-body pre:has(> code) .code-copy-button:not(a, button, input), .comment-body pre:has(> code) .code-copy-button:not(a, button, input), .post-body pre:has(> code) .code-copy-button:not(a, button, input), .activities-body pre:has(> code) .code-copy-button:not(a, button, input) {
+  border-bottom: 1px dotted;
+  text-decoration: none;
+  cursor: help;
+}
+.article-body pre:has(> code) [data-placement=top].code-copy-button::before, .comment-body pre:has(> code) [data-placement=top].code-copy-button::before, .post-body pre:has(> code) [data-placement=top].code-copy-button::before, .activities-body pre:has(> code) [data-placement=top].code-copy-button::before, .article-body pre:has(> code) [data-placement=top].code-copy-button::after, .comment-body pre:has(> code) [data-placement=top].code-copy-button::after, .post-body pre:has(> code) [data-placement=top].code-copy-button::after, .activities-body pre:has(> code) [data-placement=top].code-copy-button::after, [data-tooltip]::before, .article-body pre:has(> code) .code-copy-button::before, .comment-body pre:has(> code) .code-copy-button::before, .post-body pre:has(> code) .code-copy-button::before, .activities-body pre:has(> code) .code-copy-button::before, [data-tooltip]::after, .article-body pre:has(> code) .code-copy-button::after, .comment-body pre:has(> code) .code-copy-button::after, .post-body pre:has(> code) .code-copy-button::after, .activities-body pre:has(> code) .code-copy-button::after {
+  display: block;
+  z-index: 99;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  padding: 0.25rem 0.5rem;
+  overflow: hidden;
+  transform: translate(-50%, -0.25rem);
+  border-radius: 4px;
+  background: #0f172a;
+  content: attr(data-tooltip);
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+.article-body pre:has(> code) [data-placement=top].code-copy-button::after, .comment-body pre:has(> code) [data-placement=top].code-copy-button::after, .post-body pre:has(> code) [data-placement=top].code-copy-button::after, .activities-body pre:has(> code) [data-placement=top].code-copy-button::after, [data-tooltip]::after, .article-body pre:has(> code) .code-copy-button::after, .comment-body pre:has(> code) .code-copy-button::after, .post-body pre:has(> code) .code-copy-button::after, .activities-body pre:has(> code) .code-copy-button::after {
+  padding: 0;
+  transform: translate(-50%, 0rem);
+  border-top: 0.3rem solid;
+  border-right: 0.3rem solid transparent;
+  border-left: 0.3rem solid transparent;
+  border-radius: 0;
+  background-color: transparent;
+  content: "";
+  color: #0f172a;
+}
+[data-placement=bottom][data-tooltip]::before, .article-body pre:has(> code) [data-placement=bottom].code-copy-button::before, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button::before, .post-body pre:has(> code) [data-placement=bottom].code-copy-button::before, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button::before, [data-placement=bottom][data-tooltip]::after, .article-body pre:has(> code) [data-placement=bottom].code-copy-button::after, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button::after, .post-body pre:has(> code) [data-placement=bottom].code-copy-button::after, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button::after {
+  top: 100%;
+  bottom: auto;
+  transform: translate(-50%, 0.25rem);
+}
+[data-placement=bottom][data-tooltip]:after, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:after, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:after, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:after, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:after {
+  transform: translate(-50%, -0.3rem);
+  border: 0.3rem solid transparent;
+  border-bottom: 0.3rem solid;
+}
+[data-placement=left][data-tooltip]::before, .article-body pre:has(> code) [data-placement=left].code-copy-button::before, .comment-body pre:has(> code) [data-placement=left].code-copy-button::before, .post-body pre:has(> code) [data-placement=left].code-copy-button::before, .activities-body pre:has(> code) [data-placement=left].code-copy-button::before, [data-placement=left][data-tooltip]::after, .article-body pre:has(> code) [data-placement=left].code-copy-button::after, .comment-body pre:has(> code) [data-placement=left].code-copy-button::after, .post-body pre:has(> code) [data-placement=left].code-copy-button::after, .activities-body pre:has(> code) [data-placement=left].code-copy-button::after {
+  top: 50%;
+  right: 100%;
+  bottom: auto;
+  left: auto;
+  transform: translate(-0.25rem, -50%);
+}
+[data-placement=left][data-tooltip]:after, .article-body pre:has(> code) [data-placement=left].code-copy-button:after, .comment-body pre:has(> code) [data-placement=left].code-copy-button:after, .post-body pre:has(> code) [data-placement=left].code-copy-button:after, .activities-body pre:has(> code) [data-placement=left].code-copy-button:after {
+  transform: translate(0.3rem, -50%);
+  border: 0.3rem solid transparent;
+  border-left: 0.3rem solid;
+}
+[data-placement=right][data-tooltip]::before, .article-body pre:has(> code) [data-placement=right].code-copy-button::before, .comment-body pre:has(> code) [data-placement=right].code-copy-button::before, .post-body pre:has(> code) [data-placement=right].code-copy-button::before, .activities-body pre:has(> code) [data-placement=right].code-copy-button::before, [data-placement=right][data-tooltip]::after, .article-body pre:has(> code) [data-placement=right].code-copy-button::after, .comment-body pre:has(> code) [data-placement=right].code-copy-button::after, .post-body pre:has(> code) [data-placement=right].code-copy-button::after, .activities-body pre:has(> code) [data-placement=right].code-copy-button::after {
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  left: 100%;
+  transform: translate(0.25rem, -50%);
+}
+[data-placement=right][data-tooltip]:after, .article-body pre:has(> code) [data-placement=right].code-copy-button:after, .comment-body pre:has(> code) [data-placement=right].code-copy-button:after, .post-body pre:has(> code) [data-placement=right].code-copy-button:after, .activities-body pre:has(> code) [data-placement=right].code-copy-button:after {
+  transform: translate(-0.3rem, -50%);
+  border: 0.3rem solid transparent;
+  border-right: 0.3rem solid;
+}
+[data-tooltip]:focus::before, .article-body pre:has(> code) .code-copy-button:focus::before, .comment-body pre:has(> code) .code-copy-button:focus::before, .post-body pre:has(> code) .code-copy-button:focus::before, .activities-body pre:has(> code) .code-copy-button:focus::before, [data-tooltip]:focus::after, .article-body pre:has(> code) .code-copy-button:focus::after, .comment-body pre:has(> code) .code-copy-button:focus::after, .post-body pre:has(> code) .code-copy-button:focus::after, .activities-body pre:has(> code) .code-copy-button:focus::after, [data-tooltip]:hover::before, .article-body pre:has(> code) .code-copy-button:hover::before, .comment-body pre:has(> code) .code-copy-button:hover::before, .post-body pre:has(> code) .code-copy-button:hover::before, .activities-body pre:has(> code) .code-copy-button:hover::before, [data-tooltip]:hover::after, .article-body pre:has(> code) .code-copy-button:hover::after, .comment-body pre:has(> code) .code-copy-button:hover::after, .post-body pre:has(> code) .code-copy-button:hover::after, .activities-body pre:has(> code) .code-copy-button:hover::after {
+  opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .article-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::before, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::before, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::before, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::before, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::before, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::before, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::before, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::before, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, [data-tooltip]:focus::before, .article-body pre:has(> code) .code-copy-button:focus::before, .comment-body pre:has(> code) .code-copy-button:focus::before, .post-body pre:has(> code) .code-copy-button:focus::before, .activities-body pre:has(> code) .code-copy-button:focus::before, [data-tooltip]:focus::after, .article-body pre:has(> code) .code-copy-button:focus::after, .comment-body pre:has(> code) .code-copy-button:focus::after, .post-body pre:has(> code) .code-copy-button:focus::after, .activities-body pre:has(> code) .code-copy-button:focus::after, [data-tooltip]:hover::before, .article-body pre:has(> code) .code-copy-button:hover::before, .comment-body pre:has(> code) .code-copy-button:hover::before, .post-body pre:has(> code) .code-copy-button:hover::before, .activities-body pre:has(> code) .code-copy-button:hover::before, [data-tooltip]:hover::after, .article-body pre:has(> code) .code-copy-button:hover::after, .comment-body pre:has(> code) .code-copy-button:hover::after, .post-body pre:has(> code) .code-copy-button:hover::after, .activities-body pre:has(> code) .code-copy-button:hover::after {
+    animation-duration: 0.2s;
+    animation-name: tooltip-slide-top;
+  }
+  .article-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, [data-tooltip]:focus::after, .article-body pre:has(> code) .code-copy-button:focus::after, .comment-body pre:has(> code) .code-copy-button:focus::after, .post-body pre:has(> code) .code-copy-button:focus::after, .activities-body pre:has(> code) .code-copy-button:focus::after, [data-tooltip]:hover::after, .article-body pre:has(> code) .code-copy-button:hover::after, .comment-body pre:has(> code) .code-copy-button:hover::after, .post-body pre:has(> code) .code-copy-button:hover::after, .activities-body pre:has(> code) .code-copy-button:hover::after {
+    animation-name: tooltip-caret-slide-top;
+  }
+  [data-placement=bottom][data-tooltip]:focus::before, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::before, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::before, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::before, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::before, [data-placement=bottom][data-tooltip]:focus::after, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, [data-placement=bottom][data-tooltip]:hover::before, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::before, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::before, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::before, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::before, [data-placement=bottom][data-tooltip]:hover::after, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after {
+    animation-duration: 0.2s;
+    animation-name: tooltip-slide-bottom;
+  }
+  [data-placement=bottom][data-tooltip]:focus::after, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:focus::after, [data-placement=bottom][data-tooltip]:hover::after, .article-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .comment-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .post-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after, .activities-body pre:has(> code) [data-placement=bottom].code-copy-button:hover::after {
+    animation-name: tooltip-caret-slide-bottom;
+  }
+  [data-placement=left][data-tooltip]:focus::before, .article-body pre:has(> code) [data-placement=left].code-copy-button:focus::before, .comment-body pre:has(> code) [data-placement=left].code-copy-button:focus::before, .post-body pre:has(> code) [data-placement=left].code-copy-button:focus::before, .activities-body pre:has(> code) [data-placement=left].code-copy-button:focus::before, [data-placement=left][data-tooltip]:focus::after, .article-body pre:has(> code) [data-placement=left].code-copy-button:focus::after, .comment-body pre:has(> code) [data-placement=left].code-copy-button:focus::after, .post-body pre:has(> code) [data-placement=left].code-copy-button:focus::after, .activities-body pre:has(> code) [data-placement=left].code-copy-button:focus::after, [data-placement=left][data-tooltip]:hover::before, .article-body pre:has(> code) [data-placement=left].code-copy-button:hover::before, .comment-body pre:has(> code) [data-placement=left].code-copy-button:hover::before, .post-body pre:has(> code) [data-placement=left].code-copy-button:hover::before, .activities-body pre:has(> code) [data-placement=left].code-copy-button:hover::before, [data-placement=left][data-tooltip]:hover::after, .article-body pre:has(> code) [data-placement=left].code-copy-button:hover::after, .comment-body pre:has(> code) [data-placement=left].code-copy-button:hover::after, .post-body pre:has(> code) [data-placement=left].code-copy-button:hover::after, .activities-body pre:has(> code) [data-placement=left].code-copy-button:hover::after {
+    animation-duration: 0.2s;
+    animation-name: tooltip-slide-left;
+  }
+  [data-placement=left][data-tooltip]:focus::after, .article-body pre:has(> code) [data-placement=left].code-copy-button:focus::after, .comment-body pre:has(> code) [data-placement=left].code-copy-button:focus::after, .post-body pre:has(> code) [data-placement=left].code-copy-button:focus::after, .activities-body pre:has(> code) [data-placement=left].code-copy-button:focus::after, [data-placement=left][data-tooltip]:hover::after, .article-body pre:has(> code) [data-placement=left].code-copy-button:hover::after, .comment-body pre:has(> code) [data-placement=left].code-copy-button:hover::after, .post-body pre:has(> code) [data-placement=left].code-copy-button:hover::after, .activities-body pre:has(> code) [data-placement=left].code-copy-button:hover::after {
+    animation-name: tooltip-caret-slide-left;
+  }
+  [data-placement=right][data-tooltip]:focus::before, .article-body pre:has(> code) [data-placement=right].code-copy-button:focus::before, .comment-body pre:has(> code) [data-placement=right].code-copy-button:focus::before, .post-body pre:has(> code) [data-placement=right].code-copy-button:focus::before, .activities-body pre:has(> code) [data-placement=right].code-copy-button:focus::before, [data-placement=right][data-tooltip]:focus::after, .article-body pre:has(> code) [data-placement=right].code-copy-button:focus::after, .comment-body pre:has(> code) [data-placement=right].code-copy-button:focus::after, .post-body pre:has(> code) [data-placement=right].code-copy-button:focus::after, .activities-body pre:has(> code) [data-placement=right].code-copy-button:focus::after, [data-placement=right][data-tooltip]:hover::before, .article-body pre:has(> code) [data-placement=right].code-copy-button:hover::before, .comment-body pre:has(> code) [data-placement=right].code-copy-button:hover::before, .post-body pre:has(> code) [data-placement=right].code-copy-button:hover::before, .activities-body pre:has(> code) [data-placement=right].code-copy-button:hover::before, [data-placement=right][data-tooltip]:hover::after, .article-body pre:has(> code) [data-placement=right].code-copy-button:hover::after, .comment-body pre:has(> code) [data-placement=right].code-copy-button:hover::after, .post-body pre:has(> code) [data-placement=right].code-copy-button:hover::after, .activities-body pre:has(> code) [data-placement=right].code-copy-button:hover::after {
+    animation-duration: 0.2s;
+    animation-name: tooltip-slide-right;
+  }
+  [data-placement=right][data-tooltip]:focus::after, .article-body pre:has(> code) [data-placement=right].code-copy-button:focus::after, .comment-body pre:has(> code) [data-placement=right].code-copy-button:focus::after, .post-body pre:has(> code) [data-placement=right].code-copy-button:focus::after, .activities-body pre:has(> code) [data-placement=right].code-copy-button:focus::after, [data-placement=right][data-tooltip]:hover::after, .article-body pre:has(> code) [data-placement=right].code-copy-button:hover::after, .comment-body pre:has(> code) [data-placement=right].code-copy-button:hover::after, .post-body pre:has(> code) [data-placement=right].code-copy-button:hover::after, .activities-body pre:has(> code) [data-placement=right].code-copy-button:hover::after {
+    animation-name: tooltip-caret-slide-right;
+  }
+}
+@keyframes tooltip-slide-top {
+  from {
+    transform: translate(-50%, 0.75rem);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -0.25rem);
+    opacity: 1;
+  }
+}
+@keyframes tooltip-caret-slide-top {
+  from {
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -0.25rem);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0rem);
+    opacity: 1;
+  }
+}
+@keyframes tooltip-slide-bottom {
+  from {
+    transform: translate(-50%, -0.75rem);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0.25rem);
+    opacity: 1;
+  }
+}
+@keyframes tooltip-caret-slide-bottom {
+  from {
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -0.5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -0.3rem);
+    opacity: 1;
+  }
+}
+@keyframes tooltip-slide-left {
+  from {
+    transform: translate(0.75rem, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-0.25rem, -50%);
+    opacity: 1;
+  }
+}
+@keyframes tooltip-caret-slide-left {
+  from {
+    opacity: 0;
+  }
+  50% {
+    transform: translate(0.05rem, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0.3rem, -50%);
+    opacity: 1;
+  }
+}
+@keyframes tooltip-slide-right {
+  from {
+    transform: translate(-0.75rem, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0.25rem, -50%);
+    opacity: 1;
+  }
+}
+@keyframes tooltip-caret-slide-right {
+  from {
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-0.05rem, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-0.3rem, -50%);
+    opacity: 1;
+  }
 }
