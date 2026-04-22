@@ -1,7 +1,7 @@
 /* Variables */
 
 $text_font: Quicksand, Arial, Helvetica, sans-serif;
-$monospace_font: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$monospace_font: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 
 // Colors
 
@@ -226,7 +226,7 @@ $q-bg-weaker: map-get($q-brand-neutral,100);
 $q-bg-weak: map-get($q-brand-neutral,200);
 $q-bg-medium: map-get($q-brand-neutral,300);
 $q-bg-strong: map-get($q-brand-neutral,500);
-$q-bg-backdrop: map-get($q-brand-neutral,700);;
+$q-bg-backdrop: map-get($q-brand-neutral,700);
 
 $q-bg-brand-strong: map-get($q-brand-primary,600);
 $q-bg-brand-strong-hover: map-get($q-brand-primary,700);
@@ -448,3 +448,4 @@ $padding: 32px;
 // Transitions
 
 $input-transition: border .12s ease-in-out;
+

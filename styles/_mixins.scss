@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // Mixins
 @mixin tablet {
   @media (min-width: #{$tablet-width}) {
@@ -154,14 +156,62 @@
 
   pre:has(> code) {
     border-radius: 4px;
-  //  margin: 0 2px;
     background-color: $q-bg-backdrop;
     border: none;
     padding: $padding;
     font-family: $monospace_font;
-  //  color: $q-text-inverse-strong;
-  overflow-x: auto;
-  padding: 0;
+    color: $q-text-inverse-strong;
+    overflow-x: auto;
+
+    position: relative;
+
+    .code-copy-button {
+
+      @extend %tooltip;
+
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: math.div($padding, 2);
+      background-color: $q-bg-backdrop;
+      color: $q-text-inverse-strong;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: .825rem;
+
+      &:hover {
+        background-color: darken($q-bg-backdrop, 3%);
+      }
+
+      // Display
+      &:focus,
+      &:hover {
+        &::before,
+        &::after {
+          opacity: 0;
+        }
+      }
+
+      &.copied {
+
+        
+        &::before,
+        &::after {
+          opacity: 1;
+          content: "Copied!";
+        }
+
+        &::before,
+        &::after {
+          animation-duration: .2s;
+          animation-name: tooltip-slide-top;
+        }
+
+        &::after {
+          animation-name: tooltip-caret-slide-top; 
+        }
+      }
+    }
   }
 
   pre:not(:has(> code)) {
@@ -186,7 +236,7 @@
  // 
   background: $q-bg-subtle;
   color: $q-text-strong;
-  padding: 0 $gutter/2;
+  padding: 0 math.div($gutter, 2);
   display: inline-block;
   border: 1px solid $q-bg-weaker;
   border-radius: 4px;

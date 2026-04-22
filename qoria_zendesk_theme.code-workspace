@@ -6,6 +6,7 @@
 	],
 	"settings": {
 		"liveSassCompile.settings.compileOnWatch": true,
-		"python.terminal.useEnvFile": false
+		"python.terminal.useEnvFile": false,
+		"liveSassCompile.settings.rootIsWorkspace": false
 	}
 }
