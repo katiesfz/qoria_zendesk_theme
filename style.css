@@ -2867,11 +2867,16 @@ section.hero .hero-faqs .hero-faqs-inner ul li h5, section.hero .hero-faqs .hero
   border-radius: 4px;
   background-color: #364255;
   border: none;
-  padding: 32px;
+  padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
-  overflow-x: auto;
+  overflow: visible;
   position: relative;
+}
+.article-body pre:has(> code) > code {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0 32px 32px 32px;
 }
 .article-body pre:has(> code) .code-copy-button {
   position: absolute;
@@ -3849,11 +3854,16 @@ code.hljs {
   border-radius: 4px;
   background-color: #364255;
   border: none;
-  padding: 32px;
+  padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
-  overflow-x: auto;
+  overflow: visible;
   position: relative;
+}
+.comment-body pre:has(> code) > code {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0 32px 32px 32px;
 }
 .comment-body pre:has(> code) .code-copy-button {
   position: absolute;
@@ -4510,11 +4520,16 @@ code.hljs {
   border-radius: 4px;
   background-color: #364255;
   border: none;
-  padding: 32px;
+  padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
-  overflow-x: auto;
+  overflow: visible;
   position: relative;
+}
+.post-body pre:has(> code) > code {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0 32px 32px 32px;
 }
 .post-body pre:has(> code) .code-copy-button {
   position: absolute;
@@ -5311,11 +5326,16 @@ code.hljs {
   border-radius: 4px;
   background-color: #364255;
   border: none;
-  padding: 32px;
+  padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
-  overflow-x: auto;
+  overflow: visible;
   position: relative;
+}
+.activities-body pre:has(> code) > code {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0 32px 32px 32px;
 }
 .activities-body pre:has(> code) .code-copy-button {
   position: absolute;
