@@ -116,6 +116,7 @@
         <!-- other knowledge bases -->
         <h2>Help with other Qoria products</h2>
         <div class="products-list row row-cols-md-3">
+          {{ #if settings.product_1_name }}
           <!-- Knowledge Base Card 1 -->
           <div class="single-product">
             <div class="single-product-inner">
@@ -133,6 +134,8 @@
             </div>
           </div>
           <!-- End Knowledge Base Card 1 -->
+          {{/if}}
+          {{ #if settings.product_2_name }}
           <!-- Knowledge Base Card 2 -->
           <div class="single-product">
             <div class="single-product-inner">
@@ -150,6 +153,8 @@
             </div>
           </div>
           <!-- End Knowledge Base Card 2 -->
+          {{/if}}
+          {{ #if settings.product_3_name }}
           <!-- Knowledge Base Card 3 -->
           <div class="single-product">
             <div class="single-product-inner">
@@ -167,6 +172,64 @@
             </div>
           </div>
           <!-- End Knowledge Base Card 3 -->
+          {{/if}}
+          {{ #if settings.product_4_name }}
+          <!-- Knowledge Base Card 4 -->
+          <div class="single-product">
+            <div class="single-product-inner">
+              <div class="product-thumbnail">
+                <div class="product-icon">
+                  <img src="{{settings.product_4_icon}}">
+                </div>
+                <div class="product-copy">
+                  <a class="product-link" href="{{settings.product_4_link}}">
+                    <span class="product-title">{{settings.product_4_name}}</span>
+                    <span class="product-description">{{settings.product_4_description}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Knowledge Base Card 4 -->
+          {{/if}}
+          {{ #if settings.product_5_name }}
+          <!-- Knowledge Base Card 5 -->
+          <div class="single-product">
+            <div class="single-product-inner">
+              <div class="product-thumbnail">
+                <div class="product-icon">
+                  <img src="{{settings.product_5_icon}}">
+                </div>
+                <div class="product-copy">
+                  <a class="product-link" href="{{settings.product_5_link}}">
+                    <span class="product-title">{{settings.product_5_name}}</span>
+                    <span class="product-description">{{settings.product_5_description}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Knowledge Base Card 5 -->
+          {{/if}}
+          {{ #if settings.product_6_name }}
+          <!-- Knowledge Base Card 6 -->
+          <div class="single-product">
+            <div class="single-product-inner">
+              <div class="product-thumbnail">
+                <div class="product-icon">
+                  <img src="{{settings.product_6_icon}}">
+                </div>
+                <div class="product-copy">
+                  <a class="product-link" href="{{settings.product_6_link}}">
+                    <span class="product-title">{{settings.product_6_name}}</span>
+                    <span class="product-description">{{settings.product_6_description}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Knowledge Base Card 6 -->
+          {{/if}}
         </div>
       </div>
     </section>
