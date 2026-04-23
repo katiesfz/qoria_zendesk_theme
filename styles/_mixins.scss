@@ -158,12 +158,18 @@
     border-radius: 4px;
     background-color: $q-bg-backdrop;
     border: none;
-    padding: $padding;
+    padding: $padding 0 0 0;
     font-family: $monospace_font;
     color: $q-text-inverse-strong;
-    overflow-x: auto;
+    overflow:visible;
 
     position: relative;
+    
+    > code {
+      width: 100%;
+      overflow-x: auto;
+      padding: 0 $padding $padding $padding;
+    }
 
     .code-copy-button {
 

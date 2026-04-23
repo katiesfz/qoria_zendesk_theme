@@ -2884,11 +2884,15 @@ section.hero .hero-faqs {
   border-radius: 4px;
   background-color: #364255;
   border: none;
-  padding: 32px;
+  padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
-  overflow-x: auto;
   position: relative;
+}
+.article-body pre:has(> code) > code {
+  width: 100%;
+  overflow-x: auto;
+  padding: 16px;
 }
 .article-body pre:has(> code) .code-copy-button {
   position: absolute;
@@ -3867,11 +3871,15 @@ code.hljs {
   border-radius: 4px;
   background-color: #364255;
   border: none;
-  padding: 32px;
+  padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
-  overflow-x: auto;
   position: relative;
+}
+.comment-body pre:has(> code) > code {
+  width: 100%;
+  overflow-x: auto;
+  padding: 16px;
 }
 .comment-body pre:has(> code) .code-copy-button {
   position: absolute;
@@ -4533,11 +4541,15 @@ code.hljs {
   border-radius: 4px;
   background-color: #364255;
   border: none;
-  padding: 32px;
+  padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
-  overflow-x: auto;
   position: relative;
+}
+.post-body pre:has(> code) > code {
+  width: 100%;
+  overflow-x: auto;
+  padding: 16px;
 }
 .post-body pre:has(> code) .code-copy-button {
   position: absolute;
@@ -5339,11 +5351,15 @@ code.hljs {
   border-radius: 4px;
   background-color: #364255;
   border: none;
-  padding: 32px;
+  padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
-  overflow-x: auto;
   position: relative;
+}
+.activities-body pre:has(> code) > code {
+  width: 100%;
+  overflow-x: auto;
+  padding: 16px;
 }
 .activities-body pre:has(> code) .code-copy-button {
   position: absolute;
