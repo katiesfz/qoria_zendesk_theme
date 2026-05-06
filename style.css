@@ -1223,16 +1223,16 @@ ul {
     display: inline-block;
   }
 }
-.nav-wrapper-desktop a {
+.nav-wrapper-desktop a, .nav-wrapper-desktop button {
   border: 0;
   color: #0f172a;
   font-size: 1rem;
   width: auto;
 }
-[dir=rtl] .nav-wrapper-desktop a {
+[dir=rtl] .nav-wrapper-desktop a, [dir=rtl] .nav-wrapper-desktop button {
   padding: 0 0 0 20px;
 }
-.nav-wrapper-desktop a:hover, .nav-wrapper-desktop a:focus, .nav-wrapper-desktop a:active {
+.nav-wrapper-desktop a:hover, .nav-wrapper-desktop a:focus, .nav-wrapper-desktop a:active, .nav-wrapper-desktop button:hover, .nav-wrapper-desktop button:focus, .nav-wrapper-desktop button:active {
   background-color: transparent;
   color: #0f172a;
   text-decoration: underline;
