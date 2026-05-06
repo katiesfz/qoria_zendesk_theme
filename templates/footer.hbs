@@ -96,6 +96,12 @@
       const year = new Date().getFullYear();
       span.textContent = year;
 
+      if (hljs) {
+        console.log("hljs exists");
+        hljs.highlightAll();
+        console.log("hljs done");
+      }
+
   });
 </script>
 
