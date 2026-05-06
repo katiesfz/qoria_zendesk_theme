@@ -16176,7 +16176,3 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 
     hljs.registerLanguage('yaml', hljsGrammar);
   })();
-
-document.addEventListener("DOMContentLoaded", () => {
-  hljs.highlightAll();
-});
