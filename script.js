@@ -17257,6 +17257,10 @@
       hljs.registerLanguage('yaml', hljsGrammar);
     })();
 
+  document.addEventListener("DOMContentLoaded", () => {
+    hljs.highlightAll();
+  });
+
   document.querySelectorAll('pre:has(>code)').forEach((preElement) => {
     const button = document.createElement('button');
     button.innerHTML = '<i class="far fa-copy"></i>';
