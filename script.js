@@ -2745,7 +2745,7 @@
         ignoreUnescapedHTML: false,
         throwUnescapedHTML: false,
         noHighlightRe: /^(no-?highlight)$/i,
-        languageDetectRe: /\blang(?:uage)?-([\w-]+)\b/i,
+        languageDetectRe: /\blang(?:uage)?-(?!auto\b)([\w-]+)\b/i, // added (?!auto\b) to prevent highlight from breaking with zendesk
         classPrefix: 'hljs-',
         cssSelector: 'pre code',
         languages: null,
