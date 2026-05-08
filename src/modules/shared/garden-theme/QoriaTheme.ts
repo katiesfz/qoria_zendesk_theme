@@ -51,7 +51,6 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
     &:focus-visible {
         box-shadow: inset rgb(255, 255, 255) 0px 0px 0px 1px, inset rgb(99, 113, 187) 0px 0px 0px 3px;
     }
-        
     box-shadow: unset;
     border-width: 1px;
     border-radius: 0;
@@ -59,20 +58,22 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
   `;
 };
 
-const createAccessibleFormInput = (isWrapper:boolean) => {
-    return css`
-        ${createAccessibleFormControlStyle(isWrapper)}
+const accessibleFormInput = css`
+        ${createAccessibleFormControlStyle(false)}
             padding: ${p => p.theme.space.md};
-        `
-}
+        `;
+const accessibleFormInputWrapper = css`
+        ${createAccessibleFormControlStyle(true)}
+        `;
+        
 
 const inputLabelStyle = css`
             font-size: ${p => p.theme.fontSizes.sm};
             line-height: 1.5;
         `;
 
-const accessibleFormInputStyle = createAccessibleFormInput(false);
-const accessibleFormWrapperStyle = createAccessibleFormControlStyle(true);
+const accessibleFormInputStyle = accessibleFormInput;
+const accessibleFormWrapperStyle = accessibleFormInputWrapper;
 
 
 const themeSettings = {
