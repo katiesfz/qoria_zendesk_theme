@@ -144,7 +144,9 @@
               })
               .catch(err => console.error(err));
       } else {
-        zE('messenger', 'hide');
+          zE(function() {
+            zE('messenger', 'hide');
+          });
       }
 
     </script>
@@ -154,6 +156,8 @@
 {{else}}
   <script>
     // hide chat widget if it's shown by default
-    zE('messenger', 'hide');
+    zE(function() {
+      zE('messenger', 'hide');
+    });
   </script>
 {{/if}}
