@@ -54,18 +54,17 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
     box-shadow: unset;
     border-width: 1px;
     border-radius: 0;
-    background-color: rgba(241, 245, 249, 0.8)
+    background-color: rgba(241, 245, 249, 0.8);
   `;
 };
 
 const accessibleFormInput = css`
-        ${createAccessibleFormControlStyle(false)}
+            ${createAccessibleFormControlStyle(false)}
             padding: ${p => p.theme.space.md};
         `;
 const accessibleFormInputWrapper = css`
         ${createAccessibleFormControlStyle(true)}
         `;
-        
 
 const inputLabelStyle = css`
             font-size: ${p => p.theme.fontSizes.sm};
