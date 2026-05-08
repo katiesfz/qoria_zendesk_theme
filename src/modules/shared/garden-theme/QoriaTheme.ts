@@ -14,6 +14,8 @@ export interface Settings {
   visited_link_color: string;
 }
 
+
+
 const createAccessibleFormControlStyle = (isWrapper: boolean) => {
   const invalidSelector = isWrapper
     ? ':has(input[aria-invalid="true"])'
@@ -49,21 +51,27 @@ const createAccessibleFormControlStyle = (isWrapper: boolean) => {
     &:focus-visible {
         box-shadow: inset rgb(255, 255, 255) 0px 0px 0px 1px, inset rgb(99, 113, 187) 0px 0px 0px 3px;
     }
-
+        
     box-shadow: unset;
-    padding: ${p => p.theme.space.md};
     border-width: 1px;
     border-radius: 0;
     background-color: rgba(241, 245, 249, 0.8)
   `;
 };
 
+const createAccessibleFormInput = (isWrapper:boolean) => {
+    return css`
+        ${createAccessibleFormControlStyle(isWrapper)}
+            padding: ${p => p.theme.space.md};
+        `
+}
+
 const inputLabelStyle = css`
             font-size: ${p => p.theme.fontSizes.sm};
             line-height: 1.5;
         `;
 
-const accessibleFormInputStyle = createAccessibleFormControlStyle(false);
+const accessibleFormInputStyle = createAccessibleFormInput(false);
 const accessibleFormWrapperStyle = createAccessibleFormControlStyle(true);
 
 
