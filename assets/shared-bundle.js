@@ -53,9 +53,9 @@ function e(e,t){return t.forEach(function(t){t&&"string"!=typeof t&&!Array.isArr
     box-shadow: unset;
     border-width: 1px;
     border-radius: 0;
-    background-color: rgba(241, 245, 249, 0.8)
+    background-color: rgba(241, 245, 249, 0.8);
   `},wi=vn`
-        ${yi(!1)}
+            ${yi(!1)}
             padding: ${e=>e.theme.space.md};
         `,xi=vn`
             font-size: ${e=>e.theme.fontSizes.sm};
