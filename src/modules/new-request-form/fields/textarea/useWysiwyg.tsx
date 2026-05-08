@@ -6,6 +6,7 @@ import {
   useToast,
 } from "@zendeskgarden/react-notifications";
 import { useTranslation } from "react-i18next";
+import { notify } from "../../../shared";
 
 interface UseWysiwygOptions {
   hasWysiwyg: boolean;
@@ -63,20 +64,12 @@ export function useWysiwyg({
 
             const { type, title } = data;
 
-            addToast(({ close }) => (
-              <Notification type={type}>
-                <Title>{title}</Title>
-                {message}
-                <Close
-                  aria-label={t("new-request-form.close-label", "Close")}
-                  onClick={close}
-                />
-              </Notification>
-            ));
+            notify({ type, title, message });
+
           }
         );
       }
     },
-    [hasWysiwyg, baseLocale, hasAtMentions, userRole, brandId, addToast, t]
+    [hasWysiwyg, baseLocale, hasAtMentions, userRole, brandId]
   );
 }
