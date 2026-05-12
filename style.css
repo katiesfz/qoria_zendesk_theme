@@ -1227,16 +1227,16 @@ ul {
     display: inline-block;
   }
 }
-.nav-wrapper-desktop a {
+.nav-wrapper-desktop a, .nav-wrapper-desktop button {
   border: 0;
   color: #0f172a;
   font-size: 1rem;
   width: auto;
 }
-[dir=rtl] .nav-wrapper-desktop a {
+[dir=rtl] .nav-wrapper-desktop a, [dir=rtl] .nav-wrapper-desktop button {
   padding: 0 0 0 20px;
 }
-.nav-wrapper-desktop a:hover, .nav-wrapper-desktop a:focus, .nav-wrapper-desktop a:active {
+.nav-wrapper-desktop a:hover, .nav-wrapper-desktop a:focus, .nav-wrapper-desktop a:active, .nav-wrapper-desktop button:hover, .nav-wrapper-desktop button:focus, .nav-wrapper-desktop button:active {
   background-color: transparent;
   color: #0f172a;
   text-decoration: underline;
@@ -2887,12 +2887,13 @@ section.hero .hero-faqs {
   padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
+  overflow: visible;
   position: relative;
 }
 .article-body pre:has(> code) > code {
   width: 100%;
   overflow-x: auto;
-  padding: 16px;
+  padding: 0 32px 32px 32px;
 }
 .article-body pre:has(> code) .code-copy-button {
   position: absolute;
@@ -3874,12 +3875,13 @@ code.hljs {
   padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
+  overflow: visible;
   position: relative;
 }
 .comment-body pre:has(> code) > code {
   width: 100%;
   overflow-x: auto;
-  padding: 16px;
+  padding: 0 32px 32px 32px;
 }
 .comment-body pre:has(> code) .code-copy-button {
   position: absolute;
@@ -4544,12 +4546,13 @@ code.hljs {
   padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
+  overflow: visible;
   position: relative;
 }
 .post-body pre:has(> code) > code {
   width: 100%;
   overflow-x: auto;
-  padding: 16px;
+  padding: 0 32px 32px 32px;
 }
 .post-body pre:has(> code) .code-copy-button {
   position: absolute;
@@ -5354,12 +5357,13 @@ code.hljs {
   padding: 32px 0 0 0;
   font-family: "Courier Prime", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   color: #ffffff;
+  overflow: visible;
   position: relative;
 }
 .activities-body pre:has(> code) > code {
   width: 100%;
   overflow-x: auto;
-  padding: 16px;
+  padding: 0 32px 32px 32px;
 }
 .activities-body pre:has(> code) .code-copy-button {
   position: absolute;

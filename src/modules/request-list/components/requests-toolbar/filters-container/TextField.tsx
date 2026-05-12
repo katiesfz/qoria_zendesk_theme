@@ -54,24 +54,32 @@ export const TextField = ({
     if (value != "") {
       return { state: "valid", values: [`:"${value}"`] };
     } else {
-      return { state: "valid", values: [] };
+      return { state: "valid", values: [`:*`] };
     }
   };
   const filterKey = getFilterKey(filterProperty.identifier);
 
     useEffect(() => {
       const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
-      if (currentFilterValues.length > 0) {
-        const currentValue = currentFilterValues[0] as string;
-        if (currentValue === ":*") {
-          setValue("");
-          return;
-        }
-        const rawValue = currentValue.replace(/^:"(.*)"$/, "$1");
-        setValue(rawValue);
-      } else {
-          setValue("");
+      const curValue = currentFilterValues[0]?.substring(1);
+      
+      if (!curValue || curValue === "*") {
+        setValue("");
+        return;
       }
+
+      // const rawValue = curValue.replace(/^"(.*)"$/, "$1");
+      setValue(curValue.substring(1, curValue.length - 2));
+
+      //if (currentFilterValues.length > 0) {
+      //  const currentValue = currentFilterValues[0] as string;
+      //  if (currentValue == "*") {
+      //    setValue("");
+      //    return;
+      //  }
+      //} else {
+      //    setValue("");
+      //}
     }, [filters[filterKey]]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -55,7 +55,7 @@ export function CreditCardFilter({
         };
       }
     } else {
-      return { state: "valid", values: [] };
+      return { state: "valid", values: [`:*`] };
     }
   };
 
@@ -68,17 +68,29 @@ export function CreditCardFilter({
 
   useEffect(() => {
     const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
-    if (currentFilterValues.length > 0) {
-      const currentValue = currentFilterValues[0] as string;
-      if (currentValue === ":*") {
-        setCardNumber("");
-        return;
-      }
-      const rawValue = currentValue.replace(/^:\*(.*)$/, "$1");
-      setCardNumber(rawValue);
-    } else {
-        setCardNumber("");
+
+
+    const curValue = currentFilterValues[0]?.substring(1);
+    
+    if (!curValue || curValue === "*") {
+      setCardNumber("");
+      return;
     }
+
+    // const rawValue = curValue.replace(/^"(.*)"$/, "$1");
+    setCardNumber(curValue.substring(1, curValue.length - 1));
+
+    //if (currentFilterValues.length > 0) {
+    //  const currentValue = currentFilterValues[0] as string;
+    //  if (currentValue === ":*") {
+    //    setCardNumber("");
+    //    return;
+    //  }
+    //  const rawValue = currentValue.replace(/^:\*(.*)$/, "$1");
+    //  setCardNumber(rawValue);
+    //} else {
+    //    setCardNumber("");
+    //}
   }, [filters[filterKey]]);
 
   const handleCardNumberChanged = (e: ChangeEvent<HTMLInputElement>) => {
