@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FieldError } from "./FieldError";
 import type { FilterTypeKey, FilterTypeValue } from "./FilterTypeDropdown";
+import type { FilterValuesMap } from "../../../data-types/FilterValue";
+import type { FilterProperty } from "./FilterPropertyField";
 import { FilterTypeDropdown } from "./FilterTypeDropdown";
 import type { FormErrors, FormState } from "./FormState";
 import { useTranslation } from "react-i18next";
+import {getFilterKey} from "./SystemFieldCheck";
+import { FilterValue } from "../../../data-types";
 
 type FormFieldKey = FilterTypeKey | "cardNumber";
 
@@ -19,39 +23,26 @@ const Container = styled.div`
 `;
 
 interface CreditCardFilterProps {
+  filters: FilterValuesMap;
+  filterProperty: FilterProperty;
   onSelect: (state: FormState<FormFieldKey>) => void;
   errors: FormErrors<FormFieldKey>;
 }
 
 export function CreditCardFilter({
+  filters,
+  filterProperty,
   onSelect,
   errors,
 }: CreditCardFilterProps): JSX.Element {
   const { t } = useTranslation();
 
-  const [filterType, setFilterType] = useState<FilterTypeValue>("anyValue");
   const [cardNumber, setCardNumber] = useState("");
 
   const validateForm = (
-    filterType: FilterTypeValue,
     cardNumber: string
   ): FormState<FormFieldKey> => {
-    switch (filterType) {
-      case undefined: {
-        return {
-          state: "invalid",
-          errors: {
-            filterType: t(
-              "guide-requests-app.filters-modal.select-value-error",
-              "Select a value"
-            ),
-          },
-        };
-      }
-      case "anyValue": {
-        return { state: "valid", values: [`:*`] };
-      }
-      case "exactMatch": {
+      if (cardNumber != "") {
         if (CARD_NUMBER_REGEX.test(cardNumber)) {
           return { state: "valid", values: [`:*${cardNumber}`] };
         } else {
@@ -65,51 +56,58 @@ export function CreditCardFilter({
             },
           };
         }
+      } else {
+        return { state: "valid", values: [":*"] };
       }
-    }
   };
 
-  useEffect(() => {
-    onSelect(validateForm(filterType, ""));
-  }, []);
-
-  const handleFilterTypeSelect = (value: FilterTypeValue) => {
-    setFilterType(value);
-    onSelect(validateForm(value, cardNumber));
-  };
+  //const handleFilterTypeSelect = (value: FilterTypeValue) => {
+  //  setFilterType(value);
+  //  onSelect(validateForm(cardNumber));
+  //};
 
   const handleCardNumberChanged = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setCardNumber(value);
-    onSelect(validateForm(filterType, value));
+    onSelect(validateForm(value));
   };
 
+  const filterKey = getFilterKey(filterProperty.identifier);
+
+    useEffect(() => {
+      const currentFilterValues = filters[filterKey] as FilterValue[] || [] as FilterValue[];
+      if (currentFilterValues.length > 0) {
+        const currentValue = currentFilterValues[0] as string;
+        if (currentValue === ":*") {
+          setCardNumber("");
+          return;
+        }
+        const rawValue = currentValue.replace(/^:"(.*)"$/, "$1");
+        setCardNumber(rawValue);
+      } else {
+          setCardNumber("");
+      }
+    }, [filters[filterKey]]);
+
   return (
-    <Container>
-      <FilterTypeDropdown
-        selectedFilter={filterType}
-        onFilterTypeSelect={handleFilterTypeSelect}
-        errors={errors}
-      />
-      {filterType === "exactMatch" && (
-        <Field>
-          <Field.Label>
-            {t(
-              "guide-requests-app.filter-modal.credit-card-digits-label",
-              "Enter the last four digits of the credit card"
-            )}
-          </Field.Label>
-          <Input
-            type="text"
-            inputMode="numeric"
-            value={cardNumber}
-            onChange={handleCardNumberChanged}
-            validation={errors.cardNumber ? "error" : undefined}
-            maxLength={4}
-          />
-          <FieldError errors={errors} field="cardNumber" />
-        </Field>
-      )}
-    </Container>
+    <>
+      <Field>
+        <Field.Label>
+          {t(
+            "guide-requests-app.filter-modal.credit-card-digits-label",
+            "Enter the last four digits of the credit card"
+          )}
+        </Field.Label>
+        <Input
+          type="text"
+          inputMode="numeric"
+          value={cardNumber}
+          onChange={handleCardNumberChanged}
+          validation={errors.cardNumber ? "error" : undefined}
+          maxLength={4}
+        />
+        <FieldError errors={errors} field="cardNumber" />
+      </Field>
+    </>
   );
 }

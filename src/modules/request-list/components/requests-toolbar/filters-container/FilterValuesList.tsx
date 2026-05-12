@@ -190,7 +190,12 @@ export function FilterValuesList({
       );
     }
     case "partialcreditcard": {
-      return <CreditCardFilter onSelect={onSelect} errors={errors} />;
+      return <CreditCardFilter
+        filters={filters}
+        filterProperty={filterProperty}
+        onSelect={onSelect} 
+        errors={errors} 
+       />;
     }
     default:
       return <></>;
