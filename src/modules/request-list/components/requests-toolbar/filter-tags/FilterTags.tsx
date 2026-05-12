@@ -45,6 +45,7 @@ export function FilterTags({
       <Container>
         {Object.entries(filters).map(([field, values]) => {
           return (
+            values.length > 0 && 
             <FieldTags
               key={field}
               ticketFields={ticketFields}

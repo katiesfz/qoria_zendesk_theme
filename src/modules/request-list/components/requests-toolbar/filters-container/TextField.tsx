@@ -54,7 +54,7 @@ export const TextField = ({
     if (value != "") {
       return { state: "valid", values: [`:"${value}"`] };
     } else {
-      return { state: "valid", values: [`:*`] };
+      return { state: "valid", values: [] };
     }
   };
   const filterKey = getFilterKey(filterProperty.identifier);
@@ -69,7 +69,7 @@ export const TextField = ({
       }
 
       // const rawValue = curValue.replace(/^"(.*)"$/, "$1");
-      setValue(curValue.substring(1, curValue.length - 2));
+      setValue(curValue.substring(1, curValue.length - 1));
 
       //if (currentFilterValues.length > 0) {
       //  const currentValue = currentFilterValues[0] as string;

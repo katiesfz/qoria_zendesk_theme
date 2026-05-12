@@ -55,7 +55,7 @@ export function CreditCardFilter({
         };
       }
     } else {
-      return { state: "valid", values: [`:*`] };
+      return { state: "valid", values: [] };
     }
   };
 
@@ -78,7 +78,7 @@ export function CreditCardFilter({
     }
 
     // const rawValue = curValue.replace(/^"(.*)"$/, "$1");
-    setCardNumber(curValue.substring(1, curValue.length - 1));
+    setCardNumber(curValue.substring(1, curValue.length));
 
     //if (currentFilterValues.length > 0) {
     //  const currentValue = currentFilterValues[0] as string;
