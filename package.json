@@ -1,6 +1,6 @@
 {
   "name": "qoria_theme",
-  "version": "1.2.119",
+  "version": "1.2.120",
   "repository": "katiesfz/qoria_zendesk_theme",
   "scripts": {
     "start": "concurrently -k -r \"rollup -c -w\"",
