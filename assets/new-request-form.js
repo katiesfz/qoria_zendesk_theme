@@ -1,28 +1,28 @@
 
 import { useFormSubmit } from "./useFormSubmit";
 
-const props = {
-requestForm: {{json new_request_form}},
-newRequestPath: {{json (page_path 'new_request')}},
-parentId: {{json parent.id}},
-parentIdPath: {{json parent.url}},
-locale: {{json help_center.locale}},
-baseLocale: {{json help_center.base_locale}},
-hasAtMentions: {{json help_center.at_mentions_enabled}},
-userRole: {{json user.role}},
-userId: {{json user.id}},
-brandId: {{json brand.id}},
-organizations: {{json user.organizations}},
-wysiwyg: true,
-answerBotModal: {
-    answerBot: {{json answer_bot}},
-    hasRequestManagement: {{json help_center.request_management_enabled}},
-    isSignedIn: {{json signed_in}},
-    helpCenterPath: {{json (page_path 'help_center')}},
-    requestsPath: {{json (page_path 'requests')}},
-    requestPath: {{json (page_path 'request' id=answer_bot.request_id)}}
-},
-};
+//const props = {
+//requestForm: {{json new_request_form}},
+//newRequestPath: {{json (page_path 'new_request')}},
+//parentId: {{json parent.id}},
+//parentIdPath: {{json parent.url}},
+//locale: {{json help_center.locale}},
+//baseLocale: {{json help_center.base_locale}},
+//hasAtMentions: {{json help_center.at_mentions_enabled}},
+//userRole: {{json user.role}},
+//userId: {{json user.id}},
+//brandId: {{json brand.id}},
+//organizations: {{json user.organizations}},
+//wysiwyg: true,
+//answerBotModal: {
+//    answerBot: {{json answer_bot}},
+//    hasRequestManagement: {{json help_center.request_management_enabled}},
+//    isSignedIn: {{json signed_in}},
+//    helpCenterPath: {{json (page_path 'help_center')}},
+//    requestsPath: {{json (page_path 'requests')}},
+//    requestPath: {{json (page_path 'request' id=answer_bot.request_id)}}
+//},
+//};
 
 
 const props = {
@@ -215,7 +215,7 @@ function newRequestForm(properties) {
                     onChange={(value) => handleChange(field, value)}
                   />
                   <SuggestedArticles
-                    query={field.value as string | undefined}
+                    query={field.value}
                     locale={locale}
                   />
                 </>
@@ -297,7 +297,7 @@ function newRequestForm(properties) {
               return (
                 <Checkbox
                   field={field}
-                  onChange={(value: boolean) => handleChange(field, value)}
+                  onChange={(value) => handleChange(field, value)}
                 />
               );
             case "date":
@@ -327,7 +327,7 @@ function newRequestForm(properties) {
                   userId={userId}
                   organizationId={
                     organizationField !== null
-                      ? (organizationField.value as string)
+                      ? (organizationField.value)
                       : defaultOrganizationId
                   }
                   onChange={(value) => handleChange(field, value)}
