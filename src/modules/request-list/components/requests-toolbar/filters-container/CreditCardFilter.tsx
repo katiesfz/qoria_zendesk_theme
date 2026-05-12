@@ -29,11 +29,11 @@ export function CreditCardFilter({
 }: CreditCardFilterProps): JSX.Element {
   const { t } = useTranslation();
 
-  const [filterType, setFilterType] = useState<FilterTypeValue | undefined>();
+  const [filterType, setFilterType] = useState<FilterTypeValue>("anyValue");
   const [cardNumber, setCardNumber] = useState("");
 
   const validateForm = (
-    filterType: FilterTypeValue | undefined,
+    filterType: FilterTypeValue,
     cardNumber: string
   ): FormState<FormFieldKey> => {
     switch (filterType) {
@@ -70,7 +70,7 @@ export function CreditCardFilter({
   };
 
   useEffect(() => {
-    onSelect(validateForm(undefined, ""));
+    onSelect(validateForm(filterType, ""));
   }, []);
 
   const handleFilterTypeSelect = (value: FilterTypeValue) => {

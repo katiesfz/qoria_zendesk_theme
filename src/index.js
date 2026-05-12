@@ -11,4 +11,4 @@ import "./request_status_filter";
 import "./accordions";
 import "./lightbox";
 //import "./highlight";
-import "./copy_to_clipboard";
+//import "./copy_to_clipboard";
