@@ -9,9 +9,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
     script.src = "{{asset 'highlight.min.js'}}";
     document.head.appendChild(script);
 
+    const badgeScript = document.createElement('script');
+    badgeScript.type = 'text/javascript';
+    badgeScript.src = "{{asset 'highlightjs-badge.min.js'}}";
+    document.head.appendChild(badgeScript);
+
     script.onload = function(){
-      document.querySelectorAll('pre code').forEach((el) => {
+      document.querySelectorAll('pre>code').forEach((el) => {
         hljs.highlightElement(el);
+        if (typeof window.highlightJsBadge !== 'undefined') {
+          window.highlightJsBadge(options);
+        } else {
+          badgeScript.onload = function() {
+            window.highlightJsBadge(options);
+          }
+        }
       });
     }
   }
