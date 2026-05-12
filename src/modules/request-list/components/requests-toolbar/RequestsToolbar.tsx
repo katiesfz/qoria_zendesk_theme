@@ -1,13 +1,9 @@
 import styled from "styled-components";
-import React from 'react';
-import { Span } from "@zendeskgarden/react-typography";
 import { useTranslation } from "react-i18next";
 import RequestsSearch from "./RequestsSearch";
 import OrganizationsDropdown from "./organizations-dropdown/OrganizationsDropdown";
 import OrganizationsManagement from "./organizatios-management/OrganizationsManagement";
 import { media, Mobile, Desktop } from "../../utils/mediaQuery";
-import ChevronIcon from '@zendeskgarden/svg-icons/src/16/chevron-right-stroke.svg';
-import AdjustIcon from '@zendeskgarden/svg-icons/src/16/adjust-stroke.svg';
 
 import type {
   CustomStatus,
@@ -19,12 +15,10 @@ import { useMemo, useState } from "react";
 import type { FilterValuesMap } from "../../data-types/FilterValue";
 import type { SelectedTab } from "../../data-types/request-list-params";
 import { ORG_REQUESTS_TAB_NAME } from "../../data-types/request-list-params";
-import { FilterModal } from "./filter-modal/FilterModal";
 import { FiltersContainer } from "./filters-container/FiltersContainer";
 import { Button } from "@zendeskgarden/react-buttons";
 import { FilterTags } from "./filter-tags/FilterTags";
 import type { MultiSelectOption } from "./filter-modal/Multiselect";
-import { StyledSpan } from "../../../shared/styles"; 
 import { Drawer } from '@zendeskgarden/react-modals';
 import RequestsTabs from "../requests-tabs/RequestsTabs";
 
