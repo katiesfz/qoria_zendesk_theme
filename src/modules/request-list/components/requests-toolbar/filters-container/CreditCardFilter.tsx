@@ -55,7 +55,7 @@ export function CreditCardFilter({
         };
       }
     } else {
-      return { state: "valid", values: [":*"] };
+      return { state: "valid", values: [] };
     }
   };
 

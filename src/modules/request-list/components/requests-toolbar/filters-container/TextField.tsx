@@ -54,7 +54,7 @@ export const TextField = ({
     if (value != "") {
       return { state: "valid", values: [`:"${value}"`] };
     } else {
-      return { state: "valid", values: [":*"] };
+      return { state: "valid", values: [] };
     }
   };
   const filterKey = getFilterKey(filterProperty.identifier);
